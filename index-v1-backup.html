@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>岩韵 · 武夷山正岩茶</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Chivo+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --c-bg: #FAFAF9; --c-bg-alt: #F5F3EF; --c-bg-dark: #141210;
+  --c-bg-card: #FFFFFF; --c-text: #141210; --c-text-secondary: #6B6258;
+  --c-text-muted: #A09890; --c-text-light: rgba(255,255,255,0.7);
+  --c-accent: #D4782A; --c-accent-hover: #B8621A;
+  --c-olive: #6B7B3C; --c-earth: #8B7355;
+  --c-border: rgba(20,18,16,0.08);
+  --f-heading: 'DM Mono','Noto Serif SC',monospace;
+  --f-caption: 'Chivo Mono','DM Mono',monospace;
+  --f-body: 'DM Mono',monospace;
+  --radius:0px; --ease: cubic-bezier(0.34,1.56,0.64,1); --ease-smooth: cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--f-body);color:var(--c-text);background:var(--c-bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:var(--f-heading);font-weight:500;line-height:1.15;letter-spacing:-0.02em;}
+h1{font-size:clamp(36px,5vw,80px);}h2{font-size:clamp(28px,4vw,56px);}h3{font-size:clamp(20px,2.5vw,34px);}
+p{font-size:clamp(13px,1.1vw,16px);line-height:1.8;color:var(--c-text-secondary);}
+.cap{font-family:var(--f-caption);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;}
+.tag{font-family:var(--f-caption);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:16px;}
+.container{max-width:1200px;margin:0 auto;padding:0 32px;width:100%;}
+.section{padding:120px 0;position:relative;}
+.s-alt{background:var(--c-bg-alt);}
+.s-dark{background:var(--c-bg-dark);color:white;}
+.s-dark h2{color:white;}.s-dark p{color:var(--c-text-light);}
+.s-dark .tag{color:rgba(212,120,42,0.7);}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,250,249,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--c-border);}
+.nav-logo{font-family:var(--f-heading);font-size:18px;font-weight:500;color:var(--c-text);text-decoration:none;}
+.nav-logo span{color:var(--c-accent);}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{font-family:var(--f-caption);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--c-text-secondary);padding:8px 14px;text-decoration:none;transition:color 0.25s;}
+.nav-links a:hover{color:var(--c-text);}
+.nav-cta{background:var(--c-bg-dark);color:white !important;padding:8px 18px !important;transition:background 0.25s !important;}
+.nav-cta:hover{background:var(--c-accent) !important;}
+.nav-progress{position:absolute;bottom:-1px;left:0;height:1px;background:var(--c-accent);width:0%;transition:width 0.1s linear;}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 75% 30%,rgba(212,120,42,0.04) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 20% 70%,rgba(20,18,16,0.02) 0%,transparent 50%);pointer-events:none;}
+.hero .container{position:relative;z-index:1;display:flex;align-items:center;gap:80px;}
+.hero-content{flex:1;max-width:520px;}
+.hero-badge{font-family:var(--f-caption);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:24px;display:flex;align-items:center;gap:8px;}
+.hero-badge::before{content:'';width:24px;height:1px;background:var(--c-accent);}
+.hero h1{margin-bottom:20px;}
+.hero h1 span{color:var(--c-accent);}
+.hero p{margin-bottom:32px;max-width:380px;}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-family:var(--f-caption);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.35s var(--ease);cursor:pointer;border:none;}
+.btn-p{background:var(--c-bg-dark);color:white;}
+.btn-p:hover{background:var(--c-accent);transform:translateY(-2px);}
+.btn-s{background:transparent;color:var(--c-text);border:1px solid var(--c-border);}
+.btn-s:hover{border-color:var(--c-accent);color:var(--c-accent);}
+.hero-stats{display:flex;gap:48px;margin-top:32px;padding-top:24px;border-top:1px solid var(--c-border);}
+.hero-stat-num{font-family:var(--f-heading);font-size:28px;font-weight:500;color:var(--c-accent);}
+.hero-stat-label{font-family:var(--f-caption);font-size:9px;letter-spacing:0.1em;color:var(--c-text-muted);margin-top:6px;text-transform:uppercase;}
+
+/* Geo visual */
+.geo-w{position:relative;width:340px;height:340px;}
+.geo-sq{position:absolute;inset:0;border:1px solid var(--c-border);}
+.geo-sq::before{content:'';position:absolute;inset:28px;border:1px solid rgba(212,120,42,0.06);}
+.geo-sq::after{content:'';position:absolute;inset:56px;border:1px solid rgba(212,120,42,0.03);}
+.geo-lh{position:absolute;top:50%;left:-24px;right:-24px;height:1px;background:var(--c-border);}
+.geo-lv{position:absolute;left:50%;top:-24px;bottom:-24px;width:1px;background:var(--c-border);}
+.geo-dot{position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;background:var(--c-accent);transform:translate(-50%,-50%);animation:gd 3s ease-in-out infinite;}
+@keyframes gd{0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.5;transform:translate(-50%,-50%) scale(1.4)}}
+.geo-t{position:absolute;font-family:var(--f-caption);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-text-muted);}
+.geo-t.t1{top:-26px;left:0;}.geo-t.t2{bottom:-26px;right:0;}
+
+/* ═══ JOURNEY Section — integrated scroll narrative ═══ */
+.journey-section{padding:0;}
+.journey-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;background:var(--c-bg);}
+.journey-track{display:flex;will-change:transform;height:100vh;}
+.journey-slide{min-width:100vw;height:100vh;display:flex;align-items:center;position:relative;padding:80px 0;flex-shrink:0;}
+.journey-slide .content-2col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:0 32px;max-width:1200px;margin:0 auto;width:100%;}
+.journey-canvas-wrap{width:100%;aspect-ratio:4/3;background:var(--c-bg);border:1px solid var(--c-border);position:relative;overflow:hidden;}
+.journey-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;}
+.journey-canvas-wrap .cor{position:absolute;width:12px;height:12px;pointer-events:none;}
+.journey-canvas-wrap .cor.tl{top:-1px;left:-1px;border-top:2px solid var(--c-accent);border-left:2px solid var(--c-accent);}
+.journey-canvas-wrap .cor.tr{top:-1px;right:-1px;border-top:2px solid var(--c-accent);border-right:2px solid var(--c-accent);}
+.journey-canvas-wrap .cor.bl{bottom:-1px;left:-1px;border-bottom:2px solid var(--c-accent);border-left:2px solid var(--c-accent);}
+.journey-canvas-wrap .cor.br{bottom:-1px;right:-1px;border-bottom:2px solid var(--c-accent);border-right:2px solid var(--c-accent);}
+.journey-step{font-family:var(--f-caption);font-size:10px;letter-spacing:0.15em;color:var(--c-accent);margin-bottom:12px;}
+.journey-stat{display:flex;gap:24px;margin-top:24px;padding-top:16px;border-top:1px solid var(--c-border);}
+.journey-stat-item{font-family:var(--f-heading);font-size:13px;font-weight:500;color:var(--c-accent);}
+.journey-stat-item span{display:block;font-family:var(--f-caption);font-size:8px;color:var(--c-text-muted);margin-top:2px;text-transform:uppercase;}
+.journey-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+.journey-dot{width:5px;height:5px;border-radius:50%;background:var(--c-text-muted);opacity:0.15;transition:all 0.4s var(--ease-smooth);}
+.journey-dot.active{opacity:1;background:var(--c-accent);width:7px;height:7px;}
+.journey-slide.s-dark .journey-canvas-wrap{background:#1A1816;}
+.journey-slide.s-dark p{color:var(--c-text-light);}
+.journey-slide.s-dark .stat-item span{color:rgba(255,255,255,0.4);}
+@media(max-width:768px){
+  .journey-slide .content-2col{grid-template-columns:1fr;gap:32px;}
+  .journey-sticky{position:relative;height:auto;}
+  .journey-track{flex-direction:column;height:auto;transform:none !important;}
+  .journey-slide{min-width:100%;height:auto;padding:100px 0;}
+  .journey-dots{display:none;}
+}
+
+/* ═══ Products ═══ */
+.products-header{padding-bottom:0;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--c-border);}
+.prod-card{background:var(--c-bg-card);padding:48px 40px;position:relative;cursor:pointer;transition:background 0.4s var(--ease-smooth);}
+.prod-card:hover{background:var(--c-bg-alt);}
+.prod-corner{position:absolute;width:10px;height:10px;opacity:0;transition:opacity 0.3s;}
+.prod-card:hover .prod-corner{opacity:1;}
+.prod-corner.tl{top:12px;left:12px;border-top:2px solid var(--c-accent);border-left:2px solid var(--c-accent);}
+.prod-corner.tr{top:12px;right:12px;border-top:2px solid var(--c-accent);border-right:2px solid var(--c-accent);}
+.prod-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--c-accent);border-left:2px solid var(--c-accent);}
+.prod-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--c-accent);border-right:2px solid var(--c-accent);}
+.prod-tag{font-family:var(--f-caption);font-size:9px;letter-spacing:0.12em;color:var(--c-accent);margin-bottom:8px;text-transform:uppercase;}
+.prod-name{font-family:var(--f-heading);font-size:clamp(18px,2vw,24px);font-weight:500;margin-bottom:12px;}
+.prod-desc{font-size:13px;line-height:1.7;color:var(--c-text-muted);margin-bottom:24px;}
+.prod-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--c-border);padding-top:16px;}
+.prod-price{font-family:var(--f-heading);font-size:22px;font-weight:500;color:var(--c-accent);}
+.prod-link{font-family:var(--f-caption);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.25s;}
+.prod-link:hover{color:var(--c-accent);}
+.prod-link::after{content:'→';font-family:var(--f-heading);transition:transform 0.25s;}
+.prod-link:hover::after{transform:translateX(4px);}
+
+/* ═══ Product Detail Modal ═══ */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(20,18,16,0.6);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.4s;}
+.modal-overlay.show{opacity:1;pointer-events:auto;}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);max-width:680px;width:90%;max-height:80vh;overflow-y:auto;background:var(--c-bg-card);z-index:201;opacity:0;pointer-events:none;transition:all 0.4s var(--ease-smooth);border:1px solid var(--c-border);padding:48px;}
+.modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:1px solid var(--c-border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--f-caption);font-size:14px;transition:all 0.25s;}
+.modal-close:hover{border-color:var(--c-accent);color:var(--c-accent);}
+.modal-tag{font-family:var(--f-caption);font-size:10px;letter-spacing:0.12em;color:var(--c-accent);margin-bottom:8px;}
+.modal h3{font-size:28px;margin-bottom:20px;}
+.modal p{font-size:14px;line-height:1.8;color:var(--c-text-secondary);margin-bottom:16px;}
+.modal-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;padding:20px;background:var(--c-bg-alt);font-size:13px;}
+.modal-spec{display:flex;justify-content:space-between;font-family:var(--f-caption);font-size:11px;letter-spacing:0.05em;}
+.modal-spec span:last-child{color:var(--c-text-secondary);}
+.modal-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--c-bg-dark);color:white;font-family:var(--f-caption);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.35s var(--ease);text-decoration:none;margin-top:16px;}
+.modal-btn:hover{background:var(--c-accent);}
+
+/* ═══ Process (dark) ═══ */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;}
+.proc-step-num{font-family:var(--f-heading);font-size:13px;font-weight:500;color:var(--c-accent);margin-bottom:12px;letter-spacing:0.1em;}
+.proc-step-line{width:32px;height:1px;background:var(--c-accent);margin-bottom:20px;opacity:0.3;}
+.proc-step h3{color:white;font-size:18px;margin-bottom:12px;}
+.proc-step p{font-size:13px;color:var(--c-text-light);line-height:1.6;}
+
+/* ═══ Reviews ═══ */
+.rev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--c-border);}
+.rev-card{background:var(--c-bg-card);padding:48px 40px;display:flex;flex-direction:column;}
+.rev-tag{font-family:var(--f-caption);font-size:9px;letter-spacing:0.12em;color:var(--c-accent);margin-bottom:16px;text-transform:uppercase;}
+.rev-text{font-size:14px;line-height:1.8;color:var(--c-text-secondary);margin-bottom:24px;flex:1;font-style:italic;}
+.rev-author{border-top:1px solid var(--c-border);padding-top:16px;}
+.rev-name{font-family:var(--f-heading);font-size:14px;font-weight:500;}
+.rev-role{font-family:var(--f-caption);font-size:9px;letter-spacing:0.08em;color:var(--c-text-muted);margin-top:4px;text-transform:uppercase;}
+
+/* ═══ CTA ═══ */
+.cta-box{max-width:520px;margin:0 auto;text-align:center;}
+.cta-box h2{margin-bottom:16px;}
+.cta-box p{margin-bottom:32px;}
+.cta-form{display:flex;gap:0;max-width:460px;margin:0 auto;border:1px solid var(--c-border);}
+.cta-form input{flex:1;padding:16px 20px;font-family:var(--f-body);font-size:13px;border:none;background:var(--c-bg-card);color:var(--c-text);outline:none;}
+.cta-form button{padding:16px 28px;font-family:var(--f-caption);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:var(--c-bg-dark);color:white;border:none;cursor:pointer;transition:background 0.25s;white-space:nowrap;}
+.cta-form button:hover{background:var(--c-accent);}
+.cta-note{font-family:var(--f-caption);font-size:9px;letter-spacing:0.05em;color:var(--c-text-muted);margin-top:16px;}
+
+/* ═══ Footer ═══ */
+footer{background:var(--c-bg-dark);color:white;padding:64px 0 32px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand{font-family:var(--f-heading);font-size:18px;font-weight:500;margin-bottom:12px;}
+.footer-brand span{color:var(--c-accent);}
+.footer-brand-desc{font-size:13px;color:var(--c-text-light);line-height:1.6;margin-top:12px;max-width:280px;}
+.footer-col h4{font-family:var(--f-caption);font-size:9px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;text-transform:uppercase;}
+.footer-col a{display:block;font-family:var(--f-caption);font-size:11px;letter-spacing:0.05em;color:var(--c-text-light);margin-bottom:10px;text-decoration:none;transition:color 0.25s;}
+.footer-col a:hover{color:var(--c-accent);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;font-family:var(--f-caption);font-size:9px;color:rgba(255,255,255,0.25);}
+
+/* ═══ Animations ═══ */
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.ah-badge{animation:fu 0.6s both;}
+.ah-title{animation:fu 0.6s 0.15s both;}
+.ah-p{animation:fu 0.6s 0.25s both;}
+.ah-actions{animation:fu 0.6s 0.35s both;}
+.ah-stats{animation:fu 0.6s 0.45s both;}
+.ah-visual{animation:fu 0.8s 0.2s both;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s var(--ease-smooth),transform 0.6s var(--ease-smooth);}
+.reveal.show{opacity:1;transform:translateY(0);}
+.r1{transition-delay:0.1s;}.r2{transition-delay:0.2s;}.r3{transition-delay:0.3s;}.r4{transition-delay:0.4s;}
+
+/* ═══ Section intro label ═══ */
+.section-label{text-align:center;margin-bottom:48px;}
+.section-label .tag{display:block;}
+
+/* ═══ Media ═══ */
+@media(max-width:768px){
+  .hero .container{flex-direction:column;text-align:center;}
+  .hero p{margin:0 auto 32px;}
+  .hero-actions{justify-content:center;}
+  .hero-stats{justify-content:center;gap:32px;}
+  .hero-visual{display:none;}
+  .prod-grid{grid-template-columns:1fr;}
+  .proc-grid{grid-template-columns:1fr 1fr;}
+  .rev-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .cta-form{flex-direction:column;}
+  .nav-links a:not(.nav-cta){display:none;}
+}
+@media(max-width:480px){.proc-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">岩韵<span>.</span></a>
+  <div class="nav-links">
+    <a href="#journey">旅程</a>
+    <a href="#products">茶品</a>
+    <a href="#process">工艺</a>
+    <a href="#reviews">茶友</a>
+    <a href="#contact" class="nav-cta">品鉴体验</a>
+  </div>
+  <div class="nav-progress" id="navProg"></div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge ah-badge">武夷山 · 正岩产区</div>
+      <h1 class="ah-title">岩韵<span>.</span><br>溯源茶香</h1>
+      <p class="ah-p">源自武夷山核心产区，传统炭焙工艺。三代茶人，守护最纯正的岩骨花香。</p>
+      <div class="hero-actions ah-actions">
+        <a href="#journey" class="btn btn-p">一粒种的旅程 →</a>
+        <a href="#products" class="btn btn-s">探索茶品</a>
+      </div>
+      <div class="hero-stats ah-stats">
+        <div><div class="hero-stat-num">30+</div><div class="hero-stat-label">年传承</div></div>
+        <div><div class="hero-stat-num">12</div><div class="hero-stat-label">经典茶品</div></div>
+        <div><div class="hero-stat-num">5k+</div><div class="hero-stat-label">品鉴茶友</div></div>
+      </div>
+    </div>
+    <div class="hero-visual ah-visual">
+      <div class="geo-w">
+        <div class="geo-sq"></div><div class="geo-lh"></div><div class="geo-lv"></div>
+        <div class="geo-dot"></div>
+        <div class="geo-t t1">武夷山</div>
+        <div class="geo-t t2">正岩产区</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STORY ═══════════════ -->
+<section class="section s-alt" id="story">
+  <div class="container">
+    <div class="content-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+      <div class="reveal">
+        <div style="aspect-ratio:4/3;background:var(--c-bg);border:1px solid var(--c-border);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+          <!-- 网格底纹 -->
+          <div style="position:absolute;inset:0;background-image:linear-gradient(var(--c-border) 1px,transparent 1px),linear-gradient(90deg,var(--c-border) 1px,transparent 1px);background-size:40px 40px;opacity:0.2;"></div>
+          <!-- 茶园 SVG -->
+          <svg viewBox="0 0 400 300" width="70%" height="70%" style="position:relative;z-index:1;opacity:0.7;">
+            <!-- 远山 -->
+            <path d="M0 280 Q80 180 160 230 Q240 150 320 200 Q360 180 400 200 L400 300 L0 300Z" fill="var(--c-olive)" opacity="0.08"/>
+            <path d="M0 260 Q100 170 200 220 Q280 140 400 190 L400 300 L0 300Z" fill="var(--c-olive)" opacity="0.06"/>
+            <!-- 茶树列 -->
+            <ellipse cx="60" cy="230" rx="22" ry="14" fill="var(--c-olive)" opacity="0.12"/>
+            <ellipse cx="110" cy="220" rx="20" ry="12" fill="var(--c-olive)" opacity="0.1"/>
+            <ellipse cx="160" cy="235" rx="18" ry="11" fill="var(--c-olive)" opacity="0.1"/>
+            <ellipse cx="210" cy="225" rx="21" ry="13" fill="var(--c-olive)" opacity="0.09"/>
+            <ellipse cx="260" cy="215" rx="19" ry="11" fill="var(--c-olive)" opacity="0.09"/>
+            <ellipse cx="310" cy="230" rx="17" ry="10" fill="var(--c-olive)" opacity="0.08"/>
+            <ellipse cx="350" cy="220" rx="16" ry="9" fill="var(--c-olive)" opacity="0.08"/>
+            <!-- 云 -->
+            <ellipse cx="300" cy="60" rx="60" ry="18" fill="var(--c-sand,var(--c-border))" opacity="0.08"/>
+            <ellipse cx="100" cy="45" rx="45" ry="14" fill="var(--c-sand,var(--c-border))" opacity="0.06"/>
+            <!-- 太阳 -->
+            <circle cx="340" cy="40" r="28" fill="var(--c-accent)" opacity="0.04"/>
+            <!-- 采茶人剪影 -->
+            <circle cx="130" cy="195" r="5" fill="var(--c-text)" opacity="0.06"/>
+            <path d="M127 200 L130 215 L133 200" stroke="var(--c-text)" stroke-width="1.5" opacity="0.06" fill="none"/>
+            <circle cx="280" cy="185" r="4.5" fill="var(--c-text)" opacity="0.05"/>
+            <path d="M278 190 L280 205 L282 190" stroke="var(--c-text)" stroke-width="1.5" opacity="0.05" fill="none"/>
+          </svg>
+          <div style="position:absolute;width:12px;height:12px;top:-1px;left:-1px;border-top:2px solid var(--c-accent);border-left:2px solid var(--c-accent);"></div>
+          <div style="position:absolute;width:12px;height:12px;top:-1px;right:-1px;border-top:2px solid var(--c-accent);border-right:2px solid var(--c-accent);"></div>
+          <div style="position:absolute;width:12px;height:12px;bottom:-1px;left:-1px;border-bottom:2px solid var(--c-accent);border-left:2px solid var(--c-accent);"></div>
+          <div style="position:absolute;width:12px;height:12px;bottom:-1px;right:-1px;border-bottom:2px solid var(--c-accent);border-right:2px solid var(--c-accent);"></div>
+          <span style="font-family:var(--f-caption);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--c-accent);padding:12px 24px;border:1px solid var(--c-border);background:rgba(250,250,249,0.9);position:relative;z-index:1;">武夷山 · 1990</span>
+        </div>
+      </div>
+      <div class="reveal r2">
+        <div class="tag">品牌故事</div>
+        <h2>三代人的<br>一杯茶</h2>
+        <p style="margin-top:20px;">岩韵茶庄始于一九九零年，坐落于武夷山正岩产区。三代茶人，坚守传统炭焙工艺，只为守护最纯正的岩骨花香。</p>
+        <p style="margin-top:12px;">从茶山到茶杯，我们亲手把控每一个环节——采摘、萎凋、揉捻、炭焙。每一片茶叶，都经过至少三次品鉴，才敢送到你的手中。</p>
+        <div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--c-border);">
+          <div style="font-family:var(--f-heading);font-size:16px;font-weight:500;">陈明远</div>
+          <div style="font-family:var(--f-caption);font-size:9px;letter-spacing:0.1em;color:var(--c-text-muted);margin-top:4px;text-transform:uppercase;">岩韵茶庄 · 第三代传人</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ JOURNEY — 一粒种子的旅程 ═══════════════ -->
+<section class="section journey-section" id="journey">
+  <div class="section-label reveal">
+    <div class="tag">一粒种子的旅程</div>
+    <h2 style="font-size:clamp(24px,2.5vw,36px);">从武夷山到你的杯盏</h2>
+  </div>
+  <div class="journey-dots" id="jDots">
+    <div class="journey-dot active"></div>
+    <div class="journey-dot"></div>
+    <div class="journey-dot"></div>
+    <div class="journey-dot"></div>
+    <div class="journey-dot"></div>
+    <div class="journey-dot"></div>
+  </div>
+
+  <div class="journey-sticky" id="jSticky">
+    <div class="journey-track" id="jTrack">
+
+      <!-- Slide 1: 种子入土 -->
+      <div class="journey-slide s-alt" data-j="0">
+        <div class="content-2col">
+          <div class="journey-canvas-wrap"><canvas id="jc-seed"></canvas><div class="cor tl"></div><div class="cor tr"></div><div class="cor bl"></div><div class="cor br"></div></div>
+          <div>
+            <div class="journey-step">_ 01 / 06</div>
+            <h3 style="margin-bottom:16px;">埋下一粒<br>未来的希望</h3>
+            <p>每年清明前，茶农精选饱满的茶籽，播入武夷山特有的红壤中。土壤深处，一粒种子正在积蓄力量，等待破土而出的那一刻。</p>
+            <div class="journey-stat">
+              <div class="journey-stat-item">5cm<span>播种深度</span></div>
+              <div class="journey-stat-item">15°C<span>最适地温</span></div>
+              <div class="journey-stat-item">30天<span>破土周期</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: 破土萌芽 -->
+      <div class="journey-slide" data-j="1">
+        <div class="content-2col" style="direction:rtl;">
+          <div style="direction:ltr;">
+            <div class="journey-step">_ 02 / 06</div>
+            <h3 style="margin-bottom:16px;">冲破黑暗<br>迎接第一缕光</h3>
+            <p>经过漫长的等待，嫩芽终于冲破土层。两片嫩叶舒展——这是茶树生命的开端。武夷山的晨雾和露水，将滋养它未来的每一天。</p>
+            <div class="journey-stat">
+              <div class="journey-stat-item">30天<span>破土周期</span></div>
+              <div class="journey-stat-item">90%<span>成活率</span></div>
+            </div>
+          </div>
+          <div class="journey-canvas-wrap" style="direction:ltr;"><canvas id="jc-sprout"></canvas><div class="cor tl"></div><div class="cor tr"></div><div class="cor bl"></div><div class="cor br"></div></div>
+        </div>
+      </div>
+
+      <!-- Slide 3: 抽枝长叶 -->
+      <div class="journey-slide s-alt" data-j="2">
+        <div class="content-2col">
+          <div class="journey-canvas-wrap"><canvas id="jc-grow"></canvas><div class="cor tl"></div><div class="cor tr"></div><div class="cor bl"></div><div class="cor br"></div></div>
+          <div>
+            <div class="journey-step">_ 03 / 06</div>
+            <h3 style="margin-bottom:16px;">一芽两叶<br>天地精华</h3>
+            <p>春去秋来，茶树在武夷山的云雾、日照和雨水中茁壮成长。每一片茶叶都吸收着山场的灵气，累积着丰富的内含物质。</p>
+            <div class="journey-stat">
+              <div class="journey-stat-item">3年<span>首次采摘</span></div>
+              <div class="journey-stat-item">1芽2叶<span>采摘标准</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: 匠心采摘 -->
+      <div class="journey-slide" data-j="3">
+        <div class="content-2col" style="direction:rtl;">
+          <div style="direction:ltr;">
+            <div class="journey-step">_ 04 / 06</div>
+            <h3 style="margin-bottom:16px;">指尖上的<br>季节</h3>
+            <p>清明前后，茶农凌晨即起，手工采摘最鲜嫩的一芽两叶。每一片茶叶都是与时间的赛跑——今天的嫩芽，明天就是佳茗。</p>
+            <div class="journey-stat">
+              <div class="journey-stat-item">5:00<span>晨采时间</span></div>
+              <div class="journey-stat-item">6kg<span>日采量</span></div>
+            </div>
+          </div>
+          <div class="journey-canvas-wrap" style="direction:ltr;"><canvas id="jc-harvest"></canvas><div class="cor tl"></div><div class="cor tr"></div><div class="cor bl"></div><div class="cor br"></div></div>
+        </div>
+      </div>
+
+      <!-- Slide 5: 炭焙升华 (dark) -->
+      <div class="journey-slide s-dark" data-j="4">
+        <div class="content-2col">
+          <div class="journey-canvas-wrap" style="background:#1A1816;"><canvas id="jc-fire"></canvas><div class="cor tl" style="border-color:var(--c-accent);"></div><div class="cor tr" style="border-color:var(--c-accent);"></div><div class="cor bl" style="border-color:var(--c-accent);"></div><div class="cor br" style="border-color:var(--c-accent);"></div></div>
+          <div>
+            <div class="journey-step" style="color:rgba(212,120,42,0.7);">_ 05 / 06</div>
+            <h3 style="color:white;margin-bottom:16px;">荔枝木炭火<br>赋予灵魂</h3>
+            <p>数十小时的炭焙，是岩茶独有的修行。荔枝木炭的香气渗入茶叶，火候的掌控全凭匠人的经验。多一分则焦，少一分则生。</p>
+            <div class="journey-stat" style="border-top-color:rgba(255,255,255,0.06);">
+              <div class="journey-stat-item" style="color:var(--c-accent);">72小时<span style="color:rgba(255,255,255,0.4);">炭焙时长</span></div>
+              <div class="journey-stat-item" style="color:var(--c-accent);">80°C<span style="color:rgba(255,255,255,0.4);">炭火温度</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: 杯中茶香 -->
+      <div class="journey-slide s-alt" data-j="5">
+        <div class="content-2col" style="direction:rtl;">
+          <div style="direction:ltr;text-align:center;">
+            <div class="journey-step">_ 06 / 06</div>
+            <h3 style="margin-bottom:20px;">从一粒种子<br>到一杯岩韵</h3>
+            <p style="max-width:420px;">300天的等待，三代人的坚守。每一杯岩韵茶，都是一粒种子的漫长旅程。</p>
+            <a href="#products" class="btn btn-p" style="margin-top:32px;">探索茶品 →</a>
+          </div>
+          <canvas id="jc-tea" style="width:100%;aspect-ratio:4/3;border:1px solid var(--c-border);direction:ltr;"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRODUCTS ═══════════════ -->
+<section class="section" id="products" style="padding-bottom:0;">
+  <div class="container">
+    <div class="section-label reveal">
+      <div class="tag">精选茶品</div>
+      <h2>从山场到茶席</h2>
+    </div>
+  </div>
+  <div class="prod-grid">
+    <!-- 大红袍 -->
+    <div class="prod-card reveal r1" onclick="openModal('dahongpao')">
+      <div class="prod-corner tl"></div><div class="prod-corner tr"></div>
+      <div class="prod-corner bl"></div><div class="prod-corner br"></div>
+      <div style="height:140px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--c-bg-alt);border:1px solid var(--c-border);">
+        <svg viewBox="0 0 120 120" width="80" height="80" fill="none">
+          <ellipse cx="60" cy="80" rx="35" ry="10" fill="var(--c-accent)" opacity="0.06"/>
+          <path d="M35 45 L30 75 Q30 82 38 82 L82 82 Q90 82 90 75 L85 45Z" stroke="var(--c-text)" stroke-width="1.5" fill="none" opacity="0.12"/>
+          <ellipse cx="60" cy="70" rx="20" ry="5" fill="var(--c-accent)" opacity="0.04"/>
+          <path d="M50 70 Q55 60 60 65 Q65 60 70 70" stroke="var(--c-olive)" stroke-width="2" fill="none" opacity="0.2"/>
+          <path d="M30 42 Q35 35 45 38 Q42 30 35 32" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.15"/>
+          <path d="M90 42 Q85 35 75 38 Q78 30 85 32" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.15"/>
+          <circle cx="55" cy="55" r="3" fill="var(--c-accent)" opacity="0.08"/>
+          <circle cx="65" cy="55" r="2.5" fill="var(--c-accent)" opacity="0.06"/>
+        </svg>
+      </div>
+      <div class="prod-tag">经典 · 岩茶之首</div>
+      <div class="prod-name">大红袍</div>
+      <div class="prod-desc">岩骨花香，七泡有余香。武夷岩茶之王，醇厚甘爽，回甘悠长。</div>
+      <div class="prod-foot"><span class="prod-price">¥388</span><span class="prod-link">查看详情</span></div>
+    </div>
+    <!-- 铁观音 -->
+    <div class="prod-card reveal r2" onclick="openModal('tieguanyin')">
+      <div class="prod-corner tl"></div><div class="prod-corner tr"></div>
+      <div class="prod-corner bl"></div><div class="prod-corner br"></div>
+      <div style="height:140px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--c-bg-alt);border:1px solid var(--c-border);">
+        <svg viewBox="0 0 120 120" width="80" height="80" fill="none">
+          <ellipse cx="60" cy="85" rx="28" ry="8" fill="var(--c-olive)" opacity="0.06"/>
+          <path d="M40 45 L38 72 Q38 78 44 78 L76 78 Q82 78 82 72 L80 45Z" stroke="var(--c-text)" stroke-width="1.5" fill="none" opacity="0.1"/>
+          <!-- 兰花 -->
+          <ellipse cx="55" cy="52" rx="10" ry="4" fill="var(--c-accent)" opacity="0.08" transform="rotate(-20 55 52)"/>
+          <ellipse cx="65" cy="55" rx="10" ry="4" fill="var(--c-accent)" opacity="0.06" transform="rotate(15 65 55)"/>
+          <ellipse cx="60" cy="48" rx="8" ry="3.5" fill="var(--c-accent)" opacity="0.1"/>
+          <line x1="60" y1="48" x2="60" y2="60" stroke="var(--c-olive)" stroke-width="1" opacity="0.15"/>
+          <path d="M45 40 Q50 32 58 35" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.12"/>
+          <path d="M75 40 Q70 32 62 35" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.12"/>
+        </svg>
+      </div>
+      <div class="prod-tag">清新 · 兰花韵</div>
+      <div class="prod-name">铁观音</div>
+      <div class="prod-desc">兰花香气，清雅甘醇。传统半发酵工艺，汤色金黄，韵味悠长。</div>
+      <div class="prod-foot"><span class="prod-price">¥288</span><span class="prod-link">查看详情</span></div>
+    </div>
+    <!-- 正山小种 -->
+    <div class="prod-card reveal r3" onclick="openModal('lapsang')">
+      <div class="prod-corner tl"></div><div class="prod-corner tr"></div>
+      <div class="prod-corner bl"></div><div class="prod-corner br"></div>
+      <div style="height:140px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:var(--c-bg-alt);border:1px solid var(--c-border);">
+        <svg viewBox="0 0 120 120" width="80" height="80" fill="none">
+          <ellipse cx="60" cy="82" rx="30" ry="9" fill="var(--c-accent)" opacity="0.05"/>
+          <path d="M38 48 L35 73 Q35 79 42 79 L78 79 Q85 79 85 73 L82 48Z" stroke="var(--c-text)" stroke-width="1.5" fill="none" opacity="0.1"/>
+          <!-- 松烟 -->
+          <path d="M50 42 Q46 34 50 28 Q54 22 50 16" stroke="var(--c-accent)" stroke-width="1.5" fill="none" opacity="0.12" stroke-linecap="round"/>
+          <path d="M60 38 Q57 30 60 24 Q63 18 60 14" stroke="var(--c-accent)" stroke-width="1.5" fill="none" opacity="0.08" stroke-linecap="round"/>
+          <path d="M70 42 Q74 34 70 28 Q66 22 70 16" stroke="var(--c-accent)" stroke-width="1" fill="none" opacity="0.06" stroke-linecap="round"/>
+          <!-- 松针 -->
+          <path d="M38 35 L32 30 M38 35 L34 38" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.08"/>
+          <path d="M82 35 L88 30 M82 35 L86 38" stroke="var(--c-olive)" stroke-width="1.5" fill="none" opacity="0.08"/>
+          <circle cx="60" cy="62" r="5" fill="var(--c-accent)" opacity="0.04"/>
+        </svg>
+      </div>
+      <div class="prod-tag">经典 · 红茶鼻祖</div>
+      <div class="prod-name">正山小种</div>
+      <div class="prod-desc">松烟香，桂圆味。传统烟熏工艺，红茶鼻祖，醇厚温润。</div>
+      <div class="prod-foot"><span class="prod-price">¥328</span><span class="prod-link">查看详情</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div id="modalContent"></div>
+</div>
+
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section class="section s-dark" id="process">
+  <div class="container">
+    <div class="section-label reveal">
+      <div class="tag">匠心工艺</div>
+      <h2>一片茶叶的旅程</h2>
+      <p style="max-width:500px;margin:12px auto 0;">从枝头到杯盏，每一步都是与时间的对话。</p>
+    </div>
+    <div class="proc-grid">
+      <div class="reveal r1"><div class="proc-step-num">_ 01</div><div class="proc-step-line"></div><h3>采摘</h3><p>清明前后，手工采摘一芽两叶，只选最鲜嫩的茶菁。</p></div>
+      <div class="reveal r2"><div class="proc-step-num">_ 02</div><div class="proc-step-line"></div><h3>萎凋</h3><p>自然日光萎凋，让茶叶慢慢失去水分，唤醒内在香气。</p></div>
+      <div class="reveal r3"><div class="proc-step-num">_ 03</div><div class="proc-step-line"></div><h3>炭焙</h3><p>荔枝木炭火慢焙，历时数十小时，赋予茶叶独特的火香。</p></div>
+      <div class="reveal r4"><div class="proc-step-num">_ 04</div><div class="proc-step-line"></div><h3>品鉴</h3><p>至少三次专业审评，确保每一批茶都达到岩韵标准。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-label reveal">
+      <div class="tag">茶友说</div>
+      <h2>真实品鉴反馈</h2>
+    </div>
+  </div>
+  <div class="rev-grid">
+    <div class="rev-card reveal r1">
+      <div class="rev-tag">福建 · 林先生</div>
+      <div class="rev-text">"喝了很多年的大红袍，岩韵的这款是我喝过最正的。回甘非常明显，七泡之后还有余香。"</div>
+      <div class="rev-author"><div class="rev-name">十年茶友</div><div class="rev-role">岩韵 · 大红袍</div></div>
+    </div>
+    <div class="rev-card reveal r2">
+      <div class="rev-tag">广东 · 王女士</div>
+      <div class="rev-text">"自从喝了岩韵的铁观音，再也喝不惯别的了。兰花香气纯正，茶汤清澈透亮，入口回甘。"</div>
+      <div class="rev-author"><div class="rev-name">茶龄五年</div><div class="rev-role">岩韵 · 铁观音</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="section s-alt" id="contact">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="tag">品味岩韵</div>
+      <h2>开启茶香之旅</h2>
+      <p>订阅茶香通讯，获取新品资讯、茶知识和专属优惠。<br>免费获赠《岩茶品鉴入门指南》电子书。</p>
+      <form class="cta-form" onsubmit="event.preventDefault();alert('感谢订阅！品鉴指南已发送。');">
+        <input type="email" placeholder="输入邮箱地址" required>
+        <button type="submit">订阅</button>
+      </form>
+      <div class="cta-note">我们不会分享您的邮箱 · 退订随时</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand">岩韵<span>.</span></div><div class="footer-brand-desc">源自武夷山核心产区。三代茶人，一杯好茶。让每一杯茶都成为你与山川的对话。</div></div>
+      <div class="footer-col"><h4>茶品</h4><a href="#">大红袍</a><a href="#">铁观音</a><a href="#">正山小种</a><a href="#">全部茶品</a></div>
+      <div class="footer-col"><h4>服务</h4><a href="#">品鉴体验</a><a href="#">茶礼定制</a><a href="#">企业团购</a><a href="#">关于我们</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 岩韵茶庄 · 武夷山正岩产区</span><span>Scroll叙事 · 工业monospace · 岩骨花香</span></div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ─── Nav progress ───
+window.addEventListener('scroll', () => {
+  const st = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('navProg').style.width = (st / dh * 100) + '%';
+});
+
+// ─── Scroll reveal ───
+document.querySelectorAll('.reveal').forEach(el => {
+  ScrollTrigger.create({
+    trigger: el, start: 'top 85%',
+    onEnter: () => el.classList.add('show')
+  });
+});
+
+// ─── Journey horizontal scroll ───
+const jTrack = document.getElementById('jTrack');
+const jSticky = document.getElementById('jSticky');
+const slides = document.querySelectorAll('.journey-slide');
+const dots = document.querySelectorAll('.journey-dot');
+if (jTrack && window.innerWidth > 768) {
+  const totalW = slides.length * 100;
+  gsap.to(jTrack, {
+    xPercent: -((slides.length - 1) / slides.length * 100),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.journey-section',
+      start: 'top top',
+      end: () => '+=' + (jTrack.offsetWidth - window.innerWidth),
+      pin: true,
+      scrub: 1,
+      onUpdate: self => {
+        const i = Math.round(self.progress * (slides.length - 1));
+        dots.forEach((d,idx) => d.classList.toggle('active', idx === i));
+      }
+    }
+  });
+}
+
+// ─── Canvas animations ───
+
+// Seed canvas
+(function(){
+  const c = document.getElementById('jc-seed'); if(!c) return;
+  const ctx = c.getContext('2d');
+  let w, h;
+  function resize() {
+    const p = c.parentElement;
+    w = c.width = p.offsetWidth; h = c.height = p.offsetHeight;
+  }
+  resize();
+  const particles = Array.from({length: 50}, () => ({
+    x: Math.random()*w, y: Math.random()*h, size: Math.random()*4+2,
+    vy: Math.random()*0.3+0.1, vx: (Math.random()-0.5)*0.2,
+    o: Math.random()*0.2+0.05, gy: h*(0.5+Math.random()*0.4), done: false
+  }));
+  let seedProgress = 0.5, seedAnim;
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top',
+    onUpdate:self=>{seedProgress=self.progress;}});
+  function drawSeed(){
+    ctx.clearRect(0,w,h,w,h);
+    // Ground
+    ctx.strokeStyle = 'rgba(20,18,16,0.04)'; ctx.lineWidth=1; ctx.setLineDash([4,6]);
+    ctx.beginPath(); ctx.moveTo(0,h*0.5); ctx.lineTo(w,h*0.5); ctx.stroke();
+    ctx.setLineDash([]);
+    particles.forEach(p => {
+      if(!p.done){p.y+=p.vy;p.x+=p.vx;}
+      if(p.y>p.gy){p.y=p.gy;p.done=true;}
+      ctx.fillStyle=`rgba(139,115,85,${p.o})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
+    });
+    // Seed
+    const s = Math.min(1, seedProgress*2);
+    ctx.save(); ctx.translate(w/2, h*0.35+seedProgress*h*0.12);
+    ctx.scale(s,s);
+    const g = ctx.createRadialGradient(0,0,2,0,0,12);
+    g.addColorStop(0,'#D4782A'); g.addColorStop(1,'#8B6914');
+    ctx.fillStyle=g;
+    ctx.shadowColor='rgba(212,120,42,0.3)'; ctx.shadowBlur=15*(Math.sin(Date.now()/500)*0.2+0.8);
+    ctx.beginPath(); ctx.ellipse(0,0,8,12,0,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+    seedAnim = requestAnimationFrame(drawSeed);
+  }
+  drawSeed();
+  window.addEventListener('resize',()=>{resize();});
+})();
+
+// Sprout
+(function(){
+  const c = document.getElementById('jc-sprout'); if(!c) return;
+  const ctx = c.getContext('2d');
+  let w, h;
+  function resize(){const p=c.parentElement; w=c.width=p.offsetWidth; h=c.height=p.offsetHeight;}
+  resize();
+  let p=0.5;
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top',onUpdate:self=>{p=self.progress;}});
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='rgba(139,115,85,0.06)'; ctx.fillRect(0,h*0.6-p*h*0.1,w,h*0.4);
+    ctx.strokeStyle='rgba(212,120,42,0.12)'; ctx.lineWidth=1;
+    const rl=Math.min(p*h*0.35,h*0.35);
+    ctx.beginPath(); ctx.moveTo(w/2,h*0.55);
+    for(let i=0;i<rl;i+=2) ctx.lineTo(w/2+Math.sin(i*0.05)*10,h*0.55+i);
+    ctx.stroke();
+    if(p>0){
+      const st=p*h*0.22;
+      ctx.strokeStyle='#6B7B3C'; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(w/2,h*0.55);
+      ctx.quadraticCurveTo(w/2+Math.sin(p*3)*8,h*0.55-st*0.5,w/2,h*0.55-st);
+      ctx.stroke();
+      if(p>0.4){const lp=(p-0.4)/0.6; ctx.fillStyle='#6B7B3C';
+        ctx.beginPath(); ctx.ellipse(w/2-15*lp,h*0.55-st*0.6,12*lp,6*lp,-0.3,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(w/2+15*lp,h*0.55-st*0.7,10*lp,5*lp,0.3,0,Math.PI*2); ctx.fill();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize',resize);
+})();
+
+// Simplified: Grow, Harvest, Fire, Tea — using similar Canvas 2D patterns
+// (For brevity, the same animation patterns from journey.html are replicated here)
+
+// Grow
+(function(){
+  const c=document.getElementById('jc-grow'); if(!c)return;
+  const ctx=c.getContext('2d');
+  let w,h; function r(){const p=c.parentElement; w=c.width=p.offsetWidth; h=c.height=p.offsetHeight;} r();
+  let p=0.5;
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top',onUpdate:s=>{p=s.progress;}});
+  function d(){
+    ctx.clearRect(0,0,w,h);
+    ctx.strokeStyle='#6B7B3C'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(w/2,h*0.75);
+    ctx.quadraticCurveTo(w/2-20,h*0.4,w/2+10*Math.sin(p*Math.PI),h*0.15);
+    ctx.stroke();
+    const lc=Math.floor(p*12);
+    for(let i=0;i<lc;i++){
+      const a=i/12*Math.PI*2, r=30+Math.random()*15;
+      ctx.fillStyle=`rgba(107,123,60,${0.06+Math.random()*0.1})`;
+      ctx.beginPath(); ctx.ellipse(w/2+Math.cos(a)*r*p, h*0.5-Math.sin(Math.abs(a))*r*p*0.5, 10*p,5*p,a*0.3,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(d);
+  }
+  d(); window.addEventListener('resize',r);
+})();
+
+// Harvest
+(function(){
+  const c=document.getElementById('jc-harvest'); if(!c)return;
+  const ctx=c.getContext('2d'); let w,h;
+  function r(){const p=c.parentElement; w=c.width=p.offsetWidth; h=c.height=p.offsetHeight;} r();
+  let p=0.4;
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top',onUpdate:s=>{p=s.progress;}});
+  function d(){
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='rgba(107,123,60,0.04)'; ctx.fillRect(0,0,w,h*0.15);
+    if(p>0.3){
+      const fp=(p-0.3)/0.7,cnt=Math.floor(fp*15);
+      for(let i=0;i<cnt;i++){
+        const fx=(i/cnt*w+i*13+Date.now()*0.005)%w, fy=h*0.15+(i/cnt)*h*0.25*fp;
+        ctx.fillStyle=`rgba(107,123,60,${0.08+(i/cnt)*0.1})`;
+        ctx.save(); ctx.translate(fx,fy); ctx.rotate(i*0.5+fp*2);
+        ctx.beginPath(); ctx.ellipse(0,0,5,2.5,0,0,Math.PI*2); ctx.fill();
+        ctx.restore();
+      }
+    }
+    if(p>0.6){const bp=(p-0.6)/0.4;
+      ctx.strokeStyle='rgba(139,115,85,0.25)'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(w/2-35,h*0.85); ctx.lineTo(w/2-25,h*0.85-18*bp);
+      ctx.lineTo(w/2+25,h*0.85-18*bp); ctx.lineTo(w/2+35,h*0.85); ctx.closePath(); ctx.stroke();
+    }
+    requestAnimationFrame(d);
+  }
+  d(); window.addEventListener('resize',r);
+})();
+
+// Fire
+(function(){
+  const c=document.getElementById('jc-fire'); if(!c)return;
+  const ctx=c.getContext('2d'); let w,h;
+  function r(){const p=c.parentElement; w=c.width=p.offsetWidth; h=c.height=p.offsetHeight;} r();
+  let p=0.5, fpx=[];
+  function mk(){fpx.push({x:w/2+(Math.random()-0.5)*50,y:h,sz:Math.random()*4+2,vy:-(Math.random()*1.2+0.5),vx:(Math.random()-0.5)*0.4,life:1,dec:Math.random()*0.015+0.008});}
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top',onUpdate:s=>{p=s.progress;}});
+  function d(){
+    ctx.clearRect(0,0,w,h);
+    if(Math.random()<0.25*p) mk();
+    fpx=fpx.filter(f=>f.life>0);
+    fpx.forEach(f=>{f.x+=f.vx+(Math.random()-0.5)*0.1; f.y+=f.vy; f.vy-=0.01; f.life-=f.dec;
+      ctx.fillStyle=`rgba(212,${100+Math.floor((1-f.life)*80)},30,${Math.max(0,f.life*0.35)})`;
+      ctx.beginPath(); ctx.arc(f.x,f.y,f.sz*f.life,0,Math.PI*2); ctx.fill();
+    });
+    ctx.strokeStyle=`rgba(212,120,42,${0.02*p})`; ctx.lineWidth=1;
+    for(let i=0;i<4;i++){ctx.beginPath();
+      for(let x=0;x<w;x+=5){const y=h*0.4-i*30+Math.sin(x*0.02+Date.now()*0.001+i)*4; x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
+      ctx.stroke();
+    }
+    requestAnimationFrame(d);
+  }
+  d(); window.addEventListener('resize',r);
+})();
+
+// Tea float particles
+(function(){
+  const c=document.getElementById('jc-tea'); if(!c)return;
+  const ctx=c.getContext('2d'); let w,h;
+  function r(){const p=c.parentElement; w=c.width=p.offsetWidth; h=c.height=p.offsetHeight;} r();
+  const ps=Array.from({length:15},()=>({x:Math.random()*w,y:Math.random()*h,sz:Math.random()*3+1,vx:(Math.random()-0.5)*0.15,vy:-Math.random()*0.12-0.03,o:Math.random()*0.04+0.01}));
+  ScrollTrigger.create({trigger:'#journey',start:'top bottom',end:'bottom top'});
+  function d(){
+    ctx.clearRect(0,0,w,h);
+    ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.y<-10)p.y=h+10;
+      ctx.fillStyle=`rgba(212,120,42,${p.o})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2); ctx.fill();
+    });
+    requestAnimationFrame(d);
+  }
+  d(); window.addEventListener('resize',r);
+})();
+
+// ─── Hero animation ───
+gsap.from('.hero .hero-badge',{opacity:0,y:20,duration:0.6,ease:'power2.out'});
+gsap.from('.hero h1',{opacity:0,y:30,duration:0.8,delay:0.15,ease:'power2.out'});
+gsap.from('.hero p',{opacity:0,y:20,duration:0.6,delay:0.3,ease:'power2.out'});
+gsap.from('.hero-stats',{opacity:0,y:20,duration:0.6,delay:0.45,ease:'power2.out'});
+gsap.from('.geo-w',{opacity:0,scale:0.8,duration:0.8,delay:0.1,ease:'back.out(1.7)'});
+
+// ─── Product modals ───
+const products = {
+  dahongpao: {
+    tag: '经典 · 岩茶之首', name: '大红袍 · 正岩',
+    desc: ['大红袍是武夷岩茶之王，产自武夷山核心正岩产区。独特的岩骨花香源于武夷山特有的丹霞地貌和传统炭焙工艺。','茶汤橙黄明亮，香气馥郁持久，入口醇厚甘爽，回甘明显。七泡之后，余香犹在。'],
+    specs: {'产地':'武夷山 · 正岩产区','工艺':'传统炭焙','年份':'2025年春','净重':'100g','保质期':'36个月','储存':'密封·避光·防潮'}
+  },
+  tieguanyin: {
+    tag: '清新 · 兰花韵', name: '铁观音 · 清香型',
+    desc: ['铁观音是乌龙茶中的极品，以独特的兰花香气闻名。岩韵精选安溪核心产区传统工艺制作。','干茶卷曲紧结，色泽砂绿油润。冲泡后兰花香气清雅持久，汤色金黄明亮，入口甘醇顺滑，回甘悠长。'],
+    specs: {'产地':'安溪 · 感德镇','工艺':'传统半发酵','年份':'2025年春','净重':'100g','保质期':'24个月','储存':'密封·冷藏更佳'}
+  },
+  lapsang: {
+    tag: '经典 · 红茶鼻祖', name: '正山小种 · 烟熏',
+    desc: ['正山小种是世界红茶的鼻祖，产自武夷山桐木关。独特的松烟香和桂圆味源于传统烟熏工艺。','干茶条索肥壮，色泽乌润。茶汤红艳明亮，松烟香与桂圆甜香交织，滋味醇厚甘甜，温润顺滑。'],
+    specs: {'产地':'武夷山 · 桐木关','工艺':'传统烟熏','年份':'2025年春','净重':'100g','保质期':'36个月','储存':'密封·避光·防潮'}
+  }
+};
+
+function openModal(id){
+  const p = products[id];
+  if(!p) return;
+  let specs = '';
+  for(const[k,v] of Object.entries(p.specs)) specs += `<div class="modal-spec"><span>${k}</span><span>${v}</span></div>`;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-tag">${p.tag}</div>
+    <h3>${p.name}</h3>
+    ${p.desc.map(d=>`<p>${d}</p>`).join('')}
+    <div class="modal-specs">${specs}</div>
+    <a href="#" class="modal-btn">加入购物车 →</a>
+  `;
+  document.getElementById('modalOverlay').classList.add('show');
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.getElementById('modal').classList.remove('show');
+}
+// Close modal on Escape
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
