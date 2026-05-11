@@ -1,1374 +1,380 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>岩韵 · Yan Yun — Wuyi Rock Tea, Direct from the Mountains</title>
-<meta name="description" content="岩韵茶庄 · 三代传承的武夷岩茶。从武夷山正岩产区直达您的茶杯。有机认证、传统炭焙、全球发货。Da Hong Pao, Rou Gui, Tie Guan Yin and more.">
-<meta name="keywords" content="武夷岩茶, Wuyi rock tea, Da Hong Pao, 大红袍, Chinese tea, oolong tea, premium tea">
+<title>岩韵 · Yan Yun — Wuyi Rock Tea. Curated. Rare. Unforgettable.</title>
+<meta name="description" content="Two teas. One mountain. Three generations of mastery. Yan Yun selects only the finest Wuyi Rock Tea — Da Hong Pao and Reserve — directly from Zhengyan, charcoal roasted, hand-numbered.">
 <meta property="og:title" content="岩韵 · Yan Yun — Wuyi Rock Tea">
-<meta property="og:description" content="三代传承的武夷岩茶。从正岩产区直达您的茶杯。">
-<meta property="og:type" content="website">
+<meta property="og:description" content="Two teas. One mountain. Fifty years in the making.">
+<meta property="og:image" content="images/tea-farm-mist-1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Store",
-  "@id": "https://yanyuntea.com",
-  "name": "岩韵 Yan Yun Tea",
-  "description": "三代传承的武夷岩茶品牌。从武夷山正岩产区直达全球茶杯。",
-  "url": "https://yanyuntea.com",
-  "image": "https://yanyuntea.com/images/tea-farm-mist-1.jpg",
-  "telephone": "+86-599-xxx-xxxx",
-  "address": {"@type":"PostalAddress","addressLocality":"Wuyi Mountain","addressRegion":"Fujian","addressCountry":"CN"},
-  "foundingDate": "1990",
-  "founder": [{"@type":"Person","name":"Chen Family"}],
-  "aggregateRating": {"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"498"},
-  "makesOffer": [
-    {"@type":"Offer","name":"Da Hong Pao","price":"54","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Rou Gui","price":"37","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Shui Xian","price":"34","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Tie Guan Yin","price":"40","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Lapsang Souchong","price":"45","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Rock Tea Sampler","price":"54","priceCurrency":"USD","availability":"https://schema.org/InStock"},
-    {"@type":"Offer","name":"Yan Yun Gift Box","price":"95","priceCurrency":"USD","availability":"https://schema.org/InStock"}
-  ]
-}
-</script>
 <style>
-/* ═══════════════════ RESET & VARIABLES ═══════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F8F5F0;  --bg-alt:#F0EBE0;  --bg-dark:#1C1814;
-  --text:#1C1814;  --text-muted:#8A7D70;  --text-light:#B8ADA0;
-  --accent:#C45F3C;  --accent-light:#D97757;  --accent-dark:#A34A2E;
-  --gold:#A16207;  --green:#4A6B4A;  --green-light:#6B8F6B;
-  --border:#E5DED5;  --border-light:#F0EBE5;
-  --shadow:0 2px 20px rgba(28,24,20,0.06);  --shadow-lg:0 8px 40px rgba(28,24,20,0.10);
-  --f-serif:'Playfair Display', serif;
+  --bg:#0F0D0A; --bg-light:#1A1712; --bg-card:#14110E;
+  --text:#EAE4D8; --text-muted:#9B9384; --text-dim:#5A5344;
+  --accent:#C45F3C; --accent-light:#D97757; --accent-dark:#A34A2E;
+  --gold:#C4963E; --gold-light:#D4AF5E;
+  --f-serif:'Playfair Display',serif;
   --f-body:'Inter','Noto Serif SC',system-ui,sans-serif;
-  --f-chinese:'Noto Serif SC',serif;
+  --f-cn:'Noto Serif SC',serif;
   --f-mono:'DM Mono',monospace;
-  --radius:12px;  --radius-sm:6px;  --max-w:1200px;  --nav-h:72px;
+  --nav-h:72px;
 }
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
-body{font-family:var(--f-body);background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+body{font-family:var(--f-body);background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:inherit;font-size:inherit;border:none;background:none}
-input,textarea{font-family:inherit;font-size:inherit}
-.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:var(--radius-sm);font-weight:500;font-size:14px;letter-spacing:0.02em;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.1);opacity:0;transition:opacity 0.3s}
-.btn:hover::after{opacity:1}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,95,60,0.2)}
-.btn-outline{border:1px solid var(--accent);color:var(--accent)}
-.btn-outline:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,95,60,0.15)}
-.btn-dark{background:var(--bg-dark);color:#fff}
-.btn-dark:hover{background:#2C2420}
-.btn-sm{padding:10px 20px;font-size:13px}
-.section{padding:100px 0}
-.section-alt{background:var(--bg-alt)}
-.section-dark{background:var(--bg-dark);color:#E8E0D8}
-.label{font-family:var(--f-mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
-.section-title{font-family:var(--f-serif);font-size:40px;font-weight:600;line-height:1.2;margin-bottom:20px}
-.section-title.cn{font-family:var(--f-chinese);font-weight:700}
-.section-desc{color:var(--text-muted);max-width:540px;line-height:1.8}
-.section-dark .section-desc{color:#B8ADA0}
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+
+/* ── NAV ────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);background:rgba(15,13,10,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(234,228,216,0.04);transition:all 0.3s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 28px}
+.nav-logo{font-family:var(--f-serif);font-size:18px;font-weight:600;color:var(--text);letter-spacing:-0.02em;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--accent);font-size:20px}
+.nav-logo small{font-size:10px;font-family:var(--f-mono);color:var(--text-dim);font-weight:400;letter-spacing:0.12em;margin-left:4px}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text-muted);letter-spacing:0.05em;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent-light)}
+.nav-btn{padding:8px 20px;background:var(--accent);color:#fff;border-radius:4px;font-size:12px;font-weight:500;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+.nav-btn:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(196,95,60,0.2)}
+
+/* ── HERO ───────────────────────────────── */
+.hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:-40px;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;animation:kb 25s ease-in-out infinite alternate;filter:brightness(0.45)}
+@keyframes kb{0%{transform:scale(1)}100%{transform:scale(1.12)}}
+.hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 40%,rgba(15,13,10,0.7) 100%)}
+.hero-vignette::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,13,10,0.9) 0%,transparent 40%)}
+.hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hero-particle{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.08)}
+@keyframes floatUp{0%{transform:translateY(0)translateX(0);opacity:0}20%{opacity:0.6}80%{opacity:0.2}100%{transform:translateY(-300px)translateX(40px);opacity:0}}
+.hero-content{position:relative;z-index:2;max-width:680px;padding:0 28px}
+.hero-kicker{font-family:var(--f-mono);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-light);margin-bottom:20px;opacity:0;animation:fadeSlideIn 1s 0.2s forwards}
+.hero-title{font-family:var(--f-serif);font-size:clamp(38px,5.5vw,64px);font-weight:600;line-height:1.08;color:var(--text);margin-bottom:18px;opacity:0;animation:fadeSlideIn 1s 0.4s forwards}
+.hero-title .cn{font-family:var(--f-cn);font-weight:700;display:block;font-size:clamp(22px,2.5vw,32px);color:var(--accent-light);margin-top:8px}
+.hero-desc{font-size:clamp(14px,1vw,16px);color:rgba(234,228,216,0.55);max-width:440px;line-height:1.7;margin-bottom:32px;opacity:0;animation:fadeSlideIn 1s 0.6s forwards}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeSlideIn 1s 0.8s forwards}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:14px;letter-spacing:0.02em;transition:all 0.35s cubic-bezier(0.16,1,0.3,1)}
+.hero-cta:hover{background:var(--accent-dark);transform:translateY(-3px);box-shadow:0 12px 32px rgba(196,95,60,0.25)}
+.hero-cta-secondary{padding:16px 28px;border:1px solid rgba(234,228,216,0.2);color:rgba(234,228,216,0.7);border-radius:6px;font-size:13px;transition:all 0.35s}
+.hero-cta-secondary:hover{border-color:var(--accent);color:var(--accent-light)}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2}
+.hero-scroll-dot{width:6px;height:6px;border-radius:50%;background:rgba(234,228,216,0.3);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
+@keyframes fadeSlideIn{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION ────────────────────────────── */
+.section{padding:120px 28px}
+.container{max-width:1080px;margin:0 auto}
+.section-label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:16px}
+.section-title{font-family:var(--f-serif);font-size:clamp(28px,3.5vw,40px);font-weight:600;line-height:1.15;margin-bottom:20px;color:var(--text)}
+.section-title .cn{font-family:var(--f-cn);font-size:clamp(20px,2vw,28px);color:var(--accent-light);display:block;margin-top:6px;font-weight:700}
+.section-desc{color:var(--text-muted);max-width:540px;line-height:1.8;font-size:15px}
+
+/* ── STORY ──────────────────────────────── */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-visual{position:relative}
+.story-img{aspect-ratio:4/5;border-radius:6px;overflow:hidden}
+.story-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s}
+.story-img:hover img{transform:scale(1.03)}
+.story-img-badge{position:absolute;top:20px;left:20px;padding:6px 14px;background:rgba(15,13,10,0.85);backdrop-filter:blur(8px);border:1px solid rgba(234,228,216,0.06);border-radius:100px;font-family:var(--f-mono);font-size:10px;color:var(--accent-light);letter-spacing:0.08em}
+.story-text .label{font-family:var(--f-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent-light);margin-bottom:12px}
+.story-text h2{font-family:var(--f-serif);font-size:32px;font-weight:600;line-height:1.15;margin-bottom:14px}
+.story-text h2 .cn{font-family:var(--f-cn);font-weight:700;display:block;font-size:20px;color:var(--accent-light);margin-top:6px}
+.story-text p{color:var(--text-muted);margin-bottom:14px;line-height:1.8;font-size:14px}
+.story-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(234,228,216,0.06)}
+.story-stat-num{font-family:var(--f-serif);font-size:28px;font-weight:600;color:var(--gold-light)}
+.story-stat-label{font-size:11px;color:var(--text-dim);margin-top:2px;font-family:var(--f-mono);letter-spacing:0.05em}
+
+/* ── PRODUCTS ────────────────────────────── */
+.product-block{padding:0 0 40px}
+.product-block:last-child{padding-bottom:0}
+.product-block+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(234,228,216,0.06),transparent);margin:80px 0}
+.product-showcase{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.product-showcase.reverse .product-visual{order:2}
+.product-showcase.reverse .product-detail{order:1}
+.product-visual{position:relative}
+.product-img-wrap{aspect-ratio:1;border-radius:6px;overflow:hidden;border:1px solid rgba(234,228,216,0.04);transition:all 0.5s}
+.product-img-wrap:hover{border-color:rgba(196,95,60,0.15)}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s}
+.product-img-wrap:hover img{transform:scale(1.04)}
+.product-badge{position:absolute;top:16px;right:16px;padding:6px 14px;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:10px;letter-spacing:0.08em;border-radius:4px}
+.product-badge.limited{background:var(--gold);color:#0F0D0A}
+.product-detail{}
+.product-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent-light);margin-bottom:10px}
+.product-name{font-family:var(--f-serif);font-size:28px;font-weight:600;margin-bottom:4px}
+.product-name-cn{font-family:var(--f-cn);font-size:18px;color:var(--text-dim);margin-bottom:12px}
+.product-price{font-family:var(--f-serif);font-size:26px;font-weight:600;color:var(--gold-light);margin-bottom:16px}
+.product-price .unit{font-size:13px;color:var(--text-dim);font-weight:400}
+.product-desc{color:var(--text-muted);font-size:14px;line-height:1.8;margin-bottom:20px}
+.product-features{list-style:none;margin-bottom:24px}
+.product-features li{padding:8px 0;border-bottom:1px solid rgba(234,228,216,0.04);font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:10px}
+.product-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.product-add{display:flex;align-items:center;gap:12px;margin-top:20px}
+.product-qty{display:flex;align-items:center;border:1px solid rgba(234,228,216,0.1);border-radius:6px;overflow:hidden}
+.product-qty button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;transition:all 0.2s}
+.product-qty button:hover{background:rgba(234,228,216,0.04);color:var(--text)}
+.product-qty .qty-num{width:40px;text-align:center;font-size:14px;font-weight:500}
+.add-cart-btn{padding:14px 32px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:13px;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);flex:1;max-width:220px}
+.add-cart-btn:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,95,60,0.2)}
+
+/* ── TRUST ───────────────────────────────── */
+.trust-strip{display:flex;justify-content:center;gap:48px;padding:60px 0;border-top:1px solid rgba(234,228,216,0.04);border-bottom:1px solid rgba(234,228,216,0.04);flex-wrap:wrap}
+.trust-item{text-align:center}
+.trust-item-icon{font-size:24px;margin-bottom:8px;opacity:0.5}
+.trust-item-title{font-size:12px;font-weight:500;color:var(--text-muted);letter-spacing:0.05em}
+
+/* ── SCARCITY STRIP ──────────────────────── */
+.scarcity-banner{background:var(--bg-light);padding:32px 28px;text-align:center;border-top:1px solid rgba(196,95,60,0.1)}
+.scarcity-banner h3{font-family:var(--f-serif);font-size:20px;color:var(--gold-light);margin-bottom:8px}
+.scarcity-banner p{color:var(--text-muted);font-size:13px}
+.scarcity-counter{display:flex;justify-content:center;gap:24px;margin-top:16px}
+.scarcity-block{text-align:center}
+.scarcity-num{font-family:var(--f-mono);font-size:32px;color:var(--gold-light)}
+.scarcity-label{font-size:10px;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+
+/* ── FOOTER ──────────────────────────────── */
+footer{padding:60px 28px 24px;border-top:1px solid rgba(234,228,216,0.04);text-align:center}
+footer p{font-size:12px;color:var(--text-dim);margin-bottom:8px}
+footer a{color:var(--accent-light);transition:color 0.2s}
+footer a:hover{color:var(--gold-light)}
+
+/* ── TOAST ──────────────────────────────── */
+.toast{position:fixed;bottom:24px;right:24px;z-index:200;padding:14px 20px;background:var(--bg-light);color:var(--text);border-radius:6px;font-size:13px;opacity:0;transform:translateY(12px);transition:all 0.3s;pointer-events:none;border:1px solid rgba(234,228,216,0.06)}
+.toast.show{opacity:1;transform:translateY(0);pointer-events:auto}
+
+/* ── MOBILE ──────────────────────────────── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-title{font-size:32px}
+  .hero-title .cn{font-size:18px}
+  .story-grid,.product-showcase{grid-template-columns:1fr;gap:40px}
+  .product-showcase.reverse .product-visual,.product-showcase.reverse .product-detail{order:0}
+  .trust-strip{gap:24px}
+  .section{padding:80px 20px}
+}
+
+/* ── REVEAL ANIMATIONS ──────────────────── */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.1s}
 .reveal-delay-2{transition-delay:0.2s}
 .reveal-delay-3{transition-delay:0.3s}
-.reveal-delay-4{transition-delay:0.4s}
-
-/* ═══════════════════ NAV ═══════════════════ */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(248,245,240,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:all 0.3s}
-nav.scrolled{box-shadow:var(--shadow)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:var(--max-w);margin:0 auto;padding:0 24px}
-.nav-logo{font-family:var(--f-serif);font-size:20px;font-weight:600;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px;flex-shrink:0}
-.nav-logo span{color:var(--accent);font-size:22px}
-.nav-logo small{font-size:11px;font-family:var(--f-mono);color:var(--text-muted);font-weight:400;letter-spacing:0.1em;margin-left:4px}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:13px;font-weight:500;color:var(--text-muted);transition:color 0.2s;letter-spacing:0.03em}
-.nav-links a:hover{color:var(--accent)}
-.nav-search{position:relative;display:flex;align-items:center}
-.nav-search input{width:0;padding:0;border:none;background:transparent;font-size:13px;outline:none;transition:all 0.3s;border-bottom:1px solid transparent}
-.nav-search.open input{width:180px;padding:6px 0 4px 24px;border-bottom-color:var(--border)}
-.nav-search-icon{position:absolute;left:0;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-muted);cursor:pointer;padding:4px;z-index:1}
-.nav-actions{display:flex;align-items:center;gap:12px}
-.nav-currency{font-size:12px;font-weight:500;color:var(--text-muted);display:flex;align-items:center;gap:4px}
-.nav-currency select{background:none;border:none;font-family:var(--f-mono);font-size:12px;color:var(--text-muted);cursor:pointer;padding:4px}
-.nav-lang{position:relative;display:flex;align-items:center}
-.nav-lang-btn{font-family:var(--f-mono);font-size:11px;color:var(--text-muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;background:transparent;transition:all 0.2s;display:flex;align-items:center;gap:4px}
-.nav-lang-btn:hover{border-color:var(--accent);color:var(--accent)}
-.nav-lang-btn .arrow{font-size:8px;margin-left:2px;transition:transform 0.2s}
-.nav-lang.open .nav-lang-btn .arrow{transform:rotate(180deg)}
-.nav-lang-dropdown{position:absolute;top:calc(100% + 4px);right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);min-width:120px;z-index:100;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all 0.2s}
-.nav-lang.open .nav-lang-dropdown{opacity:1;visibility:hidden;transform:translateY(0)}
-.nav-lang.open .nav-lang-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-lang-option{display:block;width:100%;padding:10px 16px;font-size:13px;text-align:left;background:none;border:none;cursor:pointer;transition:background 0.2s;color:var(--text)}
-.nav-lang-option:hover{background:var(--bg-alt)}
-.nav-lang-option.active{color:var(--accent);font-weight:500}
-.nav-lang-option small{color:var(--text-muted);font-size:11px;margin-left:6px}
-.nav-cart{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:background 0.2s}
-.nav-cart:hover{background:var(--bg-alt)}
-.nav-cart svg{width:20px;height:20px}
-.cart-count{position:absolute;top:2px;right:2px;min-width:18px;height:18px;background:var(--accent);color:#fff;font-size:10px;font-weight:600;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;opacity:0;transform:scale(0.5);transition:all 0.3s}
-.cart-count.show{opacity:1;transform:scale(1)}
-.nav-mobile-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px}
-.nav-mobile-toggle span{width:22px;height:2px;background:var(--text);border-radius:1px;transition:all 0.3s}
-
-/* ═══════════════════ SEARCH OVERLAY ═══════════════════ */
-.search-overlay{position:fixed;inset:0;z-index:1999;background:rgba(28,24,20,0.5);opacity:0;visibility:hidden;transition:all 0.3s}
-.search-overlay.open{opacity:1;visibility:visible}
-.search-panel{position:fixed;top:0;left:0;right:0;z-index:2000;background:#fff;padding:20px 24px;box-shadow:var(--shadow-lg);transform:translateY(-100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1)}
-.search-panel.open{transform:translateY(0)}
-.search-panel-inner{max-width:600px;margin:0 auto;position:relative}
-.search-panel input{width:100%;padding:16px 20px 16px 48px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:border-color 0.2s}
-.search-panel input:focus{border-color:var(--accent)}
-.search-panel-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--text-muted)}
-.search-panel-close{position:absolute;right:0;top:50%;transform:translateY(-50%);padding:8px 12px;color:var(--text-muted);font-size:18px}
-.search-results{max-width:600px;margin:84px auto 0;padding:0 24px}
-.search-result-item{display:flex;gap:16px;padding:16px;background:#fff;border-radius:var(--radius-sm);margin-bottom:8px;cursor:pointer;transition:all 0.2s;border:1px solid var(--border-light)}
-.search-result-item:hover{border-color:var(--accent);box-shadow:var(--shadow)}
-.search-result-img{width:56px;height:56px;border-radius:var(--radius-sm);object-fit:cover;flex-shrink:0}
-.search-result-info{flex:1}
-.search-result-name{font-weight:600;font-size:14px}
-.search-result-tag{font-size:12px;color:var(--text-muted)}
-.search-result-price{font-family:var(--f-serif);font-size:16px;color:var(--accent);font-weight:600}
-
-/* ═══════════════════ PARTICLES (Hero浮动茶粒子) ═══════════════════ */
-.particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.particle{position:absolute;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);animation:particleFloat 18s ease-in-out infinite}
-.particle:nth-child(1){left:15%;top:20%;width:4px;height:4px;animation-delay:0s;animation-duration:22s}
-.particle:nth-child(2){left:35%;top:60%;width:8px;height:8px;animation-delay:3s;animation-duration:26s;background:rgba(196,95,60,0.08)}
-.particle:nth-child(3){left:55%;top:30%;width:5px;height:5px;animation-delay:6s;animation-duration:20s}
-.particle:nth-child(4){left:75%;top:70%;width:10px;height:10px;animation-delay:9s;animation-duration:28s;background:rgba(196,95,60,0.06);border:1px solid rgba(196,95,60,0.12)}
-.particle:nth-child(5){left:25%;top:85%;width:3px;height:3px;animation-delay:2s;animation-duration:24s}
-.particle:nth-child(6){left:85%;top:15%;width:7px;height:7px;animation-delay:5s;animation-duration:19s;background:rgba(255,255,255,0.08)}
-.particle:nth-child(7){left:50%;top:45%;width:4px;height:4px;animation-delay:8s;animation-duration:30s;background:rgba(196,95,60,0.1);border:1px solid rgba(196,95,60,0.08)}
-.particle:nth-child(8){left:10%;top:50%;width:6px;height:6px;animation-delay:11s;animation-duration:22s}
-@keyframes particleFloat{0%{transform:translateY(0) translateX(0) scale(1);opacity:0}10%{opacity:1}50%{transform:translateY(-120px) translateX(30px) scale(1.2);opacity:0.5}100%{transform:translateY(-250px) translateX(-20px) scale(0.5);opacity:0}}
-
-/* ═══════════════════ HERO ═══════════════════ */
-.hero{height:100vh;min-height:600px;max-height:900px;position:relative;display:flex;align-items:center;overflow:hidden;margin-top:0}
-.hero-bg{position:absolute;inset:-60px -60px -60px -60px;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;animation:heroZoom 20s ease-in-out infinite alternate}
-@keyframes heroZoom{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1.04)}}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 50%,rgba(28,24,20,0.15) 100%)}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,24,20,0.7) 0%,rgba(28,24,20,0.35) 50%,rgba(28,24,20,0.1) 100%);z-index:1}
-.hero-overlay::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(196,95,60,0.06) 0%,transparent 70%);animation:heroGlow 8s ease-in-out infinite alternate}
-@keyframes heroGlow{0%{opacity:0.5}100%{opacity:1}}
-.hero-pattern{position:absolute;inset:0;z-index:1;opacity:0.04;background-image:
-  radial-gradient(circle at 25% 50%,var(--accent) 1px,transparent 1px),
-  radial-gradient(circle at 75% 30%,var(--accent-light) 1px,transparent 1px);
-  background-size:60px 60px,40px 40px;background-position:0 0,30px 30px}
-
-.hero-content{position:relative;z-index:2;max-width:700px;padding:0 24px;margin-top:-40px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:100px;font-size:12px;color:rgba(255,255,255,0.85);margin-bottom:24px;font-family:var(--f-mono);letter-spacing:0.05em;animation:badgePulse 4s ease-in-out infinite}
-@keyframes badgePulse{0%,100%{border-color:rgba(255,255,255,0.12)}50%{border-color:rgba(196,95,60,0.3)}}
-.hero-sub{font-family:var(--f-mono);font-size:13px;color:rgba(255,255,255,0.6);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px}
-.hero h1{font-family:var(--f-serif);font-size:clamp(36px,6vw,64px);font-weight:600;line-height:1.1;color:#fff;margin-bottom:20px}
-.hero h1 .cn{font-family:var(--f-chinese);font-weight:700;display:block;font-size:clamp(28px,4vw,42px);color:rgba(255,255,255,0.7);margin-top:8px}
-.hero p{font-size:clamp(15px,1.2vw,18px);color:rgba(255,255,255,0.7);max-width:480px;line-height:1.8;margin-bottom:32px}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:0.15em;font-family:var(--f-mono)}
-.hero-scroll-line{width:1px;height:48px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden}
-.hero-scroll-line::after{content:'';position:absolute;top:-10px;left:0;width:100%;height:40%;background:rgba(255,255,255,0.5);animation:scrollPulse 2s ease-in-out infinite}
-@keyframes scrollPulse{0%{top:-30%}100%{top:100%}}
-
-/* ═══════════════════ TRUST BAR ═══════════════════ */
-.trust-bar{background:var(--bg-dark);padding:20px 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05)}
-.trust-track{display:flex;gap:48px;animation:trustScroll 30s linear infinite;width:max-content}
-.trust-track:hover{animation-play-state:paused}
-.trust-item{display:flex;align-items:center;gap:10px;white-space:nowrap;color:rgba(255,255,255,0.6);font-size:12px;font-family:var(--f-mono);letter-spacing:0.05em}
-.trust-item svg{width:16px;height:16px;opacity:0.5}
-@keyframes trustScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ═══════════════════ STORY ═══════════════════ */
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.story-img{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--radius)}
-.story-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
-.story-img:hover img{transform:scale(1.03)}
-.story-img-badge{position:absolute;bottom:20px;left:20px;padding:8px 16px;background:rgba(248,245,240,0.95);border-radius:var(--radius-sm);font-family:var(--f-mono);font-size:11px;color:var(--text-muted)}
-.story-content h2{font-family:var(--f-serif);font-size:36px;font-weight:600;line-height:1.15;margin-bottom:16px}
-.story-content h2 .cn{font-family:var(--f-chinese);font-weight:700;display:block;font-size:24px;color:var(--text-muted);margin-top:6px}
-.story-content p{color:var(--text-muted);margin-bottom:20px;line-height:1.8}
-.story-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
-.story-stat{text-align:center}
-.story-stat-num{font-family:var(--f-serif);font-size:32px;font-weight:600;color:var(--accent)}
-.story-stat-label{font-size:12px;color:var(--text-muted);margin-top:4px}
-
-/* ═══════════════════ FEATURES ═══════════════════ */
-.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.feature-card{text-align:center;padding:40px 24px;background:#fff;border-radius:var(--radius);border:1px solid var(--border-light);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden}
-.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-light),transparent);opacity:0;transition:opacity 0.4s}
-.feature-card:hover::before{opacity:0.5}
-.feature-card:hover{box-shadow:0 16px 48px rgba(28,24,20,0.08);transform:translateY(-4px)}
-.feature-icon{width:48px;height:48px;margin:0 auto 16px;border-radius:50%;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-size:20px}
-.feature-card h3{font-size:15px;font-weight:600;margin-bottom:8px}
-.feature-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
-
-/* ═══════════════════ FEATURED PRODUCTS ═══════════════════ */
-.featured-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.prod-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border-light);overflow:hidden;transition:all 0.5s cubic-bezier(0.16,1,0.3,1);position:relative;cursor:pointer}
-.prod-card::before{content:'';position:absolute;inset:0;border-radius:var(--radius);background:linear-gradient(135deg,transparent 0%,rgba(196,95,60,0.02) 100%);opacity:0;transition:opacity 0.5s;z-index:0}
-.prod-card:hover::before{opacity:1}
-.prod-card:hover{box-shadow:0 20px 60px rgba(28,24,20,0.10),0 8px 24px rgba(196,95,60,0.04);transform:translateY(-6px)}
-.prod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-light),transparent);opacity:0;transition:opacity 0.5s}
-.prod-card:hover::after{opacity:0.4}
-.prod-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform 0.6s}
-.prod-card:hover .prod-img{transform:scale(1.05)}
-.prod-body{padding:16px 18px 18px}
-.prod-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
-.prod-name{font-family:var(--f-serif);font-size:18px;font-weight:600;margin-bottom:2px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.prod-name-cn{font-family:var(--f-chinese);font-size:13px;color:var(--text-muted);font-weight:400}
-.prod-stars{font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:6px}
-.prod-stars span{font-size:11px;color:var(--text-muted);margin-left:4px;letter-spacing:0}
-.prod-desc{font-size:13px;color:var(--text-muted);margin-bottom:12px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.prod-foot{display:flex;align-items:center;justify-content:space-between}
-.prod-price{font-family:var(--f-serif);font-size:18px;font-weight:600;color:var(--accent)}
-.prod-btn{font-size:12px;padding:8px 18px;border-radius:var(--radius-sm);background:var(--accent);color:#fff;font-weight:500;transition:all 0.2s;border:none;cursor:pointer}
-.prod-btn:hover{background:var(--accent-dark)}
-.prod-btn.outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
-.prod-btn.outline:hover{background:var(--accent);color:#fff}
-.prod-badge{position:absolute;top:12px;left:12px;padding:4px 10px;background:var(--accent);color:#fff;font-size:10px;font-weight:600;border-radius:4px;font-family:var(--f-mono);letter-spacing:0.05em;z-index:2}
-.prod-badge.green{background:var(--green)}
-.prod-badge.gold{background:var(--gold)}
-
-/* ═══════════════════ QUICK VIEW MODAL (with carousel) ═══════════════════ */
-.qv-overlay{position:fixed;inset:0;z-index:2002;background:rgba(28,24,20,0.5);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s;padding:24px}
-.qv-overlay.open{opacity:1;visibility:visible}
-.qv-modal{background:#fff;border-radius:var(--radius);max-width:820px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;transform:scale(0.95) translateY(20px);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1)}
-.qv-overlay.open .qv-modal{transform:scale(1) translateY(0)}
-.qv-carousel{position:relative;aspect-ratio:1;overflow:hidden;border-radius:var(--radius) 0 0 var(--radius);background:var(--bg-alt)}
-.qv-carousel-inner{display:flex;height:100%;transition:transform 0.4s ease}
-.qv-carousel img{min-width:100%;height:100%;object-fit:cover;flex-shrink:0}
-.qv-carousel-nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 8px;pointer-events:none;z-index:2}
-.qv-carousel-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.85);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;pointer-events:auto;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.1);border:none;color:var(--text)}
-.qv-carousel-btn:hover{background:#fff;transform:scale(1.05)}
-.qv-carousel-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
-.qv-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);border:1px solid rgba(0,0,0,0.1);cursor:pointer;transition:all 0.2s}
-.qv-carousel-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.2)}
-.qv-carousel-counter{position:absolute;top:12px;right:12px;padding:3px 10px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;border-radius:100px;font-family:var(--f-mono);z-index:2}
-.qv-body{padding:32px;position:relative}
-.qv-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg);transition:background 0.2s;font-size:18px;z-index:3}
-.qv-close:hover{background:var(--bg-alt)}
-.qv-tag{font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-.qv-name{font-family:var(--f-serif);font-size:28px;font-weight:600;margin-bottom:2px}
-.qv-name-cn{font-family:var(--f-chinese);font-size:16px;color:var(--text-muted);margin-bottom:8px}
-.qv-stars{font-size:16px;color:var(--gold);letter-spacing:2px;margin-bottom:12px}
-.qv-stars span{font-size:13px;color:var(--text-muted);margin-left:6px;letter-spacing:0}
-.qv-price{font-family:var(--f-serif);font-size:24px;font-weight:600;color:var(--accent);margin-bottom:16px}
-.qv-desc{font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:16px}
-.qv-details{border-top:1px solid var(--border-light);padding-top:16px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px}
-.qv-detail{display:flex;justify-content:space-between;padding:4px 0;font-size:13px}
-.qv-detail-label{color:var(--text-muted)}
-.qv-detail-value{font-weight:500}
-.qv-qty{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.qv-qty button{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.2s}
-.qv-qty button:hover{background:var(--bg-alt)}
-.qv-qty span{font-size:16px;font-weight:500;min-width:32px;text-align:center}
-.qv-add-btn{width:100%;padding:16px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:500;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.qv-add-btn:hover{background:var(--accent-dark)}
-
-/* ═══════════════════ PROCESS ═══════════════════ */
-.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-.process-step{text-align:center}
-.process-step-num{font-family:var(--f-mono);font-size:12px;color:var(--accent);margin-bottom:8px}
-.process-icon{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:24px}
-.process-step h3{font-size:16px;font-weight:600;margin-bottom:8px;color:#fff}
-.process-step p{font-size:13px;color:#B8ADA0;line-height:1.6;max-width:220px;margin:0 auto}
-
-/* ═══════════════════ PRODUCT COMPARISON ═══════════════════ */
-.compare-section{overflow-x:auto}
-.compare-table{width:100%;min-width:700px;border-collapse:collapse;font-size:13px}
-.compare-table th{text-align:left;padding:14px 16px;font-family:var(--f-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--border)}
-.compare-table td{padding:12px 16px;border-bottom:1px solid var(--border-light);color:var(--text-muted)}
-.compare-table tr:hover td{background:rgba(196,95,60,0.03)}
-.compare-table .cmp-name{font-weight:600;color:var(--text)}
-.compare-table .cmp-cn{font-family:var(--f-chinese);font-size:12px;color:var(--text-muted)}
-.compare-table .cmp-price{font-family:var(--f-serif);font-weight:600;color:var(--accent)}
-.compare-table .cmp-stars{color:var(--gold);font-size:11px;white-space:nowrap}
-.compare-table .cmp-add{font-size:11px;padding:6px 14px;border-radius:var(--radius-sm);background:var(--accent);color:#fff;font-weight:500;cursor:pointer;border:none;transition:background 0.2s;white-space:nowrap}
-.compare-table .cmp-add:hover{background:var(--accent-dark)}
-
-/* ═══════════════════ FAQ ═══════════════════ */
-.faq-list{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border-light);overflow:hidden}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 0;cursor:pointer;font-weight:500;font-size:15px;transition:color 0.2s;gap:16px}
-.faq-q:hover{color:var(--accent)}
-.faq-q-icon{font-size:18px;transition:transform 0.3s;flex-shrink:0;color:var(--text-muted)}
-.faq-item.open .faq-q-icon{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s ease;padding:0;color:var(--text-muted);font-size:14px;line-height:1.7}
-.faq-item.open .faq-a{max-height:300px;padding:0 0 20px}
-
-/* ═══════════════════ CATALOG ═══════════════════ */
-.catalog-tabs{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap;justify-content:center}
-.catalog-tab{padding:8px 20px;border-radius:100px;font-size:13px;font-weight:500;color:var(--text-muted);background:transparent;border:1px solid var(--border);cursor:pointer;transition:all 0.2s}
-.catalog-tab:hover{color:var(--accent);border-color:var(--accent)}
-.catalog-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.catalog-grid .prod-card{cursor:pointer}
-
-/* ═══════════════════ TEA CLUB ═══════════════════ */
-.club-section{position:relative;overflow:hidden}
-.club-bg{position:absolute;inset:0;z-index:0}
-.club-bg img{width:100%;height:100%;object-fit:cover}
-.club-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,24,20,0.88) 0%,rgba(28,24,20,0.75) 100%);z-index:1}
-.club-content{position:relative;z-index:2;text-align:center;max-width:600px;margin:0 auto}
-.club-content h2{font-family:var(--f-serif);font-size:36px;color:#fff;margin-bottom:16px}
-.club-content p{color:rgba(255,255,255,0.7);margin-bottom:8px;line-height:1.8}
-.club-price{font-family:var(--f-serif);font-size:48px;color:var(--accent-light);margin:24px 0 8px}
-.club-price small{font-size:18px;color:rgba(255,255,255,0.4)}
-.club-perks{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:24px 0}
-.club-perk{padding:8px 16px;background:rgba(255,255,255,0.06);border-radius:100px;font-size:13px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px}
-
-/* ═══════════════════ REVIEWS ═══════════════════ */
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.rev-card{background:#fff;padding:28px;border-radius:var(--radius);border:1px solid var(--border-light)}
-.rev-stars{color:var(--gold);font-size:14px;margin-bottom:12px;letter-spacing:2px}
-.rev-text{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;font-style:italic}
-.rev-author{display:flex;align-items:center;gap:12px}
-.rev-avatar{width:36px;height:36px;border-radius:50%;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-muted)}
-.rev-name{font-size:13px;font-weight:600}
-.rev-title{font-size:11px;color:var(--text-light)}
-
-/* ═══════════════════ BREWING GUIDE ═══════════════════ */
-.brew-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.brew-img{aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden}
-.brew-img img{width:100%;height:100%;object-fit:cover}
-.brew-steps{display:flex;flex-direction:column;gap:20px}
-.brew-step{display:flex;gap:16px;padding:16px 20px;background:#fff;border-radius:var(--radius-sm);border:1px solid var(--border-light)}
-.brew-step-num{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.brew-step-right h4{font-size:14px;font-weight:600;margin-bottom:4px}
-.brew-step-right p{font-size:13px;color:var(--text-muted);line-height:1.5}
-
-/* ═══════════════════ SHIPPING ═══════════════════ */
-.shipping-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.shipping-card{text-align:center;padding:32px;background:#fff;border-radius:var(--radius);border:1px solid var(--border-light)}
-.shipping-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.shipping-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
-
-/* ═══════════════════ NEWSLETTER ═══════════════════ */
-.newsletter{background:var(--bg-alt);padding:80px 0;text-align:center}
-.newsletter h2{font-family:var(--f-serif);font-size:32px;margin-bottom:12px}
-.newsletter p{color:var(--text-muted);max-width:440px;margin:0 auto 32px}
-.newsletter-form{display:flex;gap:8px;max-width:440px;margin:0 auto}
-.newsletter-form input{flex:1;padding:14px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);background:#fff;outline:none;transition:border-color 0.2s}
-.newsletter-form input:focus{border-color:var(--accent)}
-.newsletter-form button{padding:14px 28px}
-
-/* ═══════════════════ FOOTER ═══════════════════ */
-footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand .nav-logo{color:#fff;margin-bottom:12px}
-.footer-brand p{font-size:13px;line-height:1.7;max-width:300px}
-.footer-col h4{color:#fff;font-size:13px;font-weight:600;margin-bottom:16px;font-family:var(--f-mono);letter-spacing:0.05em;text-transform:uppercase}
-.footer-col a{display:block;font-size:13px;padding:4px 0;transition:color 0.2s}
-.footer-col a:hover{color:var(--accent-light)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;margin-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:12px}
-.footer-socials{display:flex;gap:12px}
-.footer-socials a{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:14px}
-.footer-socials a:hover{border-color:var(--accent);color:var(--accent)}
-
-/* ═══════════════════ CART DRAWER ═══════════════════ */
-.cart-overlay{position:fixed;inset:0;z-index:2000;background:rgba(28,24,20,0.4);opacity:0;visibility:hidden;transition:all 0.3s}
-.cart-overlay.open{opacity:1;visibility:visible}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:90vw;z-index:2001;background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);box-shadow:-8px 0 40px rgba(0,0,0,0.1)}
-.cart-drawer.open{transform:translateX(0)}
-.cart-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-light)}
-.cart-header h3{font-family:var(--f-serif);font-size:20px;font-weight:600}
-.cart-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
-.cart-close:hover{background:var(--bg-alt)}
-.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
-.cart-empty{text-align:center;padding:60px 0;color:var(--text-muted)}
-.cart-empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
-.cart-empty h4{font-family:var(--f-serif);font-size:18px;color:var(--text);margin-bottom:8px}
-.cart-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-light)}
-.cart-item-img{width:64px;height:64px;border-radius:var(--radius-sm);object-fit:cover;flex-shrink:0}
-.cart-item-info{flex:1}
-.cart-item-name{font-size:14px;font-weight:600;margin-bottom:2px}
-.cart-item-variant{font-size:12px;color:var(--text-muted)}
-.cart-item-price{font-size:14px;font-weight:500;color:var(--accent);margin-top:4px}
-.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:8px}
-.cart-item-qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;transition:all 0.2s}
-.cart-item-qty button:hover{background:var(--bg-alt)}
-.cart-item-qty span{font-size:14px;font-weight:500;min-width:24px;text-align:center}
-.cart-item-remove{margin-left:auto;color:var(--text-light);font-size:12px;cursor:pointer;padding:4px;transition:color 0.2s}
-.cart-item-remove:hover{color:var(--accent)}
-.cart-footer{padding:20px 24px;border-top:1px solid var(--border-light)}
-.cart-shipping-bar{height:4px;background:var(--bg-alt);border-radius:2px;overflow:hidden;margin-bottom:16px}
-.cart-shipping-progress{height:100%;background:var(--green-light);border-radius:2px;transition:width 0.5s;width:0%}
-.cart-shipping-text{font-size:12px;color:var(--text-muted);margin-bottom:12px;text-align:center}
-.cart-shipping-text strong{color:var(--green)}
-.cart-totals{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.cart-totals-label{font-size:14px;color:var(--text-muted)}
-.cart-totals-total{font-family:var(--f-serif);font-size:24px;font-weight:600}
-.cart-currency-note{font-size:11px;color:var(--text-light);text-align:center;margin-top:8px}
-.cart-checkout-btn{width:100%;padding:16px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:500;cursor:pointer;transition:background 0.2s}
-.cart-checkout-btn:hover{background:var(--accent-dark)}
-
-/* ═══════════════════ TOAST ═══════════════════ */
-.toast{position:fixed;bottom:24px;right:24px;z-index:3000;padding:14px 20px;background:var(--bg-dark);color:#fff;border-radius:var(--radius-sm);font-size:14px;box-shadow:var(--shadow-lg);transform:translateY(20px);opacity:0;transition:all 0.3s;pointer-events:none;display:flex;align-items:center;gap:8px}
-.toast.show{opacity:1;transform:translateY(0);pointer-events:auto}
-
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
-@media(max-width:1024px){
-  .featured-grid,.catalog-grid{grid-template-columns:repeat(2,1fr)}
-  .features-grid{grid-template-columns:repeat(2,1fr)}
-  .reviews-grid{grid-template-columns:1fr 1fr}
-  .brew-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .qv-modal{grid-template-columns:1fr}
-  .qv-carousel{border-radius:var(--radius) var(--radius) 0 0;aspect-ratio:1.2}
-}
-@media(max-width:768px){
-  .nav-links{display:none}
-  .nav-mobile-toggle{display:flex}
-  .nav-search.open input{width:120px}
-  .hero{height:80vh;min-height:500px}
-  .story-grid{grid-template-columns:1fr;gap:32px}
-  .featured-grid{grid-template-columns:1fr 1fr;gap:16px}
-  .features-grid{grid-template-columns:1fr 1fr;gap:16px}
-  .catalog-grid{grid-template-columns:1fr 1fr;gap:16px}
-  .process-grid{grid-template-columns:repeat(2,1fr);gap:24px}
-  .reviews-grid{grid-template-columns:1fr}
-  .section{padding:60px 0}
-  .section-title{font-size:28px}
-  .club-content h2{font-size:28px}
-  .nav-currency select{font-size:11px}
-  .compare-table{font-size:12px}
-  .compare-table th,.compare-table td{padding:10px 12px}
-  .qv-details{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  .featured-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto}
-  .catalog-grid{grid-template-columns:1fr}
-  .process-grid{grid-template-columns:1fr 1fr}
-  .hero h1{font-size:28px}
-  .hero h1 .cn{font-size:20px}
-  .story-stats{grid-template-columns:repeat(3,1fr);gap:12px}
-  .newsletter-form{flex-direction:column}
-}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ NAV ═══════════════ -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo"><span>◆</span> 岩韵 <small>YAN YUN</small></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#products" data-i18n="nav_teas">Teas</a></li>
-      <li><a href="#story" data-i18n="nav_story">Story</a></li>
-      <li><a href="#reviews" data-i18n="nav_reviews">Reviews</a></li>
-      <li><a href="#compare" data-i18n="nav_compare">Compare</a></li>
-      <li><a href="#club" data-i18n="nav_club">Tea Club</a></li>
-      <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+    <ul class="nav-links">
+      <li><a href="#reserve">Reserve</a></li>
+      <li><a href="#dahongpao">Da Hong Pao</a></li>
+      <li><a href="#story">Story</a></li>
     </ul>
-    <div class="nav-actions">
-      <div class="nav-search" id="navSearch">
-        <span class="nav-search-icon" onclick="toggleSearch()">⌕</span>
-        <input type="text" id="searchInput" placeholder="Search teas…" onfocus="toggleSearch(true)" oninput="doSearch(this.value)">
-      </div>
-      <div class="nav-currency">
-        <select id="currencySelect" onchange="switchCurrency(this.value)">
-          <option value="USD">$ USD</option>
-          <option value="CNY">¥ CNY</option>
-        </select>
-      </div>
-      <div class="nav-lang" id="langSwitcher">
-        <button class="nav-lang-btn" onclick="toggleLangMenu()">
-          <span id="langCurrent">EN</span>
-          <span class="arrow">▾</span>
-        </button>
-        <div class="nav-lang-dropdown" id="langMenu">
-          <button class="nav-lang-option active" data-lang="en" onclick="switchLang('en')">English <small>EN</small></button>
-          <button class="nav-lang-option" data-lang="cn" onclick="switchLang('cn')">中文 <small>CN</small></button>
-          <button class="nav-lang-option" data-lang="jp" onclick="switchLang('jp')">日本語 <small>JP</small></button>
-        </div>
-      </div>
-      <button class="nav-cart" onclick="toggleCart()" aria-label="Open cart">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <div class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
+    <a href="#shop" class="nav-btn">Reserve Yours</a>
   </div>
 </nav>
 
-<!-- ═══════════════ SEARCH OVERLAY (mobile fallback) ═══════════════ -->
-<div class="search-overlay" id="searchOverlay" onclick="toggleSearch(false)"></div>
-<div class="search-panel" id="searchPanel">
-  <div class="search-panel-inner">
-    <span class="search-panel-icon">⌕</span>
-    <input type="text" id="searchPanelInput" placeholder="Search teas by name, type, or flavor…" autocomplete="off" oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')toggleSearch(false)">
-    <button class="search-panel-close" onclick="toggleSearch(false)">✕</button>
-  </div>
-  <div class="search-results" id="searchResults"></div>
-</div>
-
-<!-- ═══════════════ HERO ═══════════════ -->
-<section class="hero" id="home">
-  <div class="hero-bg"><img src="images/tea-farm-mist-1.jpg" alt="Wuyi Mountains tea plantation" loading="eager"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-pattern"></div>
-  <div class="particles">
-    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-    <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-    <div class="particle"></div><div class="particle"></div>
-  </div>
+<!-- ── HERO ──────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg"><img src="images/tea-farm-mist-1.jpg" alt="Wuyi Mountains" loading="eager"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-particles" id="heroParticles"></div>
   <div class="hero-content">
-    <div class="hero-badge">✦ <span data-i18n="hero_badge">From Wuyi Mountains, China</span></div>
-    <div class="hero-sub">三代 · 传统 · 岩韵</div>
-    <h1><span data-i18n="hero_title">Rock Tea, Perfected<br>Over Generations</span><span class="cn">三代匠心的武夷岩茶</span></h1>
-    <p data-i18n="hero_desc">Direct from our family's Wuyi Mountain tea gardens. Hand-picked, charcoal-roasted, and shipped to your door. Experience the true taste of 岩韵 — the 'rock rhyme' of mineral-rich oolong.</p>
+    <div class="hero-kicker">岩韵 · Wuyi Rock Tea · Since 1990</div>
+    <h1 class="hero-title">Two Teas.<br>One Mountain.<br><span class="cn">两杯茶，一座山。</span></h1>
+    <p class="hero-desc">We don't sell a hundred varieties. We curate two. Hand-selected from Wuyi's Zhengyan core, charcoal roasted over lychee wood, and numbered by hand. This is not commodity tea. This is the mountain in your cup.</p>
     <div class="hero-actions">
-      <a href="#products" class="btn btn-primary" data-i18n="hero_btn1">Shop Our Teas →</a>
-      <a href="#story" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;" data-i18n="hero_btn2">Our Story</a>
+      <a href="#shop" class="hero-cta">Discover the Reserve →</a>
+      <a href="#story" class="hero-cta-secondary">The Story Behind the Tea</a>
     </div>
   </div>
-  <div class="hero-scroll"><span data-i18n="hero_scroll">SCROLL</span><div class="hero-scroll-line"></div></div>
+  <div class="hero-scroll"><div class="hero-scroll-dot"></div></div>
 </section>
 
-<!-- ═══════════════ TRUST BAR ═══════════════ -->
-<div class="trust-bar">
-  <div class="trust-track" id="trustTrack">
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> USDA Organic Certified</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg> Free Shipping over $60</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 6v6l4 2"/></svg> Same-Day Dispatch</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 30-Day Satisfaction Guarantee</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 500+ Happy Tea Drinkers</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Global Tea Award 2024</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> USDA Organic Certified</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg> Free Shipping over $60</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 6v6l4 2"/></svg> Same-Day Dispatch</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 30-Day Satisfaction Guarantee</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> 500+ Happy Tea Drinkers</span>
-    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Global Tea Award 2024</span>
+<!-- ── SCARCITY ──────────────────────────── -->
+<div class="scarcity-banner" id="shop">
+  <h3>2025 Reserve · Now Open</h3>
+  <p>Only 100 numbered cans produced each year. Hand-selected, charcoal roasted, SGS tested.</p>
+  <div class="scarcity-counter">
+    <div class="scarcity-block"><div class="scarcity-num" id="countRemaining">76</div><div class="scarcity-label">Cans Remaining</div></div>
+    <div class="scarcity-block"><div class="scarcity-num">50+</div><div class="scarcity-label">Years · Old Pines</div></div>
+    <div class="scarcity-block"><div class="scarcity-num">1990</div><div class="scarcity-label">Since</div></div>
   </div>
 </div>
 
-<!-- ═══════════════ STORY ═══════════════ -->
-<section class="section" id="story">
+<!-- ── RESERVE ───────────────────────────── -->
+<section class="section" id="reserve">
   <div class="container">
-    <div class="story-grid">
-      <div class="story-img reveal"><img src="images/tea-plantation-2.jpg" alt="Wuyi Mountain tea gardens" loading="lazy"><div class="story-img-badge">武夷山 · 正岩产区 Since 1990</div></div>
-      <div class="story-content reveal reveal-delay-1">
-        <div class="label" data-i18n="story_label">FROM THE MOUNTAIN</div>
-        <h2><span data-i18n="story_title">Three Generations<br>One Cup of Tea</span><span class="cn">三代人的一杯茶</span></h2>
-        <p data-i18n="story_p1">岩韵茶庄始于一九九零年，坐落在武夷山正岩产区的核心地带。三代茶人，传承着从清末延续至今的炭焙工艺。</p>
-        <p data-i18n="story_p2">每一片茶叶都来自武夷山"三坑两涧"的优质山场——这里的丹霞地貌和独特微气候，赋予了岩茶不可复制的矿物韵味。</p>
-        <p style="font-style:italic;color:var(--text-muted);border-left:2px solid var(--accent);padding-left:16px;" data-i18n="story_quote">"岩韵，是山场在茶杯里的回响。直接贸易，意味着每一饼茶都可追溯至它生长的岩壁。"</p>
-        <div class="story-stats">
-          <div class="story-stat"><div class="story-stat-num">1990</div><div class="story-stat-label" data-i18n="story_stat1">Founded</div></div>
-          <div class="story-stat"><div class="story-stat-num">12</div><div class="story-stat-label" data-i18n="story_stat2">Partner Farms</div></div>
-          <div class="story-stat"><div class="story-stat-num">50+</div><div class="story-stat-label" data-i18n="story_stat3">Teas Curated</div></div>
+    <div class="product-block">
+      <div class="product-showcase">
+        <div class="product-visual reveal">
+          <div class="product-img-wrap"><img src="images/oolong-leaves-2.jpg" alt="Yan Yun Reserve" loading="lazy"></div>
+          <div class="product-badge limited">LIMITED — 100 CANS</div>
+        </div>
+        <div class="product-detail reveal reveal-delay-1">
+          <div class="product-tag">The Pinnacle</div>
+          <div class="product-name">Yan Yun Reserve</div>
+          <div class="product-name-cn">岩韵臻藏 · 老树水仙</div>
+          <div class="product-price">$148 <span class="unit">/ 100g · Hand-Numbered</span></div>
+          <p class="product-desc">Once a year. One old pine, 50+ years. 100 cans. If you've never experienced a 50-year-old tree Wuyi Shui Xian — this is your chance. Slow charcoal roasted over 72 hours. Creamy as silk. Mineral as stone. Sweet as memory.</p>
+          <ul class="product-features">
+            <li>Single Old Pine · Hui Yuan Keng · Zhengyan</li>
+            <li>Hand-Numbered · Titanium Can · Certificate</li>
+            <li>72-Hour Lychee Wood Charcoal Roast</li>
+            <li>SGS Tested · 400+ Pesticides & Heavy Metals</li>
+            <li>Ships within 48 Hours · Tracked Worldwide</li>
+          </ul>
+          <div class="product-add">
+            <div class="product-qty">
+              <button onclick="qtyChange('reserve',-1)">−</button>
+              <span class="qty-num" id="qtyReserve">1</span>
+              <button onclick="qtyChange('reserve',1)">+</button>
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('reserve')">Reserve Your Can</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="product-block" id="dahongpao">
+      <div class="product-showcase reverse">
+        <div class="product-visual reveal">
+          <div class="product-img-wrap"><img src="images/tea-leaves-1.jpg" alt="Da Hong Pao" loading="lazy"></div>
+          <div class="product-badge">ESSENTIAL</div>
+        </div>
+        <div class="product-detail reveal reveal-delay-1">
+          <div class="product-tag">The Icon</div>
+          <div class="product-name">Da Hong Pao</div>
+          <div class="product-name-cn">大红袍 · 岩茶之王</div>
+          <div class="product-price">$64 <span class="unit">/ 50g</span></div>
+          <p class="product-desc">The king of Wuyi Rock Tea. From the Zhengyan core — where the legend began. Orchid fragrance. Honey sweetness. A mineral finish that lingers for minutes. This is the tea that emperors drank. Now, it's yours.</p>
+          <ul class="product-features">
+            <li>Zhengyan Core · Three Pits, Two Streams</li>
+            <li>Medium-High Charcoal Roast · Lychee Wood</li>
+            <li>7-10 Infusions · Each a Different Facet</li>
+            <li>SGS Tested · Lab Results Available</li>
+            <li>50g · Resealable Light-Blocking Can</li>
+          </ul>
+          <div class="product-add">
+            <div class="product-qty">
+              <button onclick="qtyChange('dahongpao',-1)">−</button>
+              <span class="qty-num" id="qtyDahongpao">1</span>
+              <button onclick="qtyChange('dahongpao',1)">+</button>
+            </div>
+            <button class="add-cart-btn" onclick="addToCart('dahongpao')">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FEATURES ═══════════════ -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="features-grid">
-      <div class="feature-card reveal"><div class="feature-icon">🌱</div><h3 data-i18n="feat1_title">Direct from Farm</h3><p data-i18n="feat1_desc">No middlemen. We work directly with Wuyi mountain tea growers, ensuring fair prices and authentic quality.</p></div>
-      <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🔥</div><h3 data-i18n="feat2_title">Charcoal Roasted</h3><p data-i18n="feat2_desc">Traditional 72-hour charcoal roasting over lychee wood — an art passed down for generations.</p></div>
-      <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔬</div><h3 data-i18n="feat3_title">Lab Tested</h3><p data-i18n="feat3_desc">Every batch is SGS tested for over 400 pesticides and heavy metals. Results available on request.</p></div>
-      <div class="feature-card reveal reveal-delay-3"><div class="feature-icon">📦</div><h3 data-i18n="feat4_title">Free Shipping $60+</h3><p data-i18n="feat4_desc">Worldwide delivery from our US and China warehouses. Free shipping on orders over $60.</p></div>
-    </div>
+<!-- ── TRUST BAR ─────────────────────────── -->
+<div class="trust-strip">
+  <div class="trust-item reveal">
+    <div class="trust-item-icon">🔬</div>
+    <div class="trust-item-title">SGS Certified<br>400+ Tests</div>
   </div>
-</section>
-
-<!-- ═══════════════ FEATURED TEAS ═══════════════ -->
-<section class="section" id="products">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal" data-i18n="featured_label">OUR SIGNATURE TEAS</div>
-      <h2 class="section-title cn reveal reveal-delay-1">精选岩茶</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="featured_desc">Each tea tells the story of its terroir. From the rocky cliffs of Wuyi to your cup.</p>
-    </div>
-    <div class="featured-grid" id="featuredGrid"></div>
-    <div style="text-align:center;margin-top:40px;">
-      <a href="#catalog" class="btn btn-outline" data-i18n="view_all">View Full Collection →</a>
-      <a href="#compare" class="btn btn-outline" style="margin-left:12px;" data-i18n="compare_all">Compare All Teas</a>
-    </div>
+  <div class="trust-item reveal reveal-delay-1">
+    <div class="trust-item-icon">🔥</div>
+    <div class="trust-item-title">Charcoal Roasted<br>Lychee Wood</div>
   </div>
-</section>
-
-<!-- ═══════════════ PROCESS ═══════════════ -->
-<section class="section section-dark">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:56px;">
-      <div class="label reveal" style="color:var(--accent-light);" data-i18n="craft_label">THE CRAFT</div>
-      <h2 class="section-title reveal reveal-delay-1" style="color:#fff;" data-i18n="craft_title">From Leaf to Cup</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="craft_desc">Four generations of knowledge distilled into every harvest.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-step reveal"><div class="process-step-num">_ 01</div><div class="process-icon">🌿</div><h3 data-i18n="proc1_title">Hand Harvested</h3><p data-i18n="proc1_desc">Spring pickings at dawn, selecting only the finest one-bud-two-leaves.</p></div>
-      <div class="process-step reveal reveal-delay-1"><div class="process-step-num">_ 02</div><div class="process-icon">☀️</div><h3 data-i18n="proc2_title">Sun Withering</h3><p data-i18n="proc2_desc">Natural outdoor withering to awaken the leaves' aromatic potential.</p></div>
-      <div class="process-step reveal reveal-delay-2"><div class="process-step-num">_ 03</div><div class="process-icon">🔥</div><h3 data-i18n="proc3_title">Charcoal Roast</h3><p data-i18n="proc3_desc">72-hour slow roasting over lychee wood — the soul of Wuyi rock tea.</p></div>
-      <div class="process-step reveal reveal-delay-3"><div class="process-step-num">_ 04</div><div class="process-icon">🍵</div><h3 data-i18n="proc4_title">Expert Tasting</h3><p data-i18n="proc4_desc">Triple quality review by certified tea masters before release.</p></div>
-    </div>
+  <div class="trust-item reveal reveal-delay-2">
+    <div class="trust-item-icon">📍</div>
+    <div class="trust-item-title">Zhengyan Core<br>Wuyi Mountain</div>
   </div>
-</section>
-
-<!-- ═══════════════ PRODUCT COMPARISON ═══════════════ -->
-<section class="section section-alt" id="compare">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal" data-i18n="compare_label">COMPARE</div>
-      <h2 class="section-title cn reveal reveal-delay-1">产品对比</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="compare_desc">Not sure which tea to choose? Compare them side by side.</p>
-    </div>
-    <div class="compare-section reveal">
-      <table class="compare-table" id="compareTable"></table>
-    </div>
+  <div class="trust-item reveal reveal-delay-3">
+    <div class="trust-item-icon">📜</div>
+    <div class="trust-item-title">Hand-Numbered<br>Certificate</div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════════ FULL CATALOG ═══════════════ -->
-<section class="section" id="catalog">
+<!-- ── STORY ─────────────────────────────── -->
+<section class="section" id="story">
   <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal" data-i18n="catalog_label">SHOP ALL TEAS</div>
-      <h2 class="section-title cn reveal reveal-delay-1">全部茶品</h2>
-    </div>
-    <div class="catalog-tabs reveal">
-      <button class="catalog-tab active" data-filter="all" onclick="filterCatalog('all')" data-i18n="catalog_all">All</button>
-      <button class="catalog-tab" data-filter="oolong" onclick="filterCatalog('oolong')" data-i18n="catalog_oolong">Oolong</button>
-      <button class="catalog-tab" data-filter="black" onclick="filterCatalog('black')" data-i18n="catalog_black">Black Tea</button>
-      <button class="catalog-tab" data-filter="set" onclick="filterCatalog('set')" data-i18n="catalog_gift">Gift Sets</button>
-    </div>
-    <div class="catalog-grid" id="catalogGrid"></div>
-  </div>
-</section>
-
-<!-- ═══════════════ TEA CLUB ═══════════════ -->
-<section class="section club-section" id="club">
-  <div class="club-bg"><img src="images/tea-ceremony-2.jpg" alt="Tea ceremony" loading="lazy"></div>
-  <div class="club-overlay"></div>
-  <div class="container" style="position:relative;z-index:2;">
-    <div class="club-content reveal">
-      <div class="label" style="color:var(--accent-light);" data-i18n="club_label">TEA CLUB</div>
-      <h2 data-i18n="club_title">Join the Rock Tea Club</h2>
-      <p data-i18n="club_desc">A monthly journey through Wuyi's finest rock teas. Curated selections delivered to your door, with tasting notes and brewing guides.</p>
-      <div class="club-price">$35 <small data-i18n="club_per_month">/ month</small></div>
-      <div class="club-perks"><span class="club-perk">🎁 <span data-i18n="club_perk1">50g premium tea</span></span><span class="club-perk">🌍 <span data-i18n="club_perk2">Free shipping</span></span><span class="club-perk">📜 <span data-i18n="club_perk3">Tasting notes</span></span><span class="club-perk">🔄 <span data-i18n="club_perk4">Cancel anytime</span></span></div>
-      <a href="#" class="btn btn-primary" style="margin-top:8px;" onclick="addTeaClub()" data-i18n="club_btn">Subscribe Now →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ REVIEWS ═══════════════ -->
-<section class="section" id="reviews">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal" data-i18n="review_label">WHAT OUR CUSTOMERS SAY</div>
-      <h2 class="section-title cn reveal reveal-delay-1">茶友评价</h2>
-    </div>
-    <div class="reviews-grid">
-      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev1_text">"The Da Hong Pao is extraordinary — the mineral complexity is unlike anything I've found in a US tea shop. The charcoal roast gives it a depth that lingers for minutes after each sip. This is the real deal."</p><div class="rev-author"><div class="rev-avatar">JM</div><div><div class="rev-name" data-i18n="rev1_name">James M.</div><div class="rev-title" data-i18n="rev1_title">Tea Enthusiast · New York</div></div></div></div>
-      <div class="rev-card reveal reveal-delay-1"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev2_text">"I ordered the sampler set to explore Wuyi teas for the first time. The tasting notes made it easy to understand what I was drinking. Already signed up for the Tea Club. The Rou Gui is my favorite — spicy and warming."</p><div class="rev-author"><div class="rev-avatar">SK</div><div><div class="rev-name" data-i18n="rev2_name">Sarah K.</div><div class="rev-title" data-i18n="rev2_title">First-time Buyer · London</div></div></div></div>
-      <div class="rev-card reveal reveal-delay-2"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev3_text">"As someone who grew up drinking Wuyi tea in Fujian, I was skeptical about buying online. But this is the real thing — it tastes exactly like the tea my grandfather used to brew. The Tie Guan Yin brought tears to my eyes."</p><div class="rev-author"><div class="rev-avatar">LW</div><div><div class="rev-name" data-i18n="rev3_name">Li Wei</div><div class="rev-title" data-i18n="rev3_title">Fujian Native · Toronto</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ BREWING GUIDE ═══════════════ -->
-<section class="section section-alt" id="guide">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal" data-i18n="guide_label">BREWING GUIDE</div>
-      <h2 class="section-title cn reveal reveal-delay-1">冲泡指南</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="guide_desc">Unlock the full flavor of Wuyi rock tea with the traditional gongfu method.</p>
-    </div>
-    <div class="brew-grid">
-      <div class="brew-img reveal"><img src="images/tea-ceremony-1.jpg" alt="Gongfu tea ceremony" loading="lazy"></div>
-      <div class="brew-steps">
-        <div class="brew-step reveal"><div class="brew-step-num">1</div><div class="brew-step-right"><h4 data-i18n="brew1_title">Warm the Vessel</h4><p data-i18n="brew1_desc">Rinse your gaiwan or teapot with boiling water to bring it to temperature.</p></div></div>
-        <div class="brew-step reveal reveal-delay-1"><div class="brew-step-num">2</div><div class="brew-step-right"><h4 data-i18n="brew2_title">Add Leaves</h4><p data-i18n="brew2_desc">5g of tea per 100ml of water. For rock tea, don't be shy — the leaves need room to open.</p></div></div>
-        <div class="brew-step reveal reveal-delay-2"><div class="brew-step-num">3</div><div class="brew-step-right"><h4 data-i18n="brew3_title">Quick Rinse</h4><p data-i18n="brew3_desc">Pour 100°C water over the leaves and immediately discard. This 'awakens' the tea.</p></div></div>
-        <div class="brew-step reveal reveal-delay-3"><div class="brew-step-num">4</div><div class="brew-step-right"><h4 data-i18n="brew4_title">Steep &amp; Enjoy</h4><p data-i18n="brew4_desc">First steep: 15 seconds. Add 5 seconds to each subsequent steep. Wuyi rock tea rewards patience — expect 7+ infusions.</p></div></div>
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <div class="story-img"><img src="images/tea-plantation-2.jpg" alt="Wuyi Mountain tea gardens" loading="lazy"></div>
+        <div class="story-img-badge">武夷山 · 慧苑坑 · 2025</div>
+      </div>
+      <div class="story-text reveal reveal-delay-1">
+        <div class="label">THE CURATOR'S WORD</div>
+        <h2>We don't grow tea.<br>We select it.<span class="cn">好茶是选出来的。</span></h2>
+        <p>For thirty years, we've walked the same narrow paths through Wuyi's mist-covered valleys — the legendary Hui Yuan Keng, Niu Lan Keng, and Da Keng Kou. We knock on the same wooden doors. We drink tea with the same families.</p>
+        <p>The farmer who grows our Reserve old pine was eight years old when his grandfather planted that tree. The man who charcoal roasts our Da Hong Pao has been doing it since 1976. His hands know exactly when the leaves are ready — a skill that cannot be taught, only inherited.</p>
+        <p>We don't sell a hundred labels. We select two teas each year — the absolute best. If we can't find a worthy batch, we don't release it. That's happened twice in thirty years.</p>
+        <div class="story-stats">
+          <div><div class="story-stat-num">1990</div><div class="story-stat-label">Sourcing since</div></div>
+          <div><div class="story-stat-num">12</div><div class="story-stat-label">Partner Farms</div></div>
+          <div><div class="story-stat-num">2</div><div class="story-stat-label">Teas per year</div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FAQ ═══════════════ -->
-<section class="section" id="faq">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal" data-i18n="faq_label">FAQ</div>
-      <h2 class="section-title cn reveal reveal-delay-1">常见问题</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q1">How long does Wuyi rock tea stay fresh?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a1">Properly stored in an airtight container away from light, moisture, and strong odors, Wuyi rock tea can stay fresh for 2-3 years. The charcoal roasting process helps preserve it longer than green teas. Many connoisseurs find that rock tea improves with 1-2 years aging.</div></div>
-      <div class="faq-item reveal reveal-delay-1"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q2">What temperature water should I use?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a2">Always use freshly boiled water at 100°C (212°F) for Wuyi rock tea. Unlike green teas, rock teas need near-boiling water to fully release their complex mineral and roast flavors. Lower temperatures won't properly extract the 'yan yun' character.</div></div>
-      <div class="faq-item reveal reveal-delay-2"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q3">How many infusions can I get from one serving?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a3">You can typically get 7-10 infusions from a single 5g serving using the gongfu method. Each steep reveals a different facet: the first steeps are bold and roasted, middle steeps are floral and sweet, later steeps become delicate and mineral.</div></div>
-      <div class="faq-item reveal reveal-delay-3"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q4">Do you ship worldwide?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a4">Yes, we ship to over 40 countries! Orders to the US and Canada arrive within 5-10 business days. International from China warehouse takes 8-14 days. Free shipping on orders over $60 USD.</div></div>
-      <div class="faq-item reveal reveal-delay-4"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q5">Is your tea organic?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a5">Yes, our tea gardens are USDA Organic certified. Every batch is independently tested by SGS for over 400 pesticides and heavy metals. Results available upon request. Your safety is our top priority.</div></div>
-      <div class="faq-item reveal reveal-delay-5"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q6">Which tea should I choose?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a6">Da Hong Pao is the legendary king — complex and mineral. Rou Gui (Cinnamon) is bold and spicy. Shui Xian (Narcissus) is the most approachable — smooth and floral. Try the Sampler Set to discover your favorite!</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ SHIPPING & GUARANTEE ═══════════════ -->
-<section class="section section-alt">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal" data-i18n="shipping_label">SHIPPING &amp; GUARANTEE</div>
-      <h2 class="section-title cn reveal reveal-delay-1">配送与保障</h2>
-    </div>
-    <div class="shipping-grid">
-      <div class="shipping-card reveal"><h3 data-i18n="ship1_title">🌍 Worldwide Delivery</h3><p data-i18n="ship1_desc">Free shipping on orders over $60 (USD). Flat $8.50 for smaller orders. Delivered within 5-10 business days.</p></div>
-      <div class="shipping-card reveal reveal-delay-1"><h3 data-i18n="ship2_title">✅ 30-Day Guarantee</h3><p data-i18n="ship2_desc">Not happy with your tea? Contact us within 30 days for a full refund. No questions asked.</p></div>
-      <div class="shipping-card reveal reveal-delay-2"><h3 data-i18n="ship3_title">🔒 Secure &amp; Organic</h3><p data-i18n="ship3_desc">USDA Organic certified. Every batch SGS tested for purity. 256-bit SSL encryption.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ NEWSLETTER ═══════════════ -->
-<section class="newsletter">
-  <div class="container">
-    <h2 class="reveal" data-i18n="news_title">Stay in Touch</h2>
-    <p class="reveal reveal-delay-1" data-i18n="news_desc">Get 10% off your first order. We share tea stories, seasonal harvest updates, and exclusive offers.</p>
-    <form class="newsletter-form reveal reveal-delay-2" onsubmit="event.preventDefault();subscribeEmail(this);">
-      <input type="email" placeholder="Enter your email" id="newsletterEmail" required>
-      <button type="submit" class="btn btn-primary" data-i18n="news_btn">Subscribe</button>
-    </form>
-  </div>
-</section>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- ── FOOTER ─────────────────────────────── -->
 <footer>
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand"><div class="nav-logo"><span>◆</span> 岩韵 <small style="color:rgba(255,255,255,0.4);">YAN YUN</small></div><p data-i18n="footer_desc">三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。</p></div>
-      <div class="footer-col"><h4 data-i18n="footer_shop">Shop</h4><a href="#products" data-i18n="footer_all">All Teas</a><a href="#catalog" data-i18n="footer_oolong">Oolong</a><a href="#catalog" data-i18n="footer_black">Black Tea</a><a href="#club" data-i18n="footer_club">Tea Club</a><a href="#catalog" data-i18n="footer_gifts">Gift Sets</a></div>
-      <div class="footer-col"><h4 data-i18n="footer_learn">Learn</h4><a href="#story" data-i18n="footer_story">Our Story</a><a href="blog-what-is-wuyi-rock-tea.html">Wuyi Rock Tea Guide</a><a href="#guide" data-i18n="footer_brew">Brewing Guide</a><a href="#reviews" data-i18n="footer_reviews">Reviews</a><a href="#faq">FAQ</a></div>
-      <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><a href="#" data-i18n="footer_shipping">Shipping Info</a><a href="#" data-i18n="footer_returns">Returns</a><a href="#" data-i18n="footer_contact">Contact Us</a><a href="#" data-i18n="footer_wholesale">Wholesale</a><a href="privacy.html">Privacy Policy</a></div>
-    </div>
-    <div class="footer-bottom"><span>© 2025 岩韵 Yan Yun Tea. All rights reserved.</span><div class="footer-socials"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Twitter/X">X</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="WeChat">微</a></div></div>
+    <p>◆ 岩韵 Yan Yun Tea · Since 1990 · Wuyi Mountain, Fujian</p>
+    <p>© 2025 Yan Yun Tea. <a href="privacy.html">Privacy</a> · <a href="#">hello@yanyuntea.com</a></p>
   </div>
 </footer>
 
-<!-- ═══════════════ CART OVERLAY & DRAWER ═══════════════ -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-header"><h3>Your Cart</h3><button class="cart-close" onclick="toggleCart()">✕</button></div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty" id="cartEmpty"><div class="cart-empty-icon">🫖</div><h4>Your tea journey begins here</h4><p style="font-size:13px;color:var(--text-muted);">Add some teas to get started.</p></div>
-    <div id="cartList"></div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none;">
-    <div class="cart-shipping-bar"><div class="cart-shipping-progress" id="shipProgress"></div></div>
-    <div class="cart-shipping-text" id="shipText">Add <strong id="shipRemaining">$0</strong> more for free shipping!</div>
-    <div class="cart-totals"><span class="cart-totals-label">Total</span><span class="cart-totals-total" id="cartTotal">$0</span></div>
-    <button class="cart-checkout-btn" onclick="checkout()">💳 Checkout with Stripe</button>
-    <div class="cart-currency-note">We accept Visa, Mastercard, Amex. 256-bit SSL.</div>
-  </div>
-</div>
-
-<!-- ═══════════════ QUICK VIEW MODAL ═══════════════ -->
-<div class="qv-overlay" id="qvOverlay" onclick="if(event.target===this)closeQuickView()">
-  <div class="qv-modal" id="qvModal">
-    <div class="qv-carousel" id="qvCarousel">
-      <div class="qv-carousel-inner" id="qvCarouselInner"></div>
-      <div class="qv-carousel-nav">
-        <button class="qv-carousel-btn" onclick="qvCarouselMove(-1)" aria-label="Previous">‹</button>
-        <button class="qv-carousel-btn" onclick="qvCarouselMove(1)" aria-label="Next">›</button>
-      </div>
-      <div class="qv-carousel-dots" id="qvCarouselDots"></div>
-      <div class="qv-carousel-counter" id="qvCarouselCounter"></div>
-    </div>
-    <div class="qv-body">
-      <button class="qv-close" onclick="closeQuickView()">✕</button>
-      <div class="qv-tag" id="qvTag"></div>
-      <div class="qv-name" id="qvName"></div>
-      <div class="qv-name-cn" id="qvNameCn"></div>
-      <div class="qv-stars" id="qvStars"></div>
-      <div class="qv-price" id="qvPrice"></div>
-      <div class="qv-desc" id="qvDesc"></div>
-      <div class="qv-details" id="qvDetails"></div>
-      <div class="qv-qty">
-        <button onclick="qvQtyChange(-1)">−</button>
-        <span id="qvQty">1</span>
-        <button onclick="qvQtyChange(1)">+</button>
-      </div>
-      <button class="qv-add-btn" id="qvAddBtn" onclick="qvAddToCart()">Add to Cart</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ TOAST ═══════════════ -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════════ I18N TRANSLATIONS ═══════════════ */
-const LANG = {
-  en:{
-    lang_name:'English', lang_short:'EN',
-    search_placeholder:'Search teas…', nav_teas:'Teas', nav_story:'Story', nav_reviews:'Reviews', nav_compare:'Compare', nav_club:'Tea Club', nav_faq:'FAQ',
-    hero_badge:'From Wuyi Mountains, China', hero_title:'Rock Tea, Curated<br>From the Mountain', hero_desc:'We travel deep into Wuyi\'s Zhengyan core region to select the finest hand-picked, traditionally charcoal-roasted rock teas. Every batch is blind-tasted, SGS tested, and delivered to your door. Experience the true taste of 岩韵 — the \'rock rhyme\' of single-origin oolong.', hero_btn1:'Shop Our Teas →', hero_btn2:'Our Story', hero_scroll:'SCROLL',
-    trust1:'USDA Organic Certified', trust2:'Free Shipping over $60', trust3:'Same-Day Dispatch', trust4:'30-Day Guarantee', trust5:'500+ Happy Drinkers', trust6:'Global Tea Award 2024',
-    story_label:'CURATED FROM WUYI', story_title:'Three Generations of Mastery<br>One Perfect Cup', story_p1:'岩韵团队深耕武夷山正岩产区三十年。我们不种茶——我们与世代传承的茶农合作，从"三坑两涧"核心山场精选手工采摘、传统炭焙的优质岩茶。', story_p2:'每一片茶叶都经过我们的逐批盲品评审和SGS检测，确保品质稳定、纯正。我们相信：好茶不是种出来的，是选出来的。', story_quote:'"岩韵，是山场在茶杯里的回响。我们用脚步走过每一条坑涧，只为把真正的好茶递到您手里。"', story_stat1:'Sourcing Since', story_stat2:'Partner Farms', story_stat3:'Teas Curated',
-    feat1_title:'Direct from Farm', feat1_desc:'No middlemen. We work directly with Wuyi mountain tea growers, ensuring fair prices and authentic quality.',
-    feat2_title:'Charcoal Roasted', feat2_desc:'Traditional 72-hour charcoal roasting over lychee wood — an art passed down for generations.',
-    feat3_title:'Lab Tested', feat3_desc:'Every batch is SGS tested for over 400 pesticides and heavy metals. Results available on request.',
-    feat4_title:'Free Shipping $60+', feat4_desc:'Worldwide delivery from our US and China warehouses. Free shipping on orders over $60.',
-    featured_label:'OUR SIGNATURE TEAS', featured_desc:'Each tea tells the story of its terroir. From the rocky cliffs of Wuyi to your cup.', view_all:'View Full Collection →', compare_all:'Compare All Teas',
-    craft_label:'THE CRAFT', craft_title:'From Leaf to Cup', craft_desc:'Four generations of knowledge distilled into every harvest.',
-    proc1_title:'Hand Harvested', proc1_desc:'Spring pickings at dawn, selecting only the finest one-bud-two-leaves.',
-    proc2_title:'Sun Withering', proc2_desc:'Natural outdoor withering to awaken the leaves\' aromatic potential.',
-    proc3_title:'Charcoal Roast', proc3_desc:'72-hour slow roasting over lychee wood — the soul of Wuyi rock tea.',
-    proc4_title:'Expert Tasting', proc4_desc:'Triple quality review by certified tea masters before release.',
-    compare_label:'COMPARE', compare_desc:'Not sure which tea to choose? Compare them side by side.',
-    catalog_label:'SHOP ALL TEAS', catalog_all:'All', catalog_oolong:'Oolong', catalog_black:'Black Tea', catalog_gift:'Gift Sets',
-    club_label:'TEA CLUB', club_title:'Join the Rock Tea Club', club_desc:'A monthly journey through Wuyi\'s finest rock teas. Curated selections delivered to your door, with tasting notes and brewing guides.', club_per_month:'/ month', club_perk1:'50g premium tea', club_perk2:'Free shipping', club_perk3:'Tasting notes', club_perk4:'Cancel anytime', club_btn:'Subscribe Now →',
-    review_label:'WHAT OUR CUSTOMERS SAY',
-    rev1_text:'"The Da Hong Pao is extraordinary — the mineral complexity is unlike anything I\'ve found in a US tea shop. The charcoal roast gives it a depth that lingers for minutes after each sip. This is the real deal."', rev1_name:'James M.', rev1_title:'Tea Enthusiast · New York',
-    rev2_text:'"I ordered the sampler set to explore Wuyi teas for the first time. The tasting notes made it easy to understand what I was drinking. Already signed up for the Tea Club. The Rou Gui is my favorite — spicy and warming."', rev2_name:'Sarah K.', rev2_title:'First-time Buyer · London',
-    rev3_text:'"As someone who grew up drinking Wuyi tea in Fujian, I was skeptical about buying online. But this is the real thing — it tastes exactly like the tea my grandfather used to brew. The Tie Guan Yin brought tears to my eyes."', rev3_name:'Li Wei', rev3_title:'Fujian Native · Toronto',
-    guide_label:'BREWING GUIDE', guide_desc:'Unlock the full flavor of Wuyi rock tea with the traditional gongfu method.',
-    brew1_title:'Warm the Vessel', brew1_desc:'Rinse your gaiwan or teapot with boiling water to bring it to temperature.',
-    brew2_title:'Add Leaves', brew2_desc:'5g of tea per 100ml of water. For rock tea, don\'t be shy — the leaves need room to open.',
-    brew3_title:'Quick Rinse', brew3_desc:'Pour 100°C water over the leaves and immediately discard. This \'awakens\' the tea.',
-    brew4_title:'Steep & Enjoy', brew4_desc:'First steep: 15 seconds. Add 5 seconds to each subsequent steep. Wuyi rock tea rewards patience — expect 7+ infusions.',
-    faq_label:'FAQ', faq_q1:'How long does Wuyi rock tea stay fresh?', faq_a1:'Properly stored in an airtight container away from light, moisture, and strong odors, Wuyi rock tea can stay fresh for 2-3 years. The charcoal roasting process helps preserve it longer than green teas.',
-    faq_q2:'What temperature water should I use?', faq_a2:'Always use freshly boiled water at 100°C (212°F) for Wuyi rock tea. Lower temperatures won\'t properly extract the \'yan yun\' character.',
-    faq_q3:'How many infusions per serving?', faq_a3:'You can get 7-10 infusions from a single 5g serving using gongfu method. Each steep reveals a different facet.',
-    faq_q4:'Do you ship worldwide?', faq_a4:'Yes — we ship to over 40 countries! Orders to US/Canada within 5-10 business days. Free shipping over $60.',
-    faq_q5:'Is your tea organic?', faq_a5:'Yes — USDA Organic certified. Every batch SGS tested for 400+ pesticides. Results on request.',
-    faq_q6:'Which tea should I choose?', faq_a6:'Da Hong Pao is the legendary king — complex and mineral. Rou Gui is bold and spicy. Shui Xian is smooth and floral. Try the Sampler Set first!',
-    shipping_label:'SHIPPING & GUARANTEE',
-    ship1_title:'🌍 Worldwide Delivery', ship1_desc:'Free shipping on orders over $60 (USD). Flat $8.50 for smaller orders. Delivered within 5-10 business days.',
-    ship2_title:'✅ 30-Day Guarantee', ship2_desc:'Not happy with your tea? Contact us within 30 days for a full refund. No questions asked.',
-    ship3_title:'🔒 Secure & Organic', ship3_desc:'USDA Organic certified. Every batch SGS tested for purity. 256-bit SSL encryption.',
-    news_title:'Stay in Touch', news_desc:'Get 10% off your first order. We share tea stories, seasonal harvest updates, and exclusive offers.', news_btn:'Subscribe',
-    footer_desc:'三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。',
-    footer_shop:'Shop', footer_all:'All Teas', footer_oolong:'Oolong', footer_black:'Black Tea', footer_club:'Tea Club', footer_gifts:'Gift Sets',
-    footer_learn:'Learn', footer_story:'Our Story', footer_brew:'Brewing Guide', footer_reviews:'Reviews',
-    footer_support:'Support', footer_shipping:'Shipping Info', footer_returns:'Returns', footer_contact:'Contact Us', footer_wholesale:'Wholesale',
-    cart_empty_title:'Your tea journey begins here', cart_empty_desc:'Add some teas to get started.',
-    cart_title:'Your Cart', cart_total:'Total', cart_checkout:'Checkout', add_to_cart:'Add to Cart', added_toast:'Added to cart ✦'
-  },
-  cn:{
-    lang_name:'中文', lang_short:'CN',
-    search_placeholder:'搜索茶叶…', nav_teas:'茶叶', nav_story:'品牌故事', nav_reviews:'茶友评价', nav_compare:'产品对比', nav_club:'茶友会', nav_faq:'常见问题',
-    hero_badge:'✦ 来自中国武夷山', hero_title:'从山场到茶杯<br>岩韵直选', hero_desc:'我们深入武夷山正岩产区，为您精选手工采摘、传统炭焙的正宗岩茶。每批茶叶经过盲品评审和SGS检测，品质稳定如一。体验真正的"岩韵"——矿物丰富的乌龙茶之魂。', hero_btn1:'选购茶叶 →', hero_btn2:'了解我们', hero_scroll:'向下滚动',
-    trust1:'美国农业部有机认证', trust2:'满$60免运费', trust3:'当日发货', trust4:'30天无理由退换', trust5:'500+ 满意茶客', trust6:'2024全球茶叶大奖',
-    story_label:'源自武夷', story_title:'三代技艺<br>一杯好茶', story_p1:'岩韵团队深耕武夷山正岩产区三十年。我们不种茶——我们与世代传承的茶农合作，从"三坑两涧"核心山场精选手工采摘、传统炭焙的优质岩茶。', story_p2:'每一片茶叶都经过我们的逐批盲品评审和SGS检测，确保品质稳定、纯正。我们相信：好茶不是种出来的，是选出来的。', story_quote:'"岩韵，是山场在茶杯里的回响。我们用脚步走过每一条坑涧，只为把真正的好茶递到您手里。"', story_stat1:'深耕始于', story_stat2:'合作茶农', story_stat3:'精选茶品',
-    feat1_title:'茶园直供', feat1_desc:'没有中间商。我们与武夷山茶农直接合作，确保公平价格和纯正品质。',
-    feat2_title:'炭火烘焙', feat2_desc:'荔枝木炭传统炭焙72小时——一门传承上百年的技艺。',
-    feat3_title:'实验室检测', feat3_desc:'每批次经SGS检测超过400项农药和重金属残留，检测报告可索取。',
-    feat4_title:'满$60免运费', feat4_desc:'中美两地仓库全球发货，满60美元免费配送。',
-    featured_label:'精选茶叶', featured_desc:'每一款茶都讲述着它的风土故事。从武夷山岩壁到您的茶杯。', view_all:'查看全部茶品 →', compare_all:'对比所有茶品',
-    craft_label:'匠心工艺', craft_title:'从一片叶到一杯茶', craft_desc:'四代人的制茶智慧，凝聚于每一次采摘。',
-    proc1_title:'手工采摘', proc1_desc:'春茶凌晨手工采摘，只取最鲜嫩的一芽两叶。',
-    proc2_title:'日光萎凋', proc2_desc:'自然日光萎凋，唤醒茶叶中的芳香物质。',
-    proc3_title:'炭火烘焙', proc3_desc:'荔枝木炭慢火焙烤72小时——武夷岩茶的灵魂所在。',
-    proc4_title:'专家品鉴', proc4_desc:'至少三次专业审评，确保每批茶达到岩韵标准。',
-    compare_label:'产品对比', compare_desc:'不知道选哪款茶？并排对比一下。',
-    catalog_label:'全部茶品', catalog_all:'全部', catalog_oolong:'乌龙茶', catalog_black:'红茶', catalog_gift:'礼盒套装',
-    club_label:'岩韵茶友会', club_title:'加入岩韵茶友会', club_desc:'每月精选武夷岩茶送达您家，附品鉴笔记和冲泡指南。', club_per_month:'/ 月', club_perk1:'50g 精选岩茶', club_perk2:'全球免运费', club_perk3:'品鉴笔记', club_perk4:'随时取消', club_btn:'立即订阅 →',
-    review_label:'茶友真实评价',
-    rev1_text:'"这款大红袍太惊艳了——矿物层次感在美国茶叶店从未遇到过。炭焙带来的深度，每喝一口后回味数分钟。这才是真正的岩茶。"', rev1_name:'James M.', rev1_title:'纽约 · 茶叶爱好者',
-    rev2_text:'"第一次尝试岩茶就买了品鉴套装，品鉴笔记帮了大忙。每款茶都喝明白了。最喜欢肉桂——辛香又温暖。已经订阅了茶友会。"', rev2_name:'Sarah K.', rev2_title:'伦敦 · 首次购买',
-    rev3_text:'"在福建长大的我，从小喝岩茶。在网上买本来很怀疑，但这款铁观音就是记忆中外公泡的味道。喝第一口眼眶就湿了。"', rev3_name:'李伟', rev3_title:'多伦多 · 福建老乡',
-    guide_label:'冲泡指南', guide_desc:'用传统工夫茶法解锁武夷岩茶的全部风味。',
-    brew1_title:'温杯洁具', brew1_desc:'用沸水冲洗盖碗或紫砂壶，提高器具温度。',
-    brew2_title:'投茶', brew2_desc:'每100ml水投入5g茶叶。岩茶不怕多放，茶叶需要舒展空间。',
-    brew3_title:'润茶', brew3_desc:'注入100°C沸水后立刻倒出。这一步"唤醒"茶叶。',
-    brew4_title:'冲泡品饮', brew4_desc:'第一泡15秒出汤。以后每泡增加5秒。岩茶耐泡——7泡以上仍有韵味。',
-    faq_label:'常见问题',
-    faq_q1:'武夷岩茶的保质期有多长？', faq_a1:'密封避光防潮保存，武夷岩茶可存放2-3年。炭焙工艺使其比绿茶更耐存放，很多茶友认为陈放1-2年后炭火味更醇和。',
-    faq_q2:'应该用什么水温泡？', faq_a2:'武夷岩茶必须用100°C的沸水冲泡。低温无法充分释放岩茶的矿物和炭焙风味，更泡不出"岩韵"。',
-    faq_q3:'一泡茶能冲泡几次？', faq_a3:'高品质岩茶用工夫泡法可冲泡7-10次。前几泡浓郁醇厚，中间几泡花香四溢，后几泡清甜甘润。',
-    faq_q4:'全球配送吗？', faq_a4:'是的，我们发往全球40多个国家！美国/加拿大5-10个工作日送达，其他国家8-14天。满$60免运费。',
-    faq_q5:'茶叶是有机的吗？', faq_a5:'是的——获得美国农业部有机认证。每批经SGS检测400+项农残和重金属。检测报告可索取。',
-    faq_q6:'大红袍、肉桂和水仙有什么区别？', faq_a6:'大红袍是岩茶之王——复杂醇厚，矿物感强。肉桂（Cinnamon）辛香有力，个性鲜明。水仙（Narcissus）最易入口——柔滑花香。建议先买品鉴套装！',
-    shipping_label:'配送与保障',
-    ship1_title:'🌍 全球配送', ship1_desc:'满$60（或¥432）免运费。小额订单$8.50。5-10个工作日送达。',
-    ship2_title:'✅ 30天退换保障', ship2_desc:'不满意？30天内联系我们，全额退款。不问原因。',
-    ship3_title:'🔒 安全有机', ship3_desc:'美国农业部有机认证，SGS检测，256位SSL加密。',
-    news_title:'保持联系', news_desc:'首单享9折优惠。我们会分享茶文化故事、季节性新品和独家优惠。', news_btn:'订阅',
-    footer_desc:'三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。',
-    footer_shop:'产品', footer_all:'全部茶品', footer_oolong:'乌龙茶', footer_black:'红茶', footer_club:'茶友会', footer_gifts:'礼盒',
-    footer_learn:'了解', footer_story:'品牌故事', footer_brew:'冲泡指南', footer_reviews:'茶友评价',
-    footer_support:'服务', footer_shipping:'配送信息', footer_returns:'退换政策', footer_contact:'联系我们', footer_wholesale:'批发合作',
-    cart_empty_title:'您的品茶之旅从这里开始', cart_empty_desc:'添加一些茶叶到购物车吧。',
-    cart_title:'购物车', cart_total:'合计', cart_checkout:'去结算', add_to_cart:'加入购物车', added_toast:'已加入购物车 ✦'
-  },
-  jp:{
-    lang_name:'日本語', lang_short:'JP',
-    search_placeholder:'お茶を検索…', nav_teas:'商品', nav_story:'物語', nav_reviews:'口コミ', nav_compare:'比較', nav_club:'定期購入', nav_faq:'よくある質問',
-    hero_badge:'✦ 中国武夷山より', hero_title:'三代に渡る<br>武夷岩茶の極み', hero_desc:'武夷山正岩産地から直接お届け。手摘み、炭火焙煎、世界中へ発送。「岩韻」——ミネラル豊かな烏龍茶の真髄をご体験ください。', hero_btn1:'お茶を購入 →', hero_btn2:'私たちの物語', hero_scroll:'スクロール',
-    trust1:'USDA有機認証', trust2:'$60以上送料無料', trust3:'即日発送', trust4:'30日返金保証', trust5:'500人以上の顧客', trust6:'2024年国際茶葉賞',
-    story_label:'武夷山より', story_title:'三代の<br>一杯のお茶', story_p1:'岩韻茶荘は1990年、武夷山正岩産地の中心に創業。三代の茶人が清末から続く炭火焙煎の技を守り継いでいます。', story_p2:'すべての茶葉は武夷山「三坑両澗」の高品質な茶園から。丹霞地形と独特の微気候が、岩茶に唯一無二のミネラル風味を与えています。', story_quote:'「岩韻とは、茶園が茶杯に響く余韻。直接取引により、すべての茶葉が育った岩壁まで遡ることができます。」', story_stat1:'創業', story_stat2:'伝承の年', story_stat3:'提携茶園',
-    feat1_title:'茶園直送', feat1_desc:'中間業者なし。武夷山の茶農家と直接提携し、適正価格と本物の品質を保証します。',
-    feat2_title:'炭火焙煎', feat2_desc:'竜眼の木炭で72時間かけた伝統の炭火焙煎——何世代にも受け継がれた技法。',
-    feat3_title:'実験室検査', feat3_desc:'全ロットをSGSで400項目以上の農薬・重金属検査。結果はご請求に応じて開示。',
-    feat4_title:'$60以上送料無料', feat4_desc:'米中両国の倉庫から世界へ発送。$60以上のご注文で送料無料。',
-    featured_label:'厳選武夷岩茶', featured_desc:'すべてのお茶がその風土の物語を語ります。武夷山の岩壁からあなたの茶杯まで。', view_all:'全商品を見る →', compare_all:'全商品を比較',
-    craft_label:'匠の技', craft_title:'茶葉から茶杯へ', craft_desc:'四世代の知識がすべての収穫に凝縮されています。',
-    proc1_title:'手摘み', proc1_desc:'早朝に手作業で、最も柔らかな一芯二葉だけを摘み取ります。',
-    proc2_title:'日光萎凋', proc2_desc:'自然の日光でゆっくりと水分を飛ばし、香りの可能性を引き出します。',
-    proc3_title:'炭火焙煎', proc3_desc:'竜眼の木炭で72時間かけてじっくり焙煎——武夷岩茶の魂。',
-    proc4_title:'専門家による審評', proc4_desc:'資格を持った茶師による3回の品質チェックを経て出荷。',
-    compare_label:'比較', compare_desc:'どのお茶を選べばいいか迷っていますか？並べて比較してみましょう。',
-    catalog_label:'全商品', catalog_all:'すべて', catalog_oolong:'烏龍茶', catalog_black:'紅茶', catalog_gift:'ギフトセット',
-    club_label:'岩韻茶友会', club_title:'岩韻定期購入クラブ', club_desc:'毎月、武夷山の厳選岩茶をお届け。試飲ノートと淹れ方ガイド付き。', club_per_month:'/ 月', club_perk1:'50g 厳選岩茶', club_perk2:'送料無料', club_perk3:'試飲ノート', club_perk4:'いつでも解約可', club_btn:'今すぐ購読 →',
-    review_label:'お客様の声',
-    rev1_text:'「この大紅袍は素晴らしい——ミネラルの複雑さはアメリカの茶店では味わったことがない。炭火焙煎の深みが、一口ごとに何分も余韻として残る。本物だ。」', rev1_name:'James M.', rev1_title:'ニューヨーク · 茶愛好家',
-    rev2_text:'「サンプラーセットで初めて岩茶を試しました。試飲ノートのおかげで違いがよくわかりました。一番のお気に入りは肉桂——スパイシーで温かみがあります。」', rev2_name:'Sarah K.', rev2_title:'ロンドン · 初めての購入',
-    rev3_text:'「福建で育った私にとって、岩茶は故郷の味。ネットで買うのは不安でしたが、この鉄観音は祖父が淹れてくれた味そのものでした。」', rev3_name:'李偉', rev3_title:'トロント · 福建出身',
-    guide_label:'淹れ方ガイド', guide_desc:'伝統的な工夫茶で武夷岩茶の真髄を引き出します。',
-    brew1_title:'器を温める', brew1_desc:'蓋碗または急須を沸騰したお湯で温めます。',
-    brew2_title:'茶葉を入れる', brew2_desc:'100mlあたり5gの茶葉。岩茶は葉が開くスペースが必要なので多めでOK。',
-    brew3_title:'洗茶', brew3_desc:'100°Cのお湯を注いですぐに捨てる。これで茶葉が"目覚め"ます。',
-    brew4_title:'抽出して楽しむ', brew4_desc:'1回目は15秒。以降は5秒ずつ延ばす。岩茶は7煎以上楽しめます。',
-    faq_label:'よくある質問',
-    faq_q1:'武夷岩茶の賞味期限は？', faq_a1:'密閉容器で光・湿気・強い匂いを避けて保存すれば2-3年。炭火焙煎により緑茶より長期保存が可能です。',
-    faq_q2:'適切なお湯の温度は？', faq_a2:'武夷岩茶は必ず100°Cの沸騰したお湯で淹れてください。低温ではミネラルと焙煎の風味が十分に抽出されません。',
-    faq_q3:'何煎楽しめますか？', faq_a3:'工夫茶で5gの茶葉から7-10煎。最初の数煎は力強く、中盤は華やか、後半は甘く繊細に変化します。',
-    faq_q4:'海外発送は可能ですか？', faq_a4:'はい、40カ国以上に発送可能！米国・カナダは5-10営業日。$60以上で送料無料。',
-    faq_q5:'有機栽培ですか？', faq_a5:'はい——USDA有機認証取得。全ロットSGSで400項目以上の農薬検査済み。',
-    faq_q6:'どのお茶を選べばいいですか？', faq_a6:'大紅袍は岩茶の王様——複雑でミネラル豊富。肉桂はスパイシーで個性的。水仙は最も飲みやすく滑らか。まずはサンプラーセットをお試しください！',
-    shipping_label:'配送・保証',
-    ship1_title:'🌍 世界中へ発送', ship1_desc:'$60以上で送料無料。$60未満は$8.50。5-10営業日でお届け。',
-    ship2_title:'✅ 30日返金保証', ship2_desc:'ご満足いただけない場合、30日以内にご連絡ください。全額返金いたします。',
-    ship3_title:'🔒 安全・有機', ship3_desc:'USDA有機認証、SGS検査、256ビットSSL暗号化。',
-    news_title:'最新情報を受け取る', news_desc:'初回注文10%オフ。茶文化の物語や季節限定商品の情報をお届けします。', news_btn:'購読',
-    footer_desc:'三代に渡り、武夷山正岩産地にこだわり続けています。家族の名誉にかけて、すべての茶葉の品質と純正を保証します。',
-    footer_shop:'商品', footer_all:'全商品', footer_oolong:'烏龍茶', footer_black:'紅茶', footer_club:'定期購入', footer_gifts:'ギフト',
-    footer_learn:'学ぶ', footer_story:'物語', footer_brew:'淹れ方', footer_reviews:'口コミ',
-    footer_support:'サポート', footer_shipping:'配送情報', footer_returns:'返品', footer_contact:'お問い合わせ', footer_wholesale:'卸売',
-    cart_empty_title:'旅の始まり', cart_empty_desc:'お茶をカートに追加してください。',
-    cart_title:'カート', cart_total:'合計', cart_checkout:'決済へ', add_to_cart:'カートに入れる', added_toast:'カートに追加しました ✦'
-  }
+/* ── PRODUCTS ───────────────────────────── */
+const PRODUCTS = {
+  reserve:{id:'reserve',name:'Yan Yun Reserve',cn:'岩韵臻藏',price:148,img:'images/oolong-leaves-2.jpg'},
+  dahongpao:{id:'dahongpao',name:'Da Hong Pao',cn:'大红袍',price:64,img:'images/tea-leaves-1.jpg'}
 };
+const STRIPE_KEY = 'pk_test_51TVnVx3EPNnCmkOyJPzXcdiYNrcZ2qprpjsDSB7t1q46U7JeWqqtmo63gqNSKR5ZL6Iadg6C15l2FAeA5ta9Zw8m00MeXy1wjD';
 
-let currentLang = 'en';
-function t(key){return LANG[currentLang]&&LANG[currentLang][key]!==undefined?LANG[currentLang][key]:LANG['en'][key]||key;}
-
-function switchLang(lang){
-  if(!LANG[lang]) return;
-  currentLang = lang;
-  localStorage.setItem('yanyunLang', lang);
-  // Update language selector UI
-  document.querySelectorAll('.nav-lang-option').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
-  document.getElementById('langCurrent').textContent = LANG[lang].lang_short||lang.toUpperCase();
-  closeLangMenu();
-  // Update all data-i18n elements
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.dataset.i18n;
-    const text = t(key);
-    if(text && text!==key) el.innerHTML = text;
-  });
-  // Update placeholders
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-    const key = el.dataset.i18nPlaceholder;
-    const text = t(key);
-    if(text && text!==key) el.placeholder = text;
-  });
-  // Update trust bar items (no data-i18n, hardcoded in JS-rendered scroll)
-  const trustItems = document.querySelectorAll('.trust-item');
-  const trustKeys = ['trust1','trust2','trust3','trust4','trust5','trust6'];
-  if(trustItems.length>=6){
-    trustItems.forEach((el,i)=>{if(trustKeys[i%6]){const ti = el.querySelector('svg');el.innerHTML='';if(ti)el.prepend(ti);el.append(' '+t(trustKeys[i%6]));}});
-  }
-  // Re-render search placeholder
-  document.querySelector('.nav-search input').placeholder = t('search_placeholder');
-  document.getElementById('searchPanelInput').placeholder = t('search_placeholder');
-  // Update cart
-  document.querySelector('.cart-empty h4').textContent = t('cart_empty_title');
-  const cartEmptyP = document.querySelector('.cart-empty p');
-  if(cartEmptyP) cartEmptyP.textContent = t('cart_empty_desc');
-  document.querySelector('.cart-header h3').textContent = t('cart_title');
-  const cft = document.querySelector('.cart-totals-label');
-  if(cft) cft.textContent = t('cart_total');
-  const ccb = document.querySelector('.cart-checkout-btn');
-  if(ccb) ccb.innerHTML = '💳 '+t('cart_checkout');
+/* ── CART ────────────────────────────────── */
+let cart = JSON.parse(localStorage.getItem('yanyunCartV2'))||[];
+function addToCart(id){
+  const idx = cart.findIndex(i=>i.id===id);
+  if(idx>=0) cart[idx].qty += getQty(id);
+  else cart.push({id,qty:getQty(id)});
+  saveCart();showToast('Added to your collection ✦');
+  document.getElementById('countRemaining').textContent = Math.max(0,76-cart.reduce((s,i)=>i.id==='reserve'?s+i.qty:s,0));
 }
-
-function toggleLangMenu(){document.getElementById('langSwitcher').classList.toggle('open');}
-function closeLangMenu(){document.getElementById('langSwitcher').classList.remove('open');}
-document.addEventListener('click', e=>{if(!e.target.closest('.nav-lang'))closeLangMenu();});
-
-// Restore saved language
-const savedLang = localStorage.getItem('yanyunLang');
-if(savedLang && LANG[savedLang]) { currentLang = savedLang; }
-
-/* ═══════════════ STRIPE CONFIG ═══════════════ */
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TVnVx3EPNnCmkOyJPzXcdiYNrcZ2qprpjsDSB7t1q46U7JeWqqtmo63gqNSKR5ZL6Iadg6C15l2FAeA5ta9Zw8m00MeXy1wjD';
-let stripeInstance = null;
-
-/* ═══════════════ PRODUCT DATA ═══════════════ */
-const PRODUCTS = [
-  {id:'dahongpao', cat:'oolong', name:"Da Hong Pao", cn:"大红袍", tag:"The Grand Red Robe", priceUSD:54, priceCNY:388, rating:4.9, reviews:128,
-    images:["images/tea-leaves-1.jpg","images/brewed-cup-1.jpg","images/tea-ceremony-1.jpg","images/tea-plantation-2.jpg"],
-    desc:"The king of Wuyi rock teas. Our Da Hong Pao comes from the core 'Three Pits and Two Streams' region. Rich mineral notes with a distinct 'yan yun' — the mineral aftertaste that lingers long after each sip. Orchid fragrance, honey sweetness, and a deep charcoal roast that gives it unparalleled complexity.",
-    flavor:"Orchid · Honey · Mineral · Charcoal", origin:"Wuyi · Zhengyan Core", harvest:"Spring 2025", roast:"Medium-High", weight:"50g / 1.76oz", storage:"Airtight · Cool · Dark"},
-  {id:'rougui', cat:'oolong', name:"Rou Gui", cn:"肉桂", tag:"Cinnamon Rock Tea", priceUSD:37, priceCNY:268, rating:4.8, reviews:76,
-    images:["images/oolong-leaves-1.jpg","images/tea-brewing-1.jpg","images/tea-serving-1.jpg","images/tea-farm-mist-1.jpg"],
-    desc:"Named for its distinctive cinnamon-like spice, Rou Gui is a bold and warming Wuyi rock tea. Harvested from old-growth bushes on the 'Horse Head Rock' (Mǎ Tóu Yán) terroir. Pungent and aromatic with a long, sweet finish. A favorite among seasoned rock tea drinkers.",
-    flavor:"Cinnamon · Spice · Sweet · Warming", origin:"Wuyi · Ma Tou Yan", harvest:"Spring 2025", roast:"Medium", weight:"50g / 1.76oz", storage:"Airtight · Cool · Dark"},
-  {id:'shuixian', cat:'oolong', name:"Shui Xian", cn:"水仙", tag:"Narcissus Oolong", priceUSD:34, priceCNY:248, rating:4.7, reviews:43,
-    images:["images/oolong-leaves-2.jpg","images/brewed-cup-2.jpg","images/tea-plantation-1.jpg"],
-    desc:"A smooth and floral Wuyi rock tea with a creamy body and lingering sweet aftertaste. Shui Xian (Narcissus) gets its name from the delicate orchid-like fragrance that evokes the daffodil. Mellow yet complex, it's the perfect introduction to Wuyi rock tea for newcomers.",
-    flavor:"Creamy · Orchid · Floral · Smooth", origin:"Wuyi · Hui Yuan Keng", harvest:"Spring 2025", roast:"Light-Medium", weight:"50g / 1.76oz", storage:"Airtight · Cool · Dark"},
-  {id:'tieguanyin', cat:'oolong', name:"Tie Guan Yin", cn:"铁观音", tag:"Iron Goddess of Mercy", priceUSD:40, priceCNY:288, rating:4.8, reviews:62,
-    images:["images/tea-leaves-2.jpg","images/tea-ceremony-2.jpg","images/matcha-brewing-1.jpg"],
-    desc:"While originally from Anxi, our Tie Guan Yin is crafted in the Wuyi style — charcoal roasted for a deeper, more complex profile. The legendary 'Iron Goddess' tea delivers a captivating orchid fragrance with a clean, crisp finish.",
-    flavor:"Orchid · Clean · Crisp · Roasted", origin:"Anxi / Wuyi-style", harvest:"Spring 2025", roast:"Light Charcoal", weight:"50g / 1.76oz", storage:"Airtight · Cool · Dark"},
-  {id:'lapsang', cat:'black', name:"Lapsang Souchong", cn:"正山小种", tag:"Smoky Black Tea", priceUSD:45, priceCNY:328, rating:4.6, reviews:38,
-    images:["images/tea-brewing-2.jpg","images/tea-farm-mist-1.jpg","images/tea-plantation-1.jpg"],
-    desc:"The original black tea — Lapsang Souchong was the first black tea ever exported to Europe. Our traditional version is smoke-dried over pinewood fires in the Wuyi Mountains, giving it that iconic campfire aroma. The taste of history in every cup.",
-    flavor:"Campfire · Pine · Rich · Smoky", origin:"Wuyi · Tong Mu Guan", harvest:"Spring 2025", process:"Pine-smoke dried", weight:"50g / 1.76oz", storage:"Airtight · Improves with age"},
-  {id:'sampler', cat:'set', name:"Rock Tea Sampler", cn:"岩韵品鉴套装", tag:"Discover Wuyi", priceUSD:54, priceCNY:388, rating:4.9, reviews:94,
-    images:["images/tea-packaging-1.jpg","images/tea-ceremony-1.jpg","images/tea-leaves-1.jpg","images/tea-brewing-1.jpg"],
-    desc:"The perfect introduction to Wuyi rock tea. Six carefully selected teas — Da Hong Pao, Rou Gui, Shui Xian, Tie Guan Yin, Lapsang Souchong, and a seasonal mystery tea. Each 15g sample with tasting notes and brewing guide.",
-    flavor:"Six varieties · Full journey", origin:"Wuyi · Various Gardens", harvest:"Spring 2025", includes:"6 × 15g", weight:"90g total", storage:"Store individually in tins"},
-  {id:'giftbox', cat:'set', name:"Yan Yun Gift Box", cn:"岩韵豪华礼盒", tag:"The Ultimate Gift", priceUSD:95, priceCNY:688, rating:4.9, reviews:57,
-    images:["images/tea-packaging-2.jpg","images/tea-ceremony-2.jpg","images/tea-plantation-2.jpg","images/brewed-cup-2.jpg"],
-    desc:"Our flagship gift box in a handcrafted wooden box from Wuyi Mountain. Contains four finest teas: 50g each of Da Hong Pao, Rou Gui, Shui Xian, and a limited-edition vintage tea. Includes a gongfu brewing set and signed authenticity certificate.",
-    flavor:"Premium selection · Gift-ready", origin:"Wuyi · Limited Edition", harvest:"Spring 2025", includes:"4×50g + Gongfu set", weight:"200g", storage:"Wooden box · Airtight"}
-];
-
-/* ═══════════════ STATE ═══════════════ */
-let currency = 'USD';
-let cart = JSON.parse(localStorage.getItem('yanyunCart')) || [];
-let qvCurrentQty = 1;
-let qvCurrentProduct = null;
-let qvCurrentIdx = 0;
-
-/* ═══════════════ RENDER HELPER ═══════════════ */
-function starsHTML(rating,count){
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  let s = '';
-  for(let i=0;i<5;i++){
-    if(i<full) s+='★';
-    else if(i===full&&half) s+='★';
-    else s+='☆';
-  }
-  return s + '<span>'+rating.toFixed(1)+' ('+count+')</span>';
+function getQty(id){return parseInt(document.getElementById('qty'+id.charAt(0).toUpperCase()+id.slice(1))?.textContent||1);}
+function qtyChange(id,delta){
+  const el=document.getElementById('qty'+id.charAt(0).toUpperCase()+id.slice(1));
+  el.textContent = Math.max(1,Math.min(10,parseInt(el.textContent)+delta));
 }
+function saveCart(){localStorage.setItem('yanyunCartV2',JSON.stringify(cart));}
+function showToast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2500);}
 
-function renderFeatured(){
-  const featured = ['dahongpao','rougui','tieguanyin','lapsang'];
-  document.getElementById('featuredGrid').innerHTML = featured.map(id=>{
-    const prod = PRODUCTS.find(p=>p.id===id);
-    const price = currency==='USD' ? '$'+prod.priceUSD : '¥'+prod.priceCNY;
-    return `<div class="prod-card" onclick="openQuickView('${id}')"><img class="prod-img" src="${prod.images[0]}" alt="${prod.name}" loading="lazy">
-      <div class="prod-body"><div class="prod-tag">${prod.tag}</div><div class="prod-name">${prod.name} <span class="prod-name-cn">${prod.cn}</span></div>
-      <div class="prod-stars">${starsHTML(prod.rating,prod.reviews)}</div><div class="prod-desc">${prod.desc.substring(0,75)}...</div>
-      <div class="prod-foot"><span class="prod-price">${price}</span><button class="prod-btn" onclick="event.stopPropagation();addToCart('${id}')">Add</button></div></div></div>`;
-  }).join('');
-}
-
-function renderCatalog(filter='all'){
-  const items = filter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===filter);
-  document.getElementById('catalogGrid').innerHTML = items.map(prod=>{
-    const price = currency==='USD' ? '$'+prod.priceUSD : '¥'+prod.priceCNY;
-    return `<div class="prod-card" onclick="openQuickView('${prod.id}')"><img class="prod-img" src="${prod.images[0]}" alt="${prod.name}" loading="lazy">
-      <div class="prod-body"><div class="prod-tag">${prod.tag}</div><div class="prod-name">${prod.name} <span class="prod-name-cn">${prod.cn}</span></div>
-      <div class="prod-stars">${starsHTML(prod.rating,prod.reviews)}</div><div class="prod-desc">${prod.desc.substring(0,60)}...</div>
-      <div class="prod-foot"><span class="prod-price">${price}</span><button class="prod-btn" onclick="event.stopPropagation();addToCart('${prod.id}')">Add</button></div></div></div>`;
-  }).join('');
-}
-
-function filterCatalog(filter){
-  document.querySelectorAll('.catalog-tab').forEach(t=>t.classList.toggle('active',t.dataset.filter===filter));
-  renderCatalog(filter);
-}
-
-/* ═══════════════ COMPARISON TABLE ═══════════════ */
-function renderCompare(){
-  document.getElementById('compareTable').innerHTML = `<tr><th></th>${PRODUCTS.map(p=>'<th>'+p.name+'<br><span style="font-family:var(--f-chinese);font-size:10px;text-transform:none;letter-spacing:0;">'+p.cn+'</span></th>').join('')}</tr>`+
-    ['rating','price','origin','roast','weight','flavor'].map(field=>{
-      const labels = {rating:'Rating',price:'Price',origin:'Origin',roast:'Roast',weight:'Weight',flavor:'Flavor Profile'};
-      return '<tr><td style="font-weight:500;color:var(--text);font-family:var(--f-mono);font-size:11px;letter-spacing:0.05em;">'+labels[field]+'</td>'+
-        PRODUCTS.map(p=>{
-          if(field==='price'){
-            const price = currency==='USD' ? '$'+p.priceUSD : '¥'+p.priceCNY;
-            return '<td class="cmp-price">'+price+'</td>';
-          }
-          if(field==='rating') return '<td class="cmp-stars">'+'★'.repeat(Math.floor(p.rating))+'☆'.repeat(5-Math.floor(p.rating))+' <span style="font-size:11px;color:var(--text-muted);letter-spacing:0;">'+p.rating.toFixed(1)+'</span></td>';
-          return '<td>'+(p[field]||'—')+'</td>';
-        }).join('')+'</tr>';
-    }).join('')+
-    '<tr><td></td>'+PRODUCTS.map(p=>'<td><button class="cmp-add" onclick="addToCart(\''+p.id+'\')">Add to Cart</button></td>').join('')+'</tr>';
-}
-
-/* ═══════════════ QUICK VIEW ═══════════════ */
-function openQuickView(id){
-  const prod = PRODUCTS.find(p=>p.id===id);
-  if(!prod) return;
-  qvCurrentProduct = prod;
-  qvCurrentQty = 1;
-  qvCurrentIdx = 0;
-  const price = currency==='USD' ? '$'+prod.priceUSD : '¥'+prod.priceCNY;
-  const labelMap = {origin:'Origin',harvest:'Harvest',roast:'Roast',process:'Process',weight:'Weight',storage:'Storage',includes:'Includes',flavor:'Flavor'};
-
-  document.getElementById('qvCarouselInner').innerHTML = prod.images.map(img=>'<img src="'+img+'" alt="'+prod.name+'" loading="lazy">').join('');
-  document.getElementById('qvCarouselDots').innerHTML = prod.images.map((_,i)=>'<div class="qv-carousel-dot'+(i===0?' active':'')+'" onclick="qvCarouselGo('+i+')"></div>').join('');
-  qvUpdateCarousel();
-
-  document.getElementById('qvTag').textContent = prod.tag;
-  document.getElementById('qvName').textContent = prod.name;
-  document.getElementById('qvNameCn').textContent = prod.cn;
-  document.getElementById('qvStars').innerHTML = starsHTML(prod.rating,prod.reviews);
-  document.getElementById('qvPrice').textContent = price;
-  document.getElementById('qvDesc').textContent = prod.desc;
-  document.getElementById('qvQty').textContent = '1';
-  document.getElementById('qvDetails').innerHTML = Object.entries(labelMap).filter(([k])=>prod[k]).map(([k,v])=>'<div class="qv-detail"><span class="qv-detail-label">'+v+'</span><span class="qv-detail-value">'+prod[k]+'</span></div>').join('');
-  document.getElementById('qvOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeQuickView(){
-  document.getElementById('qvOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function qvCarouselMove(dir){
-  if(!qvCurrentProduct) return;
-  qvCurrentIdx = (qvCurrentIdx + dir + qvCurrentProduct.images.length) % qvCurrentProduct.images.length;
-  qvUpdateCarousel();
-}
-
-function qvCarouselGo(idx){
-  qvCurrentIdx = idx;
-  qvUpdateCarousel();
-}
-
-function qvUpdateCarousel(){
-  if(!qvCurrentProduct) return;
-  document.getElementById('qvCarouselInner').style.transform = 'translateX(-'+(qvCurrentIdx*100)+'%)';
-  document.querySelectorAll('#qvCarouselDots .qv-carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===qvCurrentIdx));
-  document.getElementById('qvCarouselCounter').textContent = (qvCurrentIdx+1)+' / '+qvCurrentProduct.images.length;
-}
-
-function qvQtyChange(delta){
-  qvCurrentQty = Math.max(1, Math.min(20, qvCurrentQty + delta));
-  document.getElementById('qvQty').textContent = qvCurrentQty;
-}
-
-function qvAddToCart(){
-  if(!qvCurrentProduct) return;
-  addToCart(qvCurrentProduct.id, qvCurrentQty);
-  closeQuickView();
-}
-
-/* ═══════════════ CART ═══════════════ */
-function getPrice(prod){return currency==='USD' ? prod.priceUSD : prod.priceCNY;}
-
-function addToCart(id, qty=1){
-  const prod = PRODUCTS.find(p=>p.id===id);
-  if(!prod) return;
-  const existing = cart.find(item=>item.id===id);
-  if(existing) existing.qty += qty;
-  else cart.push({id, qty});
-  updateCart();
-  showToast('Added to cart ✦');
-}
-
-function removeFromCart(id){cart = cart.filter(item=>item.id!==id); updateCart();}
-
-function changeQty(id, delta){
-  const item = cart.find(i=>i.id===id);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty<=0) cart = cart.filter(i=>i.id!==id);
-  updateCart();
-}
-
-function updateCart(){
-  localStorage.setItem('yanyunCart', JSON.stringify(cart));
-  const count = cart.reduce((s,i)=>s+i.qty, 0);
-  document.getElementById('cartCount').textContent = count;
-  document.getElementById('cartCount').classList.toggle('show', count>0);
-  const list = document.getElementById('cartList');
-  const empty = document.getElementById('cartEmpty');
-  const footer = document.getElementById('cartFooter');
-  if(cart.length===0){list.innerHTML='';empty.style.display='block';footer.style.display='none';return;}
-  empty.style.display='none';footer.style.display='block';
-  let subtotal = 0;
-  list.innerHTML = cart.map(item=>{
-    const prod = PRODUCTS.find(p=>p.id===item.id);
-    if(!prod) return '';
-    const price = getPrice(prod);
-    const itemTotal = price * item.qty;
-    subtotal += itemTotal;
-    const pStr = currency==='USD'?'$'+itemTotal:'¥'+itemTotal;
-    const unitStr = currency==='USD'?'$'+price:'¥'+price;
-    return `<div class="cart-item"><img class="cart-item-img" src="${prod.images[0]}" alt="${prod.name}"><div class="cart-item-info"><div class="cart-item-name">${prod.name}</div><div class="cart-item-variant">${prod.cn} · 50g</div><div class="cart-item-price">${unitStr}</div><div class="cart-item-qty"><button onclick="changeQty('${item.id}',-1)">−</button><span>${item.qty}</span><button onclick="changeQty('${item.id}',1)">+</button></div></div><div class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</div></div>`;
-  }).join('');
-  document.getElementById('cartTotal').textContent = currency==='USD'?'$'+subtotal:'¥'+subtotal;
-  const freeThreshold = currency==='USD' ? 60 : 432;
-  const progress = Math.min(100, (subtotal/freeThreshold)*100);
-  document.getElementById('shipProgress').style.width = progress+'%';
-  const remaining = Math.max(0, freeThreshold - subtotal);
-  const remainStr = currency==='USD'?'$'+remaining:'¥'+remaining;
-  document.getElementById('shipRemaining').textContent = remainStr;
-  if(subtotal >= freeThreshold){
-    document.getElementById('shipText').innerHTML = '🎉 Free shipping!';
-    document.getElementById('shipProgress').style.background = 'var(--accent)';
-  } else {
-    document.getElementById('shipText').innerHTML = 'Add <strong>'+remainStr+'</strong> more for free shipping!';
-    document.getElementById('shipProgress').style.background = 'var(--green-light)';
-  }
-}
-
-function toggleCart(){
-  const open = document.getElementById('cartDrawer').classList.toggle('open');
-  document.getElementById('cartOverlay').classList.toggle('open');
-  document.body.style.overflow = open ? 'hidden' : '';
-}
-
-/* ═══════════════ STRIPE CHECKOUT ═══════════════ */
-function checkout(){
-  if(cart.length===0){showToast('Your cart is empty'); return;}
-  try {
-    if(typeof Stripe==='undefined'||!STRIPE_PUBLISHABLE_KEY||STRIPE_PUBLISHABLE_KEY.startsWith('pk_test_XXXX')){
-      // Fallback: show order summary
-      const items = cart.map(i=>{const p=PRODUCTS.find(pr=>pr.id===i.id);return p?p.name+' ×'+i.qty:'';}).filter(Boolean).join(', ');
-      const total = currency==='USD'?'$'+cart.reduce((s,i)=>{const p=PRODUCTS.find(pr=>pr.id===i.id);return s+(p?getPrice(p)*i.qty:0);},0):'¥'+cart.reduce((s,i)=>{const p=PRODUCTS.find(pr=>pr.id===i.id);return s+(p?getPrice(p)*i.qty:0);},0);
-      showToast('🧾 Order: '+items+' — Total: '+total+'. Set your Stripe key to accept payments.');
-      return;
-    }
-    if(!stripeInstance) stripeInstance = Stripe(STRIPE_PUBLISHABLE_KEY);
-    // Create line items
-    const lineItems = cart.map(item=>{
-      const prod = PRODUCTS.find(p=>p.id===item.id);
-      if(!prod) return null;
-      return {price_data:{currency:'usd',product_data:{name:prod.name+' ('+prod.cn+')',images:[window.location.origin+'/'+prod.images[0]]},unit_amount:prod.priceUSD*100},quantity:item.qty};
-    }).filter(Boolean);
-    stripeInstance.redirectToCheckout({lineItems,mode:'payment',successUrl:window.location.origin+'/?checkout=success',cancelUrl:window.location.origin+'/?checkout=cancel'}).then(r=>{if(r.error) showToast('Error: '+r.error.message);});
-  } catch(e){
-    showToast('Checkout error: '+e.message+'. Set your Stripe publishable key in the script.');
-  }
-}
-
-/* ═══════════════ TEA CLUB ═══════════════ */
-function addTeaClub(){showToast('🎉 Tea Club subscription added! First shipment in 48 hours.');}
-
-/* ═══════════════ CURRENCY ═══════════════ */
-function switchCurrency(c){
-  currency = c;
-  renderFeatured();
-  renderCatalog(document.querySelector('.catalog-tab.active')?.dataset?.filter||'all');
-  renderCompare();
-  updateCart();
-}
-
-/* ═══════════════ TOAST ═══════════════ */
-let toastTimer;
-function showToast(msg){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>el.classList.remove('show'), 2800);
-}
-
-/* ═══════════════ SEARCH ═══════════════ */
-let searchOpen = false;
-function toggleSearch(force){
-  searchOpen = force !== undefined ? force : !searchOpen;
-  document.getElementById('searchPanel').classList.toggle('open', searchOpen);
-  document.getElementById('searchOverlay').classList.toggle('open', searchOpen);
-  if(searchOpen) setTimeout(()=>document.getElementById('searchPanelInput').focus(), 100);
-  if(!searchOpen) document.getElementById('searchResults').innerHTML = '';
-}
-function doSearch(q){
-  const results = document.getElementById('searchResults');
-  if(!q||q.length<2){results.innerHTML='';return;}
-  const ql = q.toLowerCase();
-  const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(ql)||p.cn.includes(q)||p.tag.toLowerCase().includes(ql)||p.desc.toLowerCase().includes(ql)||p.flavor.toLowerCase().includes(ql)||p.origin.toLowerCase().includes(ql));
-  if(matches.length===0){results.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted);font-size:14px;">No teas found matching "'+q+'"</div>';return;}
-  results.innerHTML = matches.slice(0,6).map(p=>{
-    const price = currency==='USD'?'$'+p.priceUSD:'¥'+p.priceCNY;
-    return '<div class="search-result-item" onclick="toggleSearch(false);openQuickView(\''+p.id+'\')"><img class="search-result-img" src="'+p.images[0]+'" alt=""><div class="search-result-info"><div class="search-result-name">'+p.name+' <span style="font-weight:400;color:var(--text-muted);font-size:12px;">'+p.cn+'</span></div><div class="search-result-tag">'+p.tag+'</div></div><div class="search-result-price">'+price+'</div></div>';
-  }).join('');
-}
-
-/* ═══════════════ FAQ ═══════════════ */
-function toggleFaq(el){
-  el.parentElement.classList.toggle('open');
-}
-
-/* ═══════════════ NEWSLETTER ═══════════════ */
-function subscribeEmail(form){
-  const email = form.querySelector('input').value;
-  if(!email||!email.includes('@')){showToast('Please enter a valid email.');return;}
-  showToast('✅ Subscribed! Check your inbox for 10% off.');
-  form.querySelector('input').value = '';
-}
-
-/* ═══════════════ SCROLL ANIMATIONS ═══════════════ */
-function initReveal(){
-  document.querySelectorAll('.reveal').forEach(el=>{
-    const ob = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target);}});
-    },{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
-    ob.observe(el);
-  });
-}
-
-/* ═══════════════ NAV SCROLL + MOBILE + PARALLAX ═══════════════ */
-window.addEventListener('scroll', ()=>{
-  const s = window.scrollY;
-  document.getElementById('nav').classList.toggle('scrolled', s>40);
-  // Hero parallax
-  const hero = document.querySelector('.hero');
-  if(hero && s < window.innerHeight){
-    const heroBg = hero.querySelector('.hero-bg');
-    const heroContent = hero.querySelector('.hero-content');
-    if(heroBg) heroBg.style.transform = 'translateY('+(s*0.15)+'px)';
-    if(heroContent) heroContent.style.transform = 'translateY('+(s*0.05)+'px)';
-  }
-});
-
-function toggleMobileMenu(){
-  const nav = document.getElementById('navLinks');
-  nav.style.display = nav.style.display==='flex' ? 'none' : 'flex';
-  if(nav.style.display==='flex'){
-    Object.assign(nav.style,{
-      position:'fixed',top:'var(--nav-h)',left:'0',right:'0',background:'rgba(248,245,240,0.98)',
-      backdropFilter:'blur(16px)',flexDirection:'column',padding:'24px',gap:'20px',
-      borderBottom:'1px solid var(--border)',zIndex:'999',alignItems:'center'
-    });
-    nav.querySelectorAll('a').forEach(a=>a.style.fontSize='16px');
-  }
-}
-
-/* ═══════════════ STRIPE URL PARAMS ═══════════════ */
+/* ── PARTICLES ──────────────────────────── */
 (function(){
-  const params = new URLSearchParams(window.location.search);
-  if(params.get('checkout')==='success') setTimeout(()=>{showToast('🎉 Payment successful! Your tea is on its way.');cart=[];updateCart();},500);
+  const c=document.getElementById('heroParticles');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');
+    p.className='hero-particle';
+    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;animation:floatUp ${10+Math.random()*20}s ${Math.random()*10}s linear infinite;width:${2+Math.random()*4}px;height:${2+Math.random()*4}px`;
+    c.appendChild(p);
+  }
 })();
 
-/* ═══════════════ INIT ═══════════════ */
-// Apply saved language first
-if(savedLang && LANG[savedLang]) switchLang(savedLang);
-renderFeatured();
-renderCatalog();
-renderCompare();
-updateCart();
-initReveal();
+/* ── REVEAL ─────────────────────────────── */
+new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'}).observeAll=function(r){r.querySelectorAll('.reveal').forEach(el=>{ob.observe(el)})};
+const ob=new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ob.observe(el));
+
+/* ── NAV SCROLL ─────────────────────────── */
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>40?'rgba(15,13,10,0.92)':'rgba(15,13,10,0.85)'});
 </script>
 </body>
 </html>
