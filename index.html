@@ -52,9 +52,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);backgrou
 .hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 30%,rgba(15,13,10,0.75) 100%)}
 .hero-vignette::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,13,10,0.92) 0%,transparent 35%)}
 /* Tea ripple overlay */
-.hero-ripple{position:absolute;top:55%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;border:1px solid rgba(196,95,60,0.06);z-index:1;pointer-events:none}
-.hero-ripple:nth-child(2){width:800px;height:800px;border-color:rgba(196,95,60,0.03)}
-.hero-ripple:nth-child(3){width:1000px;height:1000px;border-color:rgba(196,95,60,0.02)}
+.hero-ripple{position:absolute;top:55%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(196,95,60,0.06);z-index:1;pointer-events:none}
+.hero-ripple.r1{width:600px;height:600px}
+.hero-ripple.r2{width:800px;height:800px;border-color:rgba(196,95,60,0.03)}
+.hero-ripple.r3{width:1000px;height:1000px;border-color:rgba(196,95,60,0.02)}
 /* Tea leaves floating (SVG) */
 .tea-leaf{position:absolute;z-index:2;pointer-events:none;opacity:0}
 .tea-leaf svg{width:100%;height:100%}
@@ -64,11 +65,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);backgrou
 .hero-particle{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.08)}
 @keyframes floatUp{0%{transform:translateY(0)translateX(0);opacity:0}20%{opacity:0.6}80%{opacity:0.2}100%{transform:translateY(-300px)translateX(40px);opacity:0}}
 .hero-content{position:relative;z-index:2;max-width:680px;padding:0 28px}
-.hero-kicker{font-family:var(--f-mono);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-light);margin-bottom:20px;opacity:0;animation:fadeSlideIn 1s 0.2s forwards}
-.hero-title{font-family:var(--f-serif);font-size:clamp(38px,5.5vw,64px);font-weight:600;line-height:1.08;color:var(--text);margin-bottom:18px;opacity:0;animation:fadeSlideIn 1s 0.4s forwards}
+.hero-kicker{font-family:var(--f-mono);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-light);margin-bottom:20px}
+.hero-title{font-family:var(--f-serif);font-size:clamp(38px,5.5vw,64px);font-weight:600;line-height:1.08;color:var(--text);margin-bottom:18px}
 .hero-title .cn{font-family:var(--f-cn);font-weight:700;display:block;font-size:clamp(22px,2.5vw,32px);color:var(--accent-light);margin-top:8px}
-.hero-desc{font-size:clamp(14px,1vw,16px);color:rgba(234,228,216,0.55);max-width:440px;line-height:1.7;margin-bottom:32px;opacity:0;animation:fadeSlideIn 1s 0.6s forwards}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeSlideIn 1s 0.8s forwards}
+.hero-desc{font-size:clamp(14px,1vw,16px);color:rgba(234,228,216,0.55);max-width:440px;line-height:1.7;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 .hero-cta{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:14px;letter-spacing:0.02em;transition:all 0.35s cubic-bezier(0.16,1,0.3,1)}
 .hero-cta:hover{background:var(--accent-dark);transform:translateY(-3px);box-shadow:0 12px 32px rgba(196,95,60,0.25)}
 .hero-cta-secondary{padding:16px 28px;border:1px solid rgba(234,228,216,0.2);color:rgba(234,228,216,0.7);border-radius:6px;font-size:13px;transition:all 0.35s}
@@ -76,7 +77,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);backgrou
 .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2}
 .hero-scroll-dot{width:6px;height:6px;border-radius:50%;background:rgba(234,228,216,0.3);animation:scrollPulse 2s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{opacity:0.3;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
-@keyframes fadeSlideIn{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
 
 /* ── MOUSE GLOW ─────────────────────────── */
 .mouse-glow{position:fixed;pointer-events:none;z-index:999;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(196,95,60,0.04) 0%,transparent 70%);transform:translate(-50%,-50%)}
@@ -205,9 +205,9 @@ footer a:hover{color:var(--gold-light)}
 <section class="hero">
   <div class="hero-bg"><img src="images/tea-farm-mist-1.jpg" alt="Wuyi Mountains" loading="eager"></div>
   <div class="hero-vignette"></div>
-  <div class="hero-ripple"></div>
-  <div class="hero-ripple"></div>
-  <div class="hero-ripple"></div>
+  <div class="hero-ripple r1"></div>
+  <div class="hero-ripple r2"></div>
+  <div class="hero-ripple r3"></div>
   <!-- Tea leaves floating -->
   <div class="tea-leaf" id="leaf1" style="width:48px;height:54px;left:18%;top:25%">
     <svg viewBox="0 0 48 54" fill="var(--accent-light)" opacity="0.12"><path d="M24 2 C10 8 4 20 2 30 C1 38 8 50 24 52 C40 50 47 38 46 30 C44 20 38 8 24 2Z"/><path d="M24 6 L24 46" stroke="var(--accent-light)" stroke-width="0.5" opacity="0.15"/></svg>
@@ -410,7 +410,7 @@ heroTimeline.from('.hero-bg img',{scale:1,opacity:0.7,duration:0.8, ease:'none'}
   .to('.hero-bg img',{scale:1.12,duration:20,ease:'none'},0.8);
 
 // 2. Ripples pulse
-['.hero-ripple:nth-child(3)','.hero-ripple:nth-child(2)','.hero-ripple:nth-child(1)'].forEach( (sel,i) =>{
+['.r3','.r2','.r1'].forEach( (sel,i) =>{
   heroTimeline.from(sel,{scale:0.3,opacity:0,duration:1.5},0.5+i*0.3)
     .to(sel,{scale:1.15,opacity:0,duration:5,repeat:-1,yoyo:true,ease:'sine.inOut'},2+i*0.5);
 });
