@@ -101,6 +101,18 @@ nav.scrolled{box-shadow:var(--shadow)}
 .nav-actions{display:flex;align-items:center;gap:12px}
 .nav-currency{font-size:12px;font-weight:500;color:var(--text-muted);display:flex;align-items:center;gap:4px}
 .nav-currency select{background:none;border:none;font-family:var(--f-mono);font-size:12px;color:var(--text-muted);cursor:pointer;padding:4px}
+.nav-lang{position:relative;display:flex;align-items:center}
+.nav-lang-btn{font-family:var(--f-mono);font-size:11px;color:var(--text-muted);padding:4px 8px;border:1px solid var(--border);border-radius:4px;cursor:pointer;background:transparent;transition:all 0.2s;display:flex;align-items:center;gap:4px}
+.nav-lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.nav-lang-btn .arrow{font-size:8px;margin-left:2px;transition:transform 0.2s}
+.nav-lang.open .nav-lang-btn .arrow{transform:rotate(180deg)}
+.nav-lang-dropdown{position:absolute;top:calc(100% + 4px);right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);min-width:120px;z-index:100;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all 0.2s}
+.nav-lang.open .nav-lang-dropdown{opacity:1;visibility:hidden;transform:translateY(0)}
+.nav-lang.open .nav-lang-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-lang-option{display:block;width:100%;padding:10px 16px;font-size:13px;text-align:left;background:none;border:none;cursor:pointer;transition:background 0.2s;color:var(--text)}
+.nav-lang-option:hover{background:var(--bg-alt)}
+.nav-lang-option.active{color:var(--accent);font-weight:500}
+.nav-lang-option small{color:var(--text-muted);font-size:11px;margin-left:6px}
 .nav-cart{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;transition:background 0.2s}
 .nav-cart:hover{background:var(--bg-alt)}
 .nav-cart svg{width:20px;height:20px}
@@ -423,12 +435,12 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
   <div class="nav-inner">
     <a href="#" class="nav-logo"><span>◆</span> 岩韵 <small>YAN YUN</small></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#products">Teas</a></li>
-      <li><a href="#story">Story</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#compare">Compare</a></li>
-      <li><a href="#club">Tea Club</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#products" data-i18n="nav_teas">Teas</a></li>
+      <li><a href="#story" data-i18n="nav_story">Story</a></li>
+      <li><a href="#reviews" data-i18n="nav_reviews">Reviews</a></li>
+      <li><a href="#compare" data-i18n="nav_compare">Compare</a></li>
+      <li><a href="#club" data-i18n="nav_club">Tea Club</a></li>
+      <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
     </ul>
     <div class="nav-actions">
       <div class="nav-search" id="navSearch">
@@ -440,6 +452,17 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
           <option value="USD">$ USD</option>
           <option value="CNY">¥ CNY</option>
         </select>
+      </div>
+      <div class="nav-lang" id="langSwitcher">
+        <button class="nav-lang-btn" onclick="toggleLangMenu()">
+          <span id="langCurrent">EN</span>
+          <span class="arrow">▾</span>
+        </button>
+        <div class="nav-lang-dropdown" id="langMenu">
+          <button class="nav-lang-option active" data-lang="en" onclick="switchLang('en')">English <small>EN</small></button>
+          <button class="nav-lang-option" data-lang="cn" onclick="switchLang('cn')">中文 <small>CN</small></button>
+          <button class="nav-lang-option" data-lang="jp" onclick="switchLang('jp')">日本語 <small>JP</small></button>
+        </div>
       </div>
       <button class="nav-cart" onclick="toggleCart()" aria-label="Open cart">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -469,16 +492,16 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
   <div class="hero-overlay"></div>
   <div class="hero-pattern"></div>
   <div class="hero-content">
-    <div class="hero-badge">✦ From Wuyi Mountains, China</div>
+    <div class="hero-badge">✦ <span data-i18n="hero_badge">From Wuyi Mountains, China</span></div>
     <div class="hero-sub">三代 · 传统 · 岩韵</div>
-    <h1>Rock Tea, Perfected<br>Over Generations<span class="cn">三代匠心的武夷岩茶</span></h1>
-    <p>Direct from our family's Wuyi Mountain tea gardens. Hand-picked, charcoal-roasted, and shipped to your door. Experience the true taste of 岩韵 — the 'rock rhyme' of mineral-rich oolong.</p>
+    <h1><span data-i18n="hero_title">Rock Tea, Perfected<br>Over Generations</span><span class="cn">三代匠心的武夷岩茶</span></h1>
+    <p data-i18n="hero_desc">Direct from our family's Wuyi Mountain tea gardens. Hand-picked, charcoal-roasted, and shipped to your door. Experience the true taste of 岩韵 — the 'rock rhyme' of mineral-rich oolong.</p>
     <div class="hero-actions">
-      <a href="#products" class="btn btn-primary">Shop Our Teas →</a>
-      <a href="#story" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;">Our Story</a>
+      <a href="#products" class="btn btn-primary" data-i18n="hero_btn1">Shop Our Teas →</a>
+      <a href="#story" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;" data-i18n="hero_btn2">Our Story</a>
     </div>
   </div>
-  <div class="hero-scroll"><span>SCROLL</span><div class="hero-scroll-line"></div></div>
+  <div class="hero-scroll"><span data-i18n="hero_scroll">SCROLL</span><div class="hero-scroll-line"></div></div>
 </section>
 
 <!-- ═══════════════ TRUST BAR ═══════════════ -->
@@ -505,15 +528,15 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
     <div class="story-grid">
       <div class="story-img reveal"><img src="images/tea-plantation-2.jpg" alt="Wuyi Mountain tea gardens" loading="lazy"><div class="story-img-badge">武夷山 · 正岩产区 Since 1990</div></div>
       <div class="story-content reveal reveal-delay-1">
-        <div class="label">FROM THE MOUNTAIN</div>
-        <h2>Three Generations<br>One Cup of Tea<span class="cn">三代人的一杯茶</span></h2>
-        <p>岩韵茶庄始于一九九零年，坐落在武夷山正岩产区的核心地带。三代茶人，传承着从清末延续至今的炭焙工艺。</p>
-        <p>每一片茶叶都来自武夷山"三坑两涧"的优质山场——这里的丹霞地貌和独特微气候，赋予了岩茶不可复制的矿物韵味。</p>
-        <p style="font-style:italic;color:var(--text-muted);border-left:2px solid var(--accent);padding-left:16px;">"岩韵，是山场在茶杯里的回响。直接贸易，意味着每一饼茶都可追溯至它生长的岩壁。"</p>
+        <div class="label" data-i18n="story_label">FROM THE MOUNTAIN</div>
+        <h2><span data-i18n="story_title">Three Generations<br>One Cup of Tea</span><span class="cn">三代人的一杯茶</span></h2>
+        <p data-i18n="story_p1">岩韵茶庄始于一九九零年，坐落在武夷山正岩产区的核心地带。三代茶人，传承着从清末延续至今的炭焙工艺。</p>
+        <p data-i18n="story_p2">每一片茶叶都来自武夷山"三坑两涧"的优质山场——这里的丹霞地貌和独特微气候，赋予了岩茶不可复制的矿物韵味。</p>
+        <p style="font-style:italic;color:var(--text-muted);border-left:2px solid var(--accent);padding-left:16px;" data-i18n="story_quote">"岩韵，是山场在茶杯里的回响。直接贸易，意味着每一饼茶都可追溯至它生长的岩壁。"</p>
         <div class="story-stats">
-          <div class="story-stat"><div class="story-stat-num">1990</div><div class="story-stat-label">Founded</div></div>
-          <div class="story-stat"><div class="story-stat-num">34</div><div class="story-stat-label">Years of Craft</div></div>
-          <div class="story-stat"><div class="story-stat-num">50+</div><div class="story-stat-label">Tea Gardens</div></div>
+          <div class="story-stat"><div class="story-stat-num">1990</div><div class="story-stat-label" data-i18n="story_stat1">Founded</div></div>
+          <div class="story-stat"><div class="story-stat-num">34</div><div class="story-stat-label" data-i18n="story_stat2">Years of Craft</div></div>
+          <div class="story-stat"><div class="story-stat-num">50+</div><div class="story-stat-label" data-i18n="story_stat3">Tea Gardens</div></div>
         </div>
       </div>
     </div>
@@ -524,10 +547,10 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section section-alt">
   <div class="container">
     <div class="features-grid">
-      <div class="feature-card reveal"><div class="feature-icon">🌱</div><h3>Direct from Farm</h3><p>No middlemen. We work directly with Wuyi mountain tea growers, ensuring fair prices and authentic quality.</p></div>
-      <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🔥</div><h3>Charcoal Roasted</h3><p>Traditional 72-hour charcoal roasting over lychee wood — an art passed down for generations.</p></div>
-      <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔬</div><h3>Lab Tested</h3><p>Every batch is SGS tested for over 400 pesticides and heavy metals. Results available on request.</p></div>
-      <div class="feature-card reveal reveal-delay-3"><div class="feature-icon">📦</div><h3>Free Shipping $60+</h3><p>Worldwide delivery from our US and China warehouses. Free shipping on orders over $60.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🌱</div><h3 data-i18n="feat1_title">Direct from Farm</h3><p data-i18n="feat1_desc">No middlemen. We work directly with Wuyi mountain tea growers, ensuring fair prices and authentic quality.</p></div>
+      <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🔥</div><h3 data-i18n="feat2_title">Charcoal Roasted</h3><p data-i18n="feat2_desc">Traditional 72-hour charcoal roasting over lychee wood — an art passed down for generations.</p></div>
+      <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔬</div><h3 data-i18n="feat3_title">Lab Tested</h3><p data-i18n="feat3_desc">Every batch is SGS tested for over 400 pesticides and heavy metals. Results available on request.</p></div>
+      <div class="feature-card reveal reveal-delay-3"><div class="feature-icon">📦</div><h3 data-i18n="feat4_title">Free Shipping $60+</h3><p data-i18n="feat4_desc">Worldwide delivery from our US and China warehouses. Free shipping on orders over $60.</p></div>
     </div>
   </div>
 </section>
@@ -536,14 +559,14 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section" id="products">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal">OUR SIGNATURE TEAS</div>
+      <div class="label reveal" data-i18n="featured_label">OUR SIGNATURE TEAS</div>
       <h2 class="section-title cn reveal reveal-delay-1">精选岩茶</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;">Each tea tells the story of its terroir. From the rocky cliffs of Wuyi to your cup.</p>
+      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="featured_desc">Each tea tells the story of its terroir. From the rocky cliffs of Wuyi to your cup.</p>
     </div>
     <div class="featured-grid" id="featuredGrid"></div>
     <div style="text-align:center;margin-top:40px;">
-      <a href="#catalog" class="btn btn-outline">View Full Collection →</a>
-      <a href="#compare" class="btn btn-outline" style="margin-left:12px;">Compare All Teas</a>
+      <a href="#catalog" class="btn btn-outline" data-i18n="view_all">View Full Collection →</a>
+      <a href="#compare" class="btn btn-outline" style="margin-left:12px;" data-i18n="compare_all">Compare All Teas</a>
     </div>
   </div>
 </section>
@@ -552,15 +575,15 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section section-dark">
   <div class="container">
     <div style="text-align:center;margin-bottom:56px;">
-      <div class="label reveal" style="color:var(--accent-light);">THE CRAFT</div>
-      <h2 class="section-title reveal reveal-delay-1" style="color:#fff;">From Leaf to Cup</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;">Four generations of knowledge distilled into every harvest.</p>
+      <div class="label reveal" style="color:var(--accent-light);" data-i18n="craft_label">THE CRAFT</div>
+      <h2 class="section-title reveal reveal-delay-1" style="color:#fff;" data-i18n="craft_title">From Leaf to Cup</h2>
+      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="craft_desc">Four generations of knowledge distilled into every harvest.</p>
     </div>
     <div class="process-grid">
-      <div class="process-step reveal"><div class="process-step-num">_ 01</div><div class="process-icon">🌿</div><h3>Hand Harvested</h3><p>Spring pickings at dawn, selecting only the finest one-bud-two-leaves.</p></div>
-      <div class="process-step reveal reveal-delay-1"><div class="process-step-num">_ 02</div><div class="process-icon">☀️</div><h3>Sun Withering</h3><p>Natural outdoor withering to awaken the leaves' aromatic potential.</p></div>
-      <div class="process-step reveal reveal-delay-2"><div class="process-step-num">_ 03</div><div class="process-icon">🔥</div><h3>Charcoal Roast</h3><p>72-hour slow roasting over lychee wood — the soul of Wuyi rock tea.</p></div>
-      <div class="process-step reveal reveal-delay-3"><div class="process-step-num">_ 04</div><div class="process-icon">🍵</div><h3>Expert Tasting</h3><p>Triple quality review by certified tea masters before release.</p></div>
+      <div class="process-step reveal"><div class="process-step-num">_ 01</div><div class="process-icon">🌿</div><h3 data-i18n="proc1_title">Hand Harvested</h3><p data-i18n="proc1_desc">Spring pickings at dawn, selecting only the finest one-bud-two-leaves.</p></div>
+      <div class="process-step reveal reveal-delay-1"><div class="process-step-num">_ 02</div><div class="process-icon">☀️</div><h3 data-i18n="proc2_title">Sun Withering</h3><p data-i18n="proc2_desc">Natural outdoor withering to awaken the leaves' aromatic potential.</p></div>
+      <div class="process-step reveal reveal-delay-2"><div class="process-step-num">_ 03</div><div class="process-icon">🔥</div><h3 data-i18n="proc3_title">Charcoal Roast</h3><p data-i18n="proc3_desc">72-hour slow roasting over lychee wood — the soul of Wuyi rock tea.</p></div>
+      <div class="process-step reveal reveal-delay-3"><div class="process-step-num">_ 04</div><div class="process-icon">🍵</div><h3 data-i18n="proc4_title">Expert Tasting</h3><p data-i18n="proc4_desc">Triple quality review by certified tea masters before release.</p></div>
     </div>
   </div>
 </section>
@@ -569,9 +592,9 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section section-alt" id="compare">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal">COMPARE</div>
+      <div class="label reveal" data-i18n="compare_label">COMPARE</div>
       <h2 class="section-title cn reveal reveal-delay-1">产品对比</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;">Not sure which tea to choose? Compare them side by side.</p>
+      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="compare_desc">Not sure which tea to choose? Compare them side by side.</p>
     </div>
     <div class="compare-section reveal">
       <table class="compare-table" id="compareTable"></table>
@@ -583,14 +606,14 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section" id="catalog">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal">SHOP ALL TEAS</div>
+      <div class="label reveal" data-i18n="catalog_label">SHOP ALL TEAS</div>
       <h2 class="section-title cn reveal reveal-delay-1">全部茶品</h2>
     </div>
     <div class="catalog-tabs reveal">
-      <button class="catalog-tab active" data-filter="all" onclick="filterCatalog('all')">All</button>
-      <button class="catalog-tab" data-filter="oolong" onclick="filterCatalog('oolong')">Oolong</button>
-      <button class="catalog-tab" data-filter="black" onclick="filterCatalog('black')">Black Tea</button>
-      <button class="catalog-tab" data-filter="set" onclick="filterCatalog('set')">Gift Sets</button>
+      <button class="catalog-tab active" data-filter="all" onclick="filterCatalog('all')" data-i18n="catalog_all">All</button>
+      <button class="catalog-tab" data-filter="oolong" onclick="filterCatalog('oolong')" data-i18n="catalog_oolong">Oolong</button>
+      <button class="catalog-tab" data-filter="black" onclick="filterCatalog('black')" data-i18n="catalog_black">Black Tea</button>
+      <button class="catalog-tab" data-filter="set" onclick="filterCatalog('set')" data-i18n="catalog_gift">Gift Sets</button>
     </div>
     <div class="catalog-grid" id="catalogGrid"></div>
   </div>
@@ -602,12 +625,12 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
   <div class="club-overlay"></div>
   <div class="container" style="position:relative;z-index:2;">
     <div class="club-content reveal">
-      <div class="label" style="color:var(--accent-light);">TEA CLUB</div>
-      <h2>Join the Rock Tea Club</h2>
-      <p>A monthly journey through Wuyi's finest rock teas. Curated selections delivered to your door, with tasting notes and brewing guides.</p>
-      <div class="club-price">$35 <small>/ month</small></div>
-      <div class="club-perks"><span class="club-perk">🎁 50g premium tea</span><span class="club-perk">🌍 Free shipping</span><span class="club-perk">📜 Tasting notes</span><span class="club-perk">🔄 Cancel anytime</span></div>
-      <a href="#" class="btn btn-primary" style="margin-top:8px;" onclick="addTeaClub()">Subscribe Now →</a>
+      <div class="label" style="color:var(--accent-light);" data-i18n="club_label">TEA CLUB</div>
+      <h2 data-i18n="club_title">Join the Rock Tea Club</h2>
+      <p data-i18n="club_desc">A monthly journey through Wuyi's finest rock teas. Curated selections delivered to your door, with tasting notes and brewing guides.</p>
+      <div class="club-price">$35 <small data-i18n="club_per_month">/ month</small></div>
+      <div class="club-perks"><span class="club-perk">🎁 <span data-i18n="club_perk1">50g premium tea</span></span><span class="club-perk">🌍 <span data-i18n="club_perk2">Free shipping</span></span><span class="club-perk">📜 <span data-i18n="club_perk3">Tasting notes</span></span><span class="club-perk">🔄 <span data-i18n="club_perk4">Cancel anytime</span></span></div>
+      <a href="#" class="btn btn-primary" style="margin-top:8px;" onclick="addTeaClub()" data-i18n="club_btn">Subscribe Now →</a>
     </div>
   </div>
 </section>
@@ -616,13 +639,13 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section" id="reviews">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal">WHAT OUR CUSTOMERS SAY</div>
+      <div class="label reveal" data-i18n="review_label">WHAT OUR CUSTOMERS SAY</div>
       <h2 class="section-title cn reveal reveal-delay-1">茶友评价</h2>
     </div>
     <div class="reviews-grid">
-      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text">"The Da Hong Pao is extraordinary — the mineral complexity is unlike anything I've found in a US tea shop. The charcoal roast gives it a depth that lingers for minutes after each sip. This is the real deal."</p><div class="rev-author"><div class="rev-avatar">JM</div><div><div class="rev-name">James M.</div><div class="rev-title">Tea Enthusiast · New York</div></div></div></div>
-      <div class="rev-card reveal reveal-delay-1"><div class="rev-stars">★★★★★</div><p class="rev-text">"I ordered the sampler set to explore Wuyi teas for the first time. The tasting notes made it easy to understand what I was drinking. Already signed up for the Tea Club. The Rou Gui is my favorite — spicy and warming."</p><div class="rev-author"><div class="rev-avatar">SK</div><div><div class="rev-name">Sarah K.</div><div class="rev-title">First-time Buyer · London</div></div></div></div>
-      <div class="rev-card reveal reveal-delay-2"><div class="rev-stars">★★★★★</div><p class="rev-text">"As someone who grew up drinking Wuyi tea in Fujian, I was skeptical about buying online. But this is the real thing — it tastes exactly like the tea my grandfather used to brew. The Tie Guan Yin brought tears to my eyes."</p><div class="rev-author"><div class="rev-avatar">LW</div><div><div class="rev-name">Li Wei</div><div class="rev-title">Fujian Native · Toronto</div></div></div></div>
+      <div class="rev-card reveal"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev1_text">"The Da Hong Pao is extraordinary — the mineral complexity is unlike anything I've found in a US tea shop. The charcoal roast gives it a depth that lingers for minutes after each sip. This is the real deal."</p><div class="rev-author"><div class="rev-avatar">JM</div><div><div class="rev-name" data-i18n="rev1_name">James M.</div><div class="rev-title" data-i18n="rev1_title">Tea Enthusiast · New York</div></div></div></div>
+      <div class="rev-card reveal reveal-delay-1"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev2_text">"I ordered the sampler set to explore Wuyi teas for the first time. The tasting notes made it easy to understand what I was drinking. Already signed up for the Tea Club. The Rou Gui is my favorite — spicy and warming."</p><div class="rev-author"><div class="rev-avatar">SK</div><div><div class="rev-name" data-i18n="rev2_name">Sarah K.</div><div class="rev-title" data-i18n="rev2_title">First-time Buyer · London</div></div></div></div>
+      <div class="rev-card reveal reveal-delay-2"><div class="rev-stars">★★★★★</div><p class="rev-text" data-i18n="rev3_text">"As someone who grew up drinking Wuyi tea in Fujian, I was skeptical about buying online. But this is the real thing — it tastes exactly like the tea my grandfather used to brew. The Tie Guan Yin brought tears to my eyes."</p><div class="rev-author"><div class="rev-avatar">LW</div><div><div class="rev-name" data-i18n="rev3_name">Li Wei</div><div class="rev-title" data-i18n="rev3_title">Fujian Native · Toronto</div></div></div></div>
     </div>
   </div>
 </section>
@@ -631,17 +654,17 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section section-alt" id="guide">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal">BREWING GUIDE</div>
+      <div class="label reveal" data-i18n="guide_label">BREWING GUIDE</div>
       <h2 class="section-title cn reveal reveal-delay-1">冲泡指南</h2>
-      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;">Unlock the full flavor of Wuyi rock tea with the traditional gongfu method.</p>
+      <p class="section-desc reveal reveal-delay-2" style="margin:12px auto 0;" data-i18n="guide_desc">Unlock the full flavor of Wuyi rock tea with the traditional gongfu method.</p>
     </div>
     <div class="brew-grid">
       <div class="brew-img reveal"><img src="images/tea-ceremony-1.jpg" alt="Gongfu tea ceremony" loading="lazy"></div>
       <div class="brew-steps">
-        <div class="brew-step reveal"><div class="brew-step-num">1</div><div class="brew-step-right"><h4>Warm the Vessel</h4><p>Rinse your gaiwan or teapot with boiling water to bring it to temperature.</p></div></div>
-        <div class="brew-step reveal reveal-delay-1"><div class="brew-step-num">2</div><div class="brew-step-right"><h4>Add Leaves</h4><p>5g of tea per 100ml of water. For rock tea, don't be shy — the leaves need room to open.</p></div></div>
-        <div class="brew-step reveal reveal-delay-2"><div class="brew-step-num">3</div><div class="brew-step-right"><h4>Quick Rinse</h4><p>Pour 100°C water over the leaves and immediately discard. This 'awakens' the tea.</p></div></div>
-        <div class="brew-step reveal reveal-delay-3"><div class="brew-step-num">4</div><div class="brew-step-right"><h4>Steep & Enjoy</h4><p>First steep: 15 seconds. Add 5 seconds to each subsequent steep. Wuyi rock tea rewards patience — expect 7+ infusions.</p></div></div>
+        <div class="brew-step reveal"><div class="brew-step-num">1</div><div class="brew-step-right"><h4 data-i18n="brew1_title">Warm the Vessel</h4><p data-i18n="brew1_desc">Rinse your gaiwan or teapot with boiling water to bring it to temperature.</p></div></div>
+        <div class="brew-step reveal reveal-delay-1"><div class="brew-step-num">2</div><div class="brew-step-right"><h4 data-i18n="brew2_title">Add Leaves</h4><p data-i18n="brew2_desc">5g of tea per 100ml of water. For rock tea, don't be shy — the leaves need room to open.</p></div></div>
+        <div class="brew-step reveal reveal-delay-2"><div class="brew-step-num">3</div><div class="brew-step-right"><h4 data-i18n="brew3_title">Quick Rinse</h4><p data-i18n="brew3_desc">Pour 100°C water over the leaves and immediately discard. This 'awakens' the tea.</p></div></div>
+        <div class="brew-step reveal reveal-delay-3"><div class="brew-step-num">4</div><div class="brew-step-right"><h4 data-i18n="brew4_title">Steep &amp; Enjoy</h4><p data-i18n="brew4_desc">First steep: 15 seconds. Add 5 seconds to each subsequent steep. Wuyi rock tea rewards patience — expect 7+ infusions.</p></div></div>
       </div>
     </div>
   </div>
@@ -651,16 +674,16 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section" id="faq">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px;">
-      <div class="label reveal">FAQ</div>
+      <div class="label reveal" data-i18n="faq_label">FAQ</div>
       <h2 class="section-title cn reveal reveal-delay-1">常见问题</h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does Wuyi rock tea stay fresh?</span><span class="faq-q-icon">+</span></div><div class="faq-a">Properly stored in an airtight container away from light, moisture, and strong odors, Wuyi rock tea can stay fresh for 2-3 years. The charcoal roasting process actually helps preserve it longer than green teas. Many connoisseurs find that rock tea improves with 1-2 years of aging as the roast notes mellow.</div></div>
-      <div class="faq-item reveal reveal-delay-1"><div class="faq-q" onclick="toggleFaq(this)"><span>What temperature water should I use?</span><span class="faq-q-icon">+</span></div><div class="faq-a">Always use freshly boiled water at 100°C (212°F) for Wuyi rock tea. Unlike green teas, rock teas need near-boiling water to fully release their complex mineral and roast flavors. Lower temperatures won't properly extract the 'yan yun' (rock rhyme) character.</div></div>
-      <div class="faq-item reveal reveal-delay-2"><div class="faq-q" onclick="toggleFaq(this)"><span>How many infusions can I get from one serving?</span><span class="faq-q-icon">+</span></div><div class="faq-a">High-quality Wuyi rock tea is exceptionally forgiving — you can typically get 7-10 infusions from a single 5g serving using the gongfu method. Each steep reveals a different facet of the tea: the first steeps are bold and roasted, middle steeps are floral and sweet, and later steeps become delicate and mineral.</div></div>
-      <div class="faq-item reveal reveal-delay-3"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you ship worldwide? How long does it take?</span><span class="faq-q-icon">+</span></div><div class="faq-a">Yes, we ship to over 40 countries worldwide! Orders to the US and Canada arrive within 5-10 business days from our US warehouse. International orders from our China warehouse take 8-14 business days. Free shipping on orders over $60 USD.</div></div>
-      <div class="faq-item reveal reveal-delay-4"><div class="faq-q" onclick="toggleFaq(this)"><span>Is your tea organic? Do you test for pesticides?</span><span class="faq-q-icon">+</span></div><div class="faq-a">Yes, our tea gardens are USDA Organic certified. Additionally, every batch is independently tested by SGS for over 400 pesticides and heavy metals. We publish our test results and they are available upon request. Your safety is our top priority.</div></div>
-      <div class="faq-item reveal reveal-delay-5"><div class="faq-q" onclick="toggleFaq(this)"><span>What's the difference between Da Hong Pao, Rou Gui, and Shui Xian?</span><span class="faq-q-icon">+</span></div><div class="faq-a">Da Hong Pao (Big Red Robe) is the legendary king of rock teas — complex, mineral, with orchid notes. Rou Gui (Cinnamon) is bold and spicy with a warming cinnamon-like character. Shui Xian (Narcissus) is the most approachable — smooth, creamy, and floral. We recommend trying the Sampler Set to discover your favorite.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q1">How long does Wuyi rock tea stay fresh?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a1">Properly stored in an airtight container away from light, moisture, and strong odors, Wuyi rock tea can stay fresh for 2-3 years. The charcoal roasting process helps preserve it longer than green teas. Many connoisseurs find that rock tea improves with 1-2 years aging.</div></div>
+      <div class="faq-item reveal reveal-delay-1"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q2">What temperature water should I use?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a2">Always use freshly boiled water at 100°C (212°F) for Wuyi rock tea. Unlike green teas, rock teas need near-boiling water to fully release their complex mineral and roast flavors. Lower temperatures won't properly extract the 'yan yun' character.</div></div>
+      <div class="faq-item reveal reveal-delay-2"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q3">How many infusions can I get from one serving?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a3">You can typically get 7-10 infusions from a single 5g serving using the gongfu method. Each steep reveals a different facet: the first steeps are bold and roasted, middle steeps are floral and sweet, later steeps become delicate and mineral.</div></div>
+      <div class="faq-item reveal reveal-delay-3"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q4">Do you ship worldwide?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a4">Yes, we ship to over 40 countries! Orders to the US and Canada arrive within 5-10 business days. International from China warehouse takes 8-14 days. Free shipping on orders over $60 USD.</div></div>
+      <div class="faq-item reveal reveal-delay-4"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q5">Is your tea organic?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a5">Yes, our tea gardens are USDA Organic certified. Every batch is independently tested by SGS for over 400 pesticides and heavy metals. Results available upon request. Your safety is our top priority.</div></div>
+      <div class="faq-item reveal reveal-delay-5"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq_q6">Which tea should I choose?</span><span class="faq-q-icon">+</span></div><div class="faq-a" data-i18n="faq_a6">Da Hong Pao is the legendary king — complex and mineral. Rou Gui (Cinnamon) is bold and spicy. Shui Xian (Narcissus) is the most approachable — smooth and floral. Try the Sampler Set to discover your favorite!</div></div>
     </div>
   </div>
 </section>
@@ -669,13 +692,13 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <section class="section section-alt">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;">
-      <div class="label reveal">SHIPPING & GUARANTEE</div>
+      <div class="label reveal" data-i18n="shipping_label">SHIPPING &amp; GUARANTEE</div>
       <h2 class="section-title cn reveal reveal-delay-1">配送与保障</h2>
     </div>
     <div class="shipping-grid">
-      <div class="shipping-card reveal"><h3>🌍 Worldwide Delivery</h3><p>Free shipping on orders over $60 (USD). Flat $8.50 for smaller orders. Delivered within 5-10 business days.</p></div>
-      <div class="shipping-card reveal reveal-delay-1"><h3>✅ 30-Day Guarantee</h3><p>Not happy with your tea? Contact us within 30 days for a full refund. No questions asked — we mean it.</p></div>
-      <div class="shipping-card reveal reveal-delay-2"><h3>🔒 Secure & Organic</h3><p>USDA Organic certified. Every batch SGS tested for purity. Your information is protected with 256-bit SSL encryption.</p></div>
+      <div class="shipping-card reveal"><h3 data-i18n="ship1_title">🌍 Worldwide Delivery</h3><p data-i18n="ship1_desc">Free shipping on orders over $60 (USD). Flat $8.50 for smaller orders. Delivered within 5-10 business days.</p></div>
+      <div class="shipping-card reveal reveal-delay-1"><h3 data-i18n="ship2_title">✅ 30-Day Guarantee</h3><p data-i18n="ship2_desc">Not happy with your tea? Contact us within 30 days for a full refund. No questions asked.</p></div>
+      <div class="shipping-card reveal reveal-delay-2"><h3 data-i18n="ship3_title">🔒 Secure &amp; Organic</h3><p data-i18n="ship3_desc">USDA Organic certified. Every batch SGS tested for purity. 256-bit SSL encryption.</p></div>
     </div>
   </div>
 </section>
@@ -683,11 +706,11 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <!-- ═══════════════ NEWSLETTER ═══════════════ -->
 <section class="newsletter">
   <div class="container">
-    <h2 class="reveal">Stay in Touch</h2>
-    <p class="reveal reveal-delay-1">Get 10% off your first order. We share tea stories, seasonal harvest updates, and exclusive offers.</p>
+    <h2 class="reveal" data-i18n="news_title">Stay in Touch</h2>
+    <p class="reveal reveal-delay-1" data-i18n="news_desc">Get 10% off your first order. We share tea stories, seasonal harvest updates, and exclusive offers.</p>
     <form class="newsletter-form reveal reveal-delay-2" onsubmit="event.preventDefault();subscribeEmail(this);">
       <input type="email" placeholder="Enter your email" id="newsletterEmail" required>
-      <button type="submit" class="btn btn-primary">Subscribe</button>
+      <button type="submit" class="btn btn-primary" data-i18n="news_btn">Subscribe</button>
     </form>
   </div>
 </section>
@@ -696,10 +719,10 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="nav-logo"><span>◆</span> 岩韵 <small style="color:rgba(255,255,255,0.4);">YAN YUN</small></div><p>三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。</p></div>
-      <div class="footer-col"><h4>Shop</h4><a href="#products">All Teas</a><a href="#catalog">Oolong</a><a href="#catalog">Black Tea</a><a href="#club">Tea Club</a><a href="#catalog">Gift Sets</a></div>
-      <div class="footer-col"><h4>Learn</h4><a href="#story">Our Story</a><a href="blog-what-is-wuyi-rock-tea.html">Wuyi Rock Tea Guide</a><a href="#guide">Brewing Guide</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
-      <div class="footer-col"><h4>Support</h4><a href="#">Shipping Info</a><a href="#">Returns</a><a href="#">Contact Us</a><a href="#">Wholesale</a><a href="privacy.html">Privacy Policy</a></div>
+      <div class="footer-brand"><div class="nav-logo"><span>◆</span> 岩韵 <small style="color:rgba(255,255,255,0.4);">YAN YUN</small></div><p data-i18n="footer_desc">三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。</p></div>
+      <div class="footer-col"><h4 data-i18n="footer_shop">Shop</h4><a href="#products" data-i18n="footer_all">All Teas</a><a href="#catalog" data-i18n="footer_oolong">Oolong</a><a href="#catalog" data-i18n="footer_black">Black Tea</a><a href="#club" data-i18n="footer_club">Tea Club</a><a href="#catalog" data-i18n="footer_gifts">Gift Sets</a></div>
+      <div class="footer-col"><h4 data-i18n="footer_learn">Learn</h4><a href="#story" data-i18n="footer_story">Our Story</a><a href="blog-what-is-wuyi-rock-tea.html">Wuyi Rock Tea Guide</a><a href="#guide" data-i18n="footer_brew">Brewing Guide</a><a href="#reviews" data-i18n="footer_reviews">Reviews</a><a href="#faq">FAQ</a></div>
+      <div class="footer-col"><h4 data-i18n="footer_support">Support</h4><a href="#" data-i18n="footer_shipping">Shipping Info</a><a href="#" data-i18n="footer_returns">Returns</a><a href="#" data-i18n="footer_contact">Contact Us</a><a href="#" data-i18n="footer_wholesale">Wholesale</a><a href="privacy.html">Privacy Policy</a></div>
     </div>
     <div class="footer-bottom"><span>© 2025 岩韵 Yan Yun Tea. All rights reserved.</span><div class="footer-socials"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Twitter/X">X</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="WeChat">微</a></div></div>
   </div>
@@ -757,6 +780,201 @@ footer{background:var(--bg-dark);color:rgba(255,255,255,0.6);padding:60px 0 30px
 <div class="toast" id="toast"></div>
 
 <script>
+/* ═══════════════ I18N TRANSLATIONS ═══════════════ */
+const LANG = {
+  en:{
+    lang_name:'English', lang_short:'EN',
+    search_placeholder:'Search teas…', nav_teas:'Teas', nav_story:'Story', nav_reviews:'Reviews', nav_compare:'Compare', nav_club:'Tea Club', nav_faq:'FAQ',
+    hero_badge:'From Wuyi Mountains, China', hero_title:'Rock Tea, Perfected<br>Over Generations', hero_desc:'Direct from our family\'s Wuyi Mountain tea gardens. Hand-picked, charcoal-roasted, and shipped to your door. Experience the true taste of 岩韵 — the \'rock rhyme\' of mineral-rich oolong.', hero_btn1:'Shop Our Teas →', hero_btn2:'Our Story', hero_scroll:'SCROLL',
+    trust1:'USDA Organic Certified', trust2:'Free Shipping over $60', trust3:'Same-Day Dispatch', trust4:'30-Day Guarantee', trust5:'500+ Happy Drinkers', trust6:'Global Tea Award 2024',
+    story_label:'FROM THE MOUNTAIN', story_title:'Three Generations<br>One Cup of Tea', story_p1:'岩韵茶庄始于一九九零年，坐落在武夷山正岩产区的核心地带。三代茶人，传承着从清末延续至今的炭焙工艺。', story_p2:'每一片茶叶都来自武夷山"三坑两涧"的优质山场——这里的丹霞地貌和独特微气候，赋予了岩茶不可复制的矿物韵味。', story_quote:'"岩韵，是山场在茶杯里的回响。直接贸易，意味着每一饼茶都可追溯至它生长的岩壁。"', story_stat1:'Founded', story_stat2:'Years of Craft', story_stat3:'Tea Gardens',
+    feat1_title:'Direct from Farm', feat1_desc:'No middlemen. We work directly with Wuyi mountain tea growers, ensuring fair prices and authentic quality.',
+    feat2_title:'Charcoal Roasted', feat2_desc:'Traditional 72-hour charcoal roasting over lychee wood — an art passed down for generations.',
+    feat3_title:'Lab Tested', feat3_desc:'Every batch is SGS tested for over 400 pesticides and heavy metals. Results available on request.',
+    feat4_title:'Free Shipping $60+', feat4_desc:'Worldwide delivery from our US and China warehouses. Free shipping on orders over $60.',
+    featured_label:'OUR SIGNATURE TEAS', featured_desc:'Each tea tells the story of its terroir. From the rocky cliffs of Wuyi to your cup.', view_all:'View Full Collection →', compare_all:'Compare All Teas',
+    craft_label:'THE CRAFT', craft_title:'From Leaf to Cup', craft_desc:'Four generations of knowledge distilled into every harvest.',
+    proc1_title:'Hand Harvested', proc1_desc:'Spring pickings at dawn, selecting only the finest one-bud-two-leaves.',
+    proc2_title:'Sun Withering', proc2_desc:'Natural outdoor withering to awaken the leaves\' aromatic potential.',
+    proc3_title:'Charcoal Roast', proc3_desc:'72-hour slow roasting over lychee wood — the soul of Wuyi rock tea.',
+    proc4_title:'Expert Tasting', proc4_desc:'Triple quality review by certified tea masters before release.',
+    compare_label:'COMPARE', compare_desc:'Not sure which tea to choose? Compare them side by side.',
+    catalog_label:'SHOP ALL TEAS', catalog_all:'All', catalog_oolong:'Oolong', catalog_black:'Black Tea', catalog_gift:'Gift Sets',
+    club_label:'TEA CLUB', club_title:'Join the Rock Tea Club', club_desc:'A monthly journey through Wuyi\'s finest rock teas. Curated selections delivered to your door, with tasting notes and brewing guides.', club_per_month:'/ month', club_perk1:'50g premium tea', club_perk2:'Free shipping', club_perk3:'Tasting notes', club_perk4:'Cancel anytime', club_btn:'Subscribe Now →',
+    review_label:'WHAT OUR CUSTOMERS SAY',
+    rev1_text:'"The Da Hong Pao is extraordinary — the mineral complexity is unlike anything I\'ve found in a US tea shop. The charcoal roast gives it a depth that lingers for minutes after each sip. This is the real deal."', rev1_name:'James M.', rev1_title:'Tea Enthusiast · New York',
+    rev2_text:'"I ordered the sampler set to explore Wuyi teas for the first time. The tasting notes made it easy to understand what I was drinking. Already signed up for the Tea Club. The Rou Gui is my favorite — spicy and warming."', rev2_name:'Sarah K.', rev2_title:'First-time Buyer · London',
+    rev3_text:'"As someone who grew up drinking Wuyi tea in Fujian, I was skeptical about buying online. But this is the real thing — it tastes exactly like the tea my grandfather used to brew. The Tie Guan Yin brought tears to my eyes."', rev3_name:'Li Wei', rev3_title:'Fujian Native · Toronto',
+    guide_label:'BREWING GUIDE', guide_desc:'Unlock the full flavor of Wuyi rock tea with the traditional gongfu method.',
+    brew1_title:'Warm the Vessel', brew1_desc:'Rinse your gaiwan or teapot with boiling water to bring it to temperature.',
+    brew2_title:'Add Leaves', brew2_desc:'5g of tea per 100ml of water. For rock tea, don\'t be shy — the leaves need room to open.',
+    brew3_title:'Quick Rinse', brew3_desc:'Pour 100°C water over the leaves and immediately discard. This \'awakens\' the tea.',
+    brew4_title:'Steep & Enjoy', brew4_desc:'First steep: 15 seconds. Add 5 seconds to each subsequent steep. Wuyi rock tea rewards patience — expect 7+ infusions.',
+    faq_label:'FAQ', faq_q1:'How long does Wuyi rock tea stay fresh?', faq_a1:'Properly stored in an airtight container away from light, moisture, and strong odors, Wuyi rock tea can stay fresh for 2-3 years. The charcoal roasting process helps preserve it longer than green teas.',
+    faq_q2:'What temperature water should I use?', faq_a2:'Always use freshly boiled water at 100°C (212°F) for Wuyi rock tea. Lower temperatures won\'t properly extract the \'yan yun\' character.',
+    faq_q3:'How many infusions per serving?', faq_a3:'You can get 7-10 infusions from a single 5g serving using gongfu method. Each steep reveals a different facet.',
+    faq_q4:'Do you ship worldwide?', faq_a4:'Yes — we ship to over 40 countries! Orders to US/Canada within 5-10 business days. Free shipping over $60.',
+    faq_q5:'Is your tea organic?', faq_a5:'Yes — USDA Organic certified. Every batch SGS tested for 400+ pesticides. Results on request.',
+    faq_q6:'Which tea should I choose?', faq_a6:'Da Hong Pao is the legendary king — complex and mineral. Rou Gui is bold and spicy. Shui Xian is smooth and floral. Try the Sampler Set first!',
+    shipping_label:'SHIPPING & GUARANTEE',
+    ship1_title:'🌍 Worldwide Delivery', ship1_desc:'Free shipping on orders over $60 (USD). Flat $8.50 for smaller orders. Delivered within 5-10 business days.',
+    ship2_title:'✅ 30-Day Guarantee', ship2_desc:'Not happy with your tea? Contact us within 30 days for a full refund. No questions asked.',
+    ship3_title:'🔒 Secure & Organic', ship3_desc:'USDA Organic certified. Every batch SGS tested for purity. 256-bit SSL encryption.',
+    news_title:'Stay in Touch', news_desc:'Get 10% off your first order. We share tea stories, seasonal harvest updates, and exclusive offers.', news_btn:'Subscribe',
+    footer_desc:'三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。',
+    footer_shop:'Shop', footer_all:'All Teas', footer_oolong:'Oolong', footer_black:'Black Tea', footer_club:'Tea Club', footer_gifts:'Gift Sets',
+    footer_learn:'Learn', footer_story:'Our Story', footer_brew:'Brewing Guide', footer_reviews:'Reviews',
+    footer_support:'Support', footer_shipping:'Shipping Info', footer_returns:'Returns', footer_contact:'Contact Us', footer_wholesale:'Wholesale',
+    cart_empty_title:'Your tea journey begins here', cart_empty_desc:'Add some teas to get started.',
+    cart_title:'Your Cart', cart_total:'Total', cart_checkout:'Checkout', add_to_cart:'Add to Cart', added_toast:'Added to cart ✦'
+  },
+  cn:{
+    lang_name:'中文', lang_short:'CN',
+    search_placeholder:'搜索茶叶…', nav_teas:'茶叶', nav_story:'品牌故事', nav_reviews:'茶友评价', nav_compare:'产品对比', nav_club:'茶友会', nav_faq:'常见问题',
+    hero_badge:'✦ 来自中国武夷山', hero_title:'三代传承<br>武夷岩茶', hero_desc:'从武夷山正岩产区直达您的茶杯。手工采摘、传统炭焙、全球发货。体验真正的"岩韵"——矿物丰富的乌龙茶之魂。', hero_btn1:'选购茶叶 →', hero_btn2:'了解我们', hero_scroll:'向下滚动',
+    trust1:'美国农业部有机认证', trust2:'满$60免运费', trust3:'当日发货', trust4:'30天无理由退换', trust5:'500+ 满意茶客', trust6:'2024全球茶叶大奖',
+    story_label:'源自武夷', story_title:'三代匠人的<br>一杯好茶', story_p1:'岩韵茶庄始于一九九零年，坐落在武夷山正岩产区的核心地带。三代茶人，传承着从清末延续至今的炭焙工艺。', story_p2:'每一片茶叶都来自武夷山"三坑两涧"的优质山场——这里的丹霞地貌和独特微气候，赋予了岩茶不可复制的矿物韵味。', story_quote:'"岩韵，是山场在茶杯里的回响。直接贸易，意味着每一饼茶都可追溯至它生长的岩壁。"', story_stat1:'创立于', story_stat2:'传承年数', story_stat3:'合作茶园',
+    feat1_title:'茶园直供', feat1_desc:'没有中间商。我们与武夷山茶农直接合作，确保公平价格和纯正品质。',
+    feat2_title:'炭火烘焙', feat2_desc:'荔枝木炭传统炭焙72小时——一门传承上百年的技艺。',
+    feat3_title:'实验室检测', feat3_desc:'每批次经SGS检测超过400项农药和重金属残留，检测报告可索取。',
+    feat4_title:'满$60免运费', feat4_desc:'中美两地仓库全球发货，满60美元免费配送。',
+    featured_label:'精选茶叶', featured_desc:'每一款茶都讲述着它的风土故事。从武夷山岩壁到您的茶杯。', view_all:'查看全部茶品 →', compare_all:'对比所有茶品',
+    craft_label:'匠心工艺', craft_title:'从一片叶到一杯茶', craft_desc:'四代人的制茶智慧，凝聚于每一次采摘。',
+    proc1_title:'手工采摘', proc1_desc:'春茶凌晨手工采摘，只取最鲜嫩的一芽两叶。',
+    proc2_title:'日光萎凋', proc2_desc:'自然日光萎凋，唤醒茶叶中的芳香物质。',
+    proc3_title:'炭火烘焙', proc3_desc:'荔枝木炭慢火焙烤72小时——武夷岩茶的灵魂所在。',
+    proc4_title:'专家品鉴', proc4_desc:'至少三次专业审评，确保每批茶达到岩韵标准。',
+    compare_label:'产品对比', compare_desc:'不知道选哪款茶？并排对比一下。',
+    catalog_label:'全部茶品', catalog_all:'全部', catalog_oolong:'乌龙茶', catalog_black:'红茶', catalog_gift:'礼盒套装',
+    club_label:'岩韵茶友会', club_title:'加入岩韵茶友会', club_desc:'每月精选武夷岩茶送达您家，附品鉴笔记和冲泡指南。', club_per_month:'/ 月', club_perk1:'50g 精选岩茶', club_perk2:'全球免运费', club_perk3:'品鉴笔记', club_perk4:'随时取消', club_btn:'立即订阅 →',
+    review_label:'茶友真实评价',
+    rev1_text:'"这款大红袍太惊艳了——矿物层次感在美国茶叶店从未遇到过。炭焙带来的深度，每喝一口后回味数分钟。这才是真正的岩茶。"', rev1_name:'James M.', rev1_title:'纽约 · 茶叶爱好者',
+    rev2_text:'"第一次尝试岩茶就买了品鉴套装，品鉴笔记帮了大忙。每款茶都喝明白了。最喜欢肉桂——辛香又温暖。已经订阅了茶友会。"', rev2_name:'Sarah K.', rev2_title:'伦敦 · 首次购买',
+    rev3_text:'"在福建长大的我，从小喝岩茶。在网上买本来很怀疑，但这款铁观音就是记忆中外公泡的味道。喝第一口眼眶就湿了。"', rev3_name:'李伟', rev3_title:'多伦多 · 福建老乡',
+    guide_label:'冲泡指南', guide_desc:'用传统工夫茶法解锁武夷岩茶的全部风味。',
+    brew1_title:'温杯洁具', brew1_desc:'用沸水冲洗盖碗或紫砂壶，提高器具温度。',
+    brew2_title:'投茶', brew2_desc:'每100ml水投入5g茶叶。岩茶不怕多放，茶叶需要舒展空间。',
+    brew3_title:'润茶', brew3_desc:'注入100°C沸水后立刻倒出。这一步"唤醒"茶叶。',
+    brew4_title:'冲泡品饮', brew4_desc:'第一泡15秒出汤。以后每泡增加5秒。岩茶耐泡——7泡以上仍有韵味。',
+    faq_label:'常见问题',
+    faq_q1:'武夷岩茶的保质期有多长？', faq_a1:'密封避光防潮保存，武夷岩茶可存放2-3年。炭焙工艺使其比绿茶更耐存放，很多茶友认为陈放1-2年后炭火味更醇和。',
+    faq_q2:'应该用什么水温泡？', faq_a2:'武夷岩茶必须用100°C的沸水冲泡。低温无法充分释放岩茶的矿物和炭焙风味，更泡不出"岩韵"。',
+    faq_q3:'一泡茶能冲泡几次？', faq_a3:'高品质岩茶用工夫泡法可冲泡7-10次。前几泡浓郁醇厚，中间几泡花香四溢，后几泡清甜甘润。',
+    faq_q4:'全球配送吗？', faq_a4:'是的，我们发往全球40多个国家！美国/加拿大5-10个工作日送达，其他国家8-14天。满$60免运费。',
+    faq_q5:'茶叶是有机的吗？', faq_a5:'是的——获得美国农业部有机认证。每批经SGS检测400+项农残和重金属。检测报告可索取。',
+    faq_q6:'大红袍、肉桂和水仙有什么区别？', faq_a6:'大红袍是岩茶之王——复杂醇厚，矿物感强。肉桂（Cinnamon）辛香有力，个性鲜明。水仙（Narcissus）最易入口——柔滑花香。建议先买品鉴套装！',
+    shipping_label:'配送与保障',
+    ship1_title:'🌍 全球配送', ship1_desc:'满$60（或¥432）免运费。小额订单$8.50。5-10个工作日送达。',
+    ship2_title:'✅ 30天退换保障', ship2_desc:'不满意？30天内联系我们，全额退款。不问原因。',
+    ship3_title:'🔒 安全有机', ship3_desc:'美国农业部有机认证，SGS检测，256位SSL加密。',
+    news_title:'保持联系', news_desc:'首单享9折优惠。我们会分享茶文化故事、季节性新品和独家优惠。', news_btn:'订阅',
+    footer_desc:'三代传承，只在武夷正岩核心产区。我们以家族之名担保每一片茶叶的品质与纯正。',
+    footer_shop:'产品', footer_all:'全部茶品', footer_oolong:'乌龙茶', footer_black:'红茶', footer_club:'茶友会', footer_gifts:'礼盒',
+    footer_learn:'了解', footer_story:'品牌故事', footer_brew:'冲泡指南', footer_reviews:'茶友评价',
+    footer_support:'服务', footer_shipping:'配送信息', footer_returns:'退换政策', footer_contact:'联系我们', footer_wholesale:'批发合作',
+    cart_empty_title:'您的品茶之旅从这里开始', cart_empty_desc:'添加一些茶叶到购物车吧。',
+    cart_title:'购物车', cart_total:'合计', cart_checkout:'去结算', add_to_cart:'加入购物车', added_toast:'已加入购物车 ✦'
+  },
+  jp:{
+    lang_name:'日本語', lang_short:'JP',
+    search_placeholder:'お茶を検索…', nav_teas:'商品', nav_story:'物語', nav_reviews:'口コミ', nav_compare:'比較', nav_club:'定期購入', nav_faq:'よくある質問',
+    hero_badge:'✦ 中国武夷山より', hero_title:'三代に渡る<br>武夷岩茶の極み', hero_desc:'武夷山正岩産地から直接お届け。手摘み、炭火焙煎、世界中へ発送。「岩韻」——ミネラル豊かな烏龍茶の真髄をご体験ください。', hero_btn1:'お茶を購入 →', hero_btn2:'私たちの物語', hero_scroll:'スクロール',
+    trust1:'USDA有機認証', trust2:'$60以上送料無料', trust3:'即日発送', trust4:'30日返金保証', trust5:'500人以上の顧客', trust6:'2024年国際茶葉賞',
+    story_label:'武夷山より', story_title:'三代の<br>一杯のお茶', story_p1:'岩韻茶荘は1990年、武夷山正岩産地の中心に創業。三代の茶人が清末から続く炭火焙煎の技を守り継いでいます。', story_p2:'すべての茶葉は武夷山「三坑両澗」の高品質な茶園から。丹霞地形と独特の微気候が、岩茶に唯一無二のミネラル風味を与えています。', story_quote:'「岩韻とは、茶園が茶杯に響く余韻。直接取引により、すべての茶葉が育った岩壁まで遡ることができます。」', story_stat1:'創業', story_stat2:'伝承の年', story_stat3:'提携茶園',
+    feat1_title:'茶園直送', feat1_desc:'中間業者なし。武夷山の茶農家と直接提携し、適正価格と本物の品質を保証します。',
+    feat2_title:'炭火焙煎', feat2_desc:'竜眼の木炭で72時間かけた伝統の炭火焙煎——何世代にも受け継がれた技法。',
+    feat3_title:'実験室検査', feat3_desc:'全ロットをSGSで400項目以上の農薬・重金属検査。結果はご請求に応じて開示。',
+    feat4_title:'$60以上送料無料', feat4_desc:'米中両国の倉庫から世界へ発送。$60以上のご注文で送料無料。',
+    featured_label:'厳選武夷岩茶', featured_desc:'すべてのお茶がその風土の物語を語ります。武夷山の岩壁からあなたの茶杯まで。', view_all:'全商品を見る →', compare_all:'全商品を比較',
+    craft_label:'匠の技', craft_title:'茶葉から茶杯へ', craft_desc:'四世代の知識がすべての収穫に凝縮されています。',
+    proc1_title:'手摘み', proc1_desc:'早朝に手作業で、最も柔らかな一芯二葉だけを摘み取ります。',
+    proc2_title:'日光萎凋', proc2_desc:'自然の日光でゆっくりと水分を飛ばし、香りの可能性を引き出します。',
+    proc3_title:'炭火焙煎', proc3_desc:'竜眼の木炭で72時間かけてじっくり焙煎——武夷岩茶の魂。',
+    proc4_title:'専門家による審評', proc4_desc:'資格を持った茶師による3回の品質チェックを経て出荷。',
+    compare_label:'比較', compare_desc:'どのお茶を選べばいいか迷っていますか？並べて比較してみましょう。',
+    catalog_label:'全商品', catalog_all:'すべて', catalog_oolong:'烏龍茶', catalog_black:'紅茶', catalog_gift:'ギフトセット',
+    club_label:'岩韻茶友会', club_title:'岩韻定期購入クラブ', club_desc:'毎月、武夷山の厳選岩茶をお届け。試飲ノートと淹れ方ガイド付き。', club_per_month:'/ 月', club_perk1:'50g 厳選岩茶', club_perk2:'送料無料', club_perk3:'試飲ノート', club_perk4:'いつでも解約可', club_btn:'今すぐ購読 →',
+    review_label:'お客様の声',
+    rev1_text:'「この大紅袍は素晴らしい——ミネラルの複雑さはアメリカの茶店では味わったことがない。炭火焙煎の深みが、一口ごとに何分も余韻として残る。本物だ。」', rev1_name:'James M.', rev1_title:'ニューヨーク · 茶愛好家',
+    rev2_text:'「サンプラーセットで初めて岩茶を試しました。試飲ノートのおかげで違いがよくわかりました。一番のお気に入りは肉桂——スパイシーで温かみがあります。」', rev2_name:'Sarah K.', rev2_title:'ロンドン · 初めての購入',
+    rev3_text:'「福建で育った私にとって、岩茶は故郷の味。ネットで買うのは不安でしたが、この鉄観音は祖父が淹れてくれた味そのものでした。」', rev3_name:'李偉', rev3_title:'トロント · 福建出身',
+    guide_label:'淹れ方ガイド', guide_desc:'伝統的な工夫茶で武夷岩茶の真髄を引き出します。',
+    brew1_title:'器を温める', brew1_desc:'蓋碗または急須を沸騰したお湯で温めます。',
+    brew2_title:'茶葉を入れる', brew2_desc:'100mlあたり5gの茶葉。岩茶は葉が開くスペースが必要なので多めでOK。',
+    brew3_title:'洗茶', brew3_desc:'100°Cのお湯を注いですぐに捨てる。これで茶葉が"目覚め"ます。',
+    brew4_title:'抽出して楽しむ', brew4_desc:'1回目は15秒。以降は5秒ずつ延ばす。岩茶は7煎以上楽しめます。',
+    faq_label:'よくある質問',
+    faq_q1:'武夷岩茶の賞味期限は？', faq_a1:'密閉容器で光・湿気・強い匂いを避けて保存すれば2-3年。炭火焙煎により緑茶より長期保存が可能です。',
+    faq_q2:'適切なお湯の温度は？', faq_a2:'武夷岩茶は必ず100°Cの沸騰したお湯で淹れてください。低温ではミネラルと焙煎の風味が十分に抽出されません。',
+    faq_q3:'何煎楽しめますか？', faq_a3:'工夫茶で5gの茶葉から7-10煎。最初の数煎は力強く、中盤は華やか、後半は甘く繊細に変化します。',
+    faq_q4:'海外発送は可能ですか？', faq_a4:'はい、40カ国以上に発送可能！米国・カナダは5-10営業日。$60以上で送料無料。',
+    faq_q5:'有機栽培ですか？', faq_a5:'はい——USDA有機認証取得。全ロットSGSで400項目以上の農薬検査済み。',
+    faq_q6:'どのお茶を選べばいいですか？', faq_a6:'大紅袍は岩茶の王様——複雑でミネラル豊富。肉桂はスパイシーで個性的。水仙は最も飲みやすく滑らか。まずはサンプラーセットをお試しください！',
+    shipping_label:'配送・保証',
+    ship1_title:'🌍 世界中へ発送', ship1_desc:'$60以上で送料無料。$60未満は$8.50。5-10営業日でお届け。',
+    ship2_title:'✅ 30日返金保証', ship2_desc:'ご満足いただけない場合、30日以内にご連絡ください。全額返金いたします。',
+    ship3_title:'🔒 安全・有機', ship3_desc:'USDA有機認証、SGS検査、256ビットSSL暗号化。',
+    news_title:'最新情報を受け取る', news_desc:'初回注文10%オフ。茶文化の物語や季節限定商品の情報をお届けします。', news_btn:'購読',
+    footer_desc:'三代に渡り、武夷山正岩産地にこだわり続けています。家族の名誉にかけて、すべての茶葉の品質と純正を保証します。',
+    footer_shop:'商品', footer_all:'全商品', footer_oolong:'烏龍茶', footer_black:'紅茶', footer_club:'定期購入', footer_gifts:'ギフト',
+    footer_learn:'学ぶ', footer_story:'物語', footer_brew:'淹れ方', footer_reviews:'口コミ',
+    footer_support:'サポート', footer_shipping:'配送情報', footer_returns:'返品', footer_contact:'お問い合わせ', footer_wholesale:'卸売',
+    cart_empty_title:'旅の始まり', cart_empty_desc:'お茶をカートに追加してください。',
+    cart_title:'カート', cart_total:'合計', cart_checkout:'決済へ', add_to_cart:'カートに入れる', added_toast:'カートに追加しました ✦'
+  }
+};
+
+let currentLang = 'en';
+function t(key){return LANG[currentLang]&&LANG[currentLang][key]!==undefined?LANG[currentLang][key]:LANG['en'][key]||key;}
+
+function switchLang(lang){
+  if(!LANG[lang]) return;
+  currentLang = lang;
+  localStorage.setItem('yanyunLang', lang);
+  // Update language selector UI
+  document.querySelectorAll('.nav-lang-option').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  document.getElementById('langCurrent').textContent = LANG[lang].lang_short||lang.toUpperCase();
+  closeLangMenu();
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n;
+    const text = t(key);
+    if(text && text!==key) el.innerHTML = text;
+  });
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.dataset.i18nPlaceholder;
+    const text = t(key);
+    if(text && text!==key) el.placeholder = text;
+  });
+  // Update trust bar items (no data-i18n, hardcoded in JS-rendered scroll)
+  const trustItems = document.querySelectorAll('.trust-item');
+  const trustKeys = ['trust1','trust2','trust3','trust4','trust5','trust6'];
+  if(trustItems.length>=6){
+    trustItems.forEach((el,i)=>{if(trustKeys[i%6]){const ti = el.querySelector('svg');el.innerHTML='';if(ti)el.prepend(ti);el.append(' '+t(trustKeys[i%6]));}});
+  }
+  // Re-render search placeholder
+  document.querySelector('.nav-search input').placeholder = t('search_placeholder');
+  document.getElementById('searchPanelInput').placeholder = t('search_placeholder');
+  // Update cart
+  document.querySelector('.cart-empty h4').textContent = t('cart_empty_title');
+  const cartEmptyP = document.querySelector('.cart-empty p');
+  if(cartEmptyP) cartEmptyP.textContent = t('cart_empty_desc');
+  document.querySelector('.cart-header h3').textContent = t('cart_title');
+  const cft = document.querySelector('.cart-totals-label');
+  if(cft) cft.textContent = t('cart_total');
+  const ccb = document.querySelector('.cart-checkout-btn');
+  if(ccb) ccb.innerHTML = '💳 '+t('cart_checkout');
+}
+
+function toggleLangMenu(){document.getElementById('langSwitcher').classList.toggle('open');}
+function closeLangMenu(){document.getElementById('langSwitcher').classList.remove('open');}
+document.addEventListener('click', e=>{if(!e.target.closest('.nav-lang'))closeLangMenu();});
+
+// Restore saved language
+const savedLang = localStorage.getItem('yanyunLang');
+if(savedLang && LANG[savedLang]) { currentLang = savedLang; }
+
 /* ═══════════════ STRIPE CONFIG ═══════════════ */
 const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TVnVx3EPNnCmkOyJPzXcdiYNrcZ2qprpjsDSB7t1q46U7JeWqqtmo63gqNSKR5ZL6Iadg6C15l2FAeA5ta9Zw8m00MeXy1wjD';
 let stripeInstance = null;
@@ -1098,6 +1316,8 @@ function toggleMobileMenu(){
 })();
 
 /* ═══════════════ INIT ═══════════════ */
+// Apply saved language first
+if(savedLang && LANG[savedLang]) switchLang(savedLang);
 renderFeatured();
 renderCatalog();
 renderCompare();
