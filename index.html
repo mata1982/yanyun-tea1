@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -46,10 +47,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);backgrou
 /* ── HERO ───────────────────────────────── */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:center;overflow:hidden}
 .hero-bg{position:absolute;inset:-40px;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;animation:kb 25s ease-in-out infinite alternate;filter:brightness(0.45)}
-@keyframes kb{0%{transform:scale(1)}100%{transform:scale(1.12)}}
-.hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 40%,rgba(15,13,10,0.7) 100%)}
-.hero-vignette::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,13,10,0.9) 0%,transparent 40%)}
+.hero-bg{position:absolute;inset:-40px;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.42)}
+.hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 30%,rgba(15,13,10,0.75) 100%)}
+.hero-vignette::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,13,10,0.92) 0%,transparent 35%)}
+/* Tea ripple overlay */
+.hero-ripple{position:absolute;top:55%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;border:1px solid rgba(196,95,60,0.06);z-index:1;pointer-events:none}
+.hero-ripple:nth-child(2){width:800px;height:800px;border-color:rgba(196,95,60,0.03)}
+.hero-ripple:nth-child(3){width:1000px;height:1000px;border-color:rgba(196,95,60,0.02)}
+/* Tea leaves floating (SVG) */
+.tea-leaf{position:absolute;z-index:2;pointer-events:none;opacity:0}
+.tea-leaf svg{width:100%;height:100%}
+/* Steam wisps */
+.steam{position:absolute;z-index:1;width:2px;height:40px;background:linear-gradient(to top,transparent,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border-radius:1px;pointer-events:none;opacity:0}
 .hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none}
 .hero-particle{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.08)}
 @keyframes floatUp{0%{transform:translateY(0)translateX(0);opacity:0}20%{opacity:0.6}80%{opacity:0.2}100%{transform:translateY(-300px)translateX(40px);opacity:0}}
@@ -185,6 +195,29 @@ footer a:hover{color:var(--gold-light)}
 <section class="hero">
   <div class="hero-bg"><img src="images/tea-farm-mist-1.jpg" alt="Wuyi Mountains" loading="eager"></div>
   <div class="hero-vignette"></div>
+  <div class="hero-ripple"></div>
+  <div class="hero-ripple"></div>
+  <div class="hero-ripple"></div>
+  <!-- Tea leaves floating -->
+  <div class="tea-leaf" id="leaf1" style="width:48px;height:54px;left:18%;top:25%">
+    <svg viewBox="0 0 48 54" fill="var(--accent-light)" opacity="0.12"><path d="M24 2 C10 8 4 20 2 30 C1 38 8 50 24 52 C40 50 47 38 46 30 C44 20 38 8 24 2Z"/><path d="M24 6 L24 46" stroke="var(--accent-light)" stroke-width="0.5" opacity="0.15"/></svg>
+  </div>
+  <div class="tea-leaf" id="leaf2" style="width:36px;height:40px;left:72%;top:18%">
+    <svg viewBox="0 0 36 40" fill="var(--gold-light)" opacity="0.15"><path d="M18 1 C8 6 3 15 2 24 C1 30 6 40 18 42 C30 40 35 30 34 24 C33 15 28 6 18 1Z"/></svg>
+  </div>
+  <div class="tea-leaf" id="leaf3" style="width:52px;height:58px;left:50%;top:65%">
+    <svg viewBox="0 0 52 58" fill="var(--accent)" opacity="0.10"><path d="M26 3 C12 9 5 22 4 32 C3 40 10 52 26 55 C42 52 49 40 48 32 C47 22 40 9 26 3Z"/></svg>
+  </div>
+  <div class="tea-leaf" id="leaf4" style="width:30px;height:34px;left:85%;top:55%">
+    <svg viewBox="0 0 30 34" fill="var(--gold-light)" opacity="0.08"><path d="M15 2 C7 6 3 14 2 22 C1 28 6 34 15 35 C24 34 29 28 28 22 C27 14 23 6 15 2Z"/></svg>
+  </div>
+  <div class="tea-leaf" id="leaf5" style="width:40px;height:46px;left:8%;top:70%">
+    <svg viewBox="0 0 40 46" fill="var(--accent-light)" opacity="0.09"><path d="M20 2 C9 7 4 16 3 26 C2 32 7 42 20 44 C33 42 38 32 37 26 C36 16 31 7 20 2Z"/></svg>
+  </div>
+  <div class="steam" id="steam1" style="left:30%;top:60%"></div>
+  <div class="steam" id="steam2" style="left:55%;top:55%"></div>
+  <div class="steam" id="steam3" style="left:70%;top:62%"></div>
+  <div class="steam" id="steam4" style="left:40%;top:50%"></div>
   <div class="hero-particles" id="heroParticles"></div>
   <div class="hero-content">
     <div class="hero-kicker">岩韵 · Wuyi Rock Tea · Since 1990</div>
@@ -357,6 +390,47 @@ function qtyChange(id,delta){
 function saveCart(){localStorage.setItem('yanyunCartV2',JSON.stringify(cart));}
 function showToast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2500);}
 
+/* ── GSAP HERO ANIMATION ───────────────── */
+gsap.registerEffect({name:'heroAnim',defaults:{},effect(tl){return tl}});
+
+const heroTimeline = gsap.timeline({defaults:{ease:'power2.out'}});
+
+// 1. Background slow Ken Burns zoom
+heroTimeline.from('.hero-bg img',{scale:1,opacity:0.7,duration:0.8, ease:'none'},0)
+  .to('.hero-bg img',{scale:1.12,duration:20,ease:'none'},0.8);
+
+// 2. Ripples pulse
+['.hero-ripple:nth-child(3)','.hero-ripple:nth-child(2)','.hero-ripple:nth-child(1)'].forEach( (sel,i) =>{
+  heroTimeline.from(sel,{scale:0.3,opacity:0,duration:1.5},0.5+i*0.3)
+    .to(sel,{scale:1.15,opacity:0,duration:5,repeat:-1,yoyo:true,ease:'sine.inOut'},2+i*0.5);
+});
+
+// 3. Tea leaves drift across screen
+const leafPaths = [
+  {id:'#leaf1',x:-30,y:-60,r:25,d:12,dl:2},
+  {id:'#leaf2',x:40,y:-80,r:-15,d:14,dl:4},
+  {id:'#leaf3',x:-20,y:-50,r:20,d:16,dl:1},
+  {id:'#leaf4',x:30,y:-70,r:-30,d:13,dl:5},
+  {id:'#leaf5',x:-40,y:-55,r:15,d:15,dl:3}
+];
+leafPaths.forEach(l=>{
+  heroTimeline.from(l.id,{opacity:0,scale:0.5,duration:0.6},0.8+l.dl)
+    .to(l.id,{x:l.x,y:l.y,rotation:l.r,opacity:0.6,duration:l.d,repeat:-1,yoyo:true,ease:'sine.inOut'},1.2+l.dl);
+});
+
+// 4. Steam wisps
+const steams = ['#steam1','#steam2','#steam3','#steam4'];
+steams.forEach((s,i)=>{
+  heroTimeline.from(s,{y:20,x:gsap.utils.random(-10,10),opacity:0,duration:0.4},1+i*0.3)
+    .to(s,{y:-80,x:gsap.utils.random(-15,15),opacity:0.5,duration:gsap.utils.random(3,5),repeat:-1,yoyo:true,ease:'sine.inOut',repeatDelay:gsap.utils.random(0.5,1.5)},1.5+i*0.3);
+});
+
+// 5. Text reveal sequence
+heroTimeline.from('.hero-kicker',{y:30,opacity:0,duration:0.8},1)
+  .from('.hero-title',{y:40,opacity:0,duration:1,ease:'power3.out'},1.3)
+  .from('.hero-desc',{y:20,opacity:0,duration:0.8},1.9)
+  .from('.hero-actions',{y:20,opacity:0,duration:0.6},2.3);
+
 /* ── PARTICLES ──────────────────────────── */
 (function(){
   const c=document.getElementById('heroParticles');
@@ -369,7 +443,6 @@ function showToast(m){const e=document.getElementById('toast');e.textContent=m;e
 })();
 
 /* ── REVEAL ─────────────────────────────── */
-new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'}).observeAll=function(r){r.querySelectorAll('.reveal').forEach(el=>{ob.observe(el)})};
 const ob=new IntersectionObserver(e=>e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ob.observe(el));
 
